@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Give this the 1 argument to activate the Trackpad.
+# Give this 0 to disable it.
+
+input="$1"
+
+xinput --set-prop 12 "Device Enabled" $input
+
+case "$input" in
+	0) notify-send -i "$HOME/.fonts/svg/mouse-pointer.svg" -a Trackpad "Trackpad successfully disabled" ;;
+	1) notify-send -i "$HOME/.fonts/svg/mouse-pointer.svg" -a Trackpad "Trackpad successfully enabled" ;;
+	*) notify-send -i "$HOME/.fonts/svg/mouse-pointer.svg" -a Trackpad "Error" ;;
+esac
+

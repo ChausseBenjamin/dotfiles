@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Toggle dropdown terminal windows.
+# The first argument is the title of the window.
+# The rest of it is the program/command to be run
+# in the dropdown window.
+
+class="$1"
+title="dropdown_$class"
+active="$(xdotool search --name $title | wc -l)"
+shift
+
+
+case "$active" in
+	0) $TERMINAL -c "dropdown" -t "$class" -e "$@" & ;;
+	*) kill -9 `xdotool search --name "$class" getwindowpid` ;;
+esac

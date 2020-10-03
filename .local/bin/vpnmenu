@@ -1,0 +1,14 @@
+#!/bin/sh
+
+current=$(expressvpn status | sed "s/.......................//; 1q")
+
+location=$(expressvpn list recomend | sed "1,4d; s/^.*\t//" | head | dmenu -l 10)
+
+if [ ! -n "$location" ]
+then
+	notify-send -i "$HOME/.fonts/svg/shield.svg" -a "VPN Module" "Operation aborted"
+else
+	expressvpn disconnect; expressvpn connect "$location"
+fi
+
+# expressvpn disconnect; expressvpn connect "$location"

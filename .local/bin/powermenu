@@ -1,0 +1,11 @@
+#!/bin/sh
+
+choice=$(printf "Logout\\nShutdown\\nReboot\\nHibernate" | dmenu -i -p "Power Utility")
+
+case $choice in
+	*L*) $SCRIPTS/control/lockscreen ;;
+	*H*) systemctl suspend ;;
+	*R*) reboot ;;
+	*S*) shutdown -h now ;;
+	"") notify-send -i "$HOME/.fonts/svg/power-off.svg" -a Power "Operation suspended"
+esac

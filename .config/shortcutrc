@@ -1,0 +1,34 @@
+#   _____ _                _             _
+#  / ____| |              | |           | |
+# | (___ | |__   ___  _ __| |_ ___ _   _| |_ _ __ ___
+#  \___ \| '_ \ / _ \| '__| __/ __| | | | __| '__/ __|
+#  ____) | | | | (_) | |  | || (__| |_| | |_| | | (__
+# |_____/|_| |_|\___/|_|   \__\___|\__,_|\__|_|  \___|
+#
+
+
+
+# #---Universal Shortcut Configuration File---# #
+# First column should have the directory's Label
+# Second column should contain the shortcut itself
+#   (without the modifier)
+# Third column should contain the directory itself
+#  (It can contain environmental variables)
+
+|----------------+-----+--------------------------------------------------|
+| Bibliographies | bb  | $HOME/Dropbox/A/Scholar/All/References           |
+| Config         | cf  | $HOME/.config                                    |
+| Downloads      | dl  | $HOME/Dropbox/Downloads                          |
+| Dropbox        | db  | $HOME/Dropbox                                    |
+| Music          | ms  | $HOME/Music                                      |
+| Neovim         | vi  | $HOME/.config/nvim                               |
+| Personnal      | ps  | $HOME/Dropbox/A/Personnal/                       |
+| Wallpapers     | wp  | $HOME/Dropbox/A/Personnal/Photos/Wallpapers      |
+| RSS            | rss | $HOME/.config/newsboat                           |
+| Scholar        | sf  | $HOME/Dropbox/A/Scholar/1-CEGEP/Courses/session5 |
+| Workspace      | ws  | $HOME/Workspace                                  |
+| Scripts        | sc  | $HOME/.scripts                                   |
+| Hotkeys        | sx  | $HOME/.config/sxhkd                              |
+| Images         | img | $HOME/Dropbox/A/Personnal/Photos/unsorted        |
+| Compilation    | cmp | $HOME/Compilation                                |
+|----------------+-----+--------------------------------------------------|

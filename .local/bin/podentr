@@ -1,0 +1,5 @@
+#!/bin/bash
+# entr command to run `queueandnotify` when newsboat queue is changed
+
+# [ "$(pgrep -x $(basename $0) | wc -l)" -gt 2 ] && exit
+echo /home/master/.local/share/newsboat/queue | entr -p $SCRIPTS/handling/pod-dl 2>/dev/null &

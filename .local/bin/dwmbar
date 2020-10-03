@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Refreshes the dwm bar using the scripts in:
+# $SCRIPTS/dwm/
+
+# When given the echo option, echo to stdout instead
+# of refreshing (useful for debugging)
+
+battery=$(battery)
+datetime=$(datetime)
+# dropbox=$(dropbox-status)
+kblayout=$(kblayout)
+# mailbox=$(mailbox)
+news=$(news)
+vpnstatus=$(vpnstatus)
+# wifi=$(wifi)
+yadms=$(yadms)
+
+bar="$yadms|$news|$datetime|$kblayout|$vpnstatus|$battery |"
+
+case "$1" in
+	echo) echo "$bar" ;;
+	*) xsetroot -name  "$bar" ;;
+esac
+
+

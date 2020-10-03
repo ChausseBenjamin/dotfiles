@@ -1,0 +1,30 @@
+---
+title: My dwm configuration
+author: Benjamin Chausse
+date: 2020-01-26
+---
+
+The idea behind this configuration is simple. Vim-keybindings, Quick access to frequently used apps, and
+Consistent design!
+
+# Useful info
+
+I use dwm, the dynamic window manager. All the bindings present in *Miscellaneous bindings*
+are dynamically generated from my sxhkd configuration file (`~/.config/sxhkd/sxhkdrc`).
+For that reason, some of it's syntax was borrowed when generating this manual:
+Lists of keys surrounded by `{}` are key choices where typing different keys inside the array will have different effects.
+The underscore `_` represents the lack of a key.
+Therefore, `super + {_,shift} + i` represents these keybindings:
+`super + i` **and**
+`super + shift + i`
+
+# Terminal Bindings (st)
+The default terminal is my build of st which itself is a variant
+of Luke Smith's build.
+- **Copy a commands's output**:`alt + o`
+- **Copy a url on the terminal screen**:`alt + y`
+- **Follow a url on the terminal screen**:`alt + l`
+- **Scroll down in the terminal**:`alt + j`
+- **Scroll up in the terminal**:`alt + k`
+
+# General Bindings

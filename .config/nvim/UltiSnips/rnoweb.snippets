@@ -1,0 +1,122 @@
+snippet \ "Begin/End Environments"
+\begin{${1:element}}
+${2:contents}
+\end{$1}
+
+endsnippet
+
+snippet v "Import R variable in LaTeX"
+\Sexpr{${1:var}}
+endsnippet
+
+snippet eqn "Floating Equation"
+\begin{eqfloat}[H]
+\begin{align}
+    ${3:E} &= ${4:mc^2}
+\end{align}
+cond$5
+\label{eqn:${2:title}}
+\caption{${1:A Title}}
+\end{eqfloat}
+
+endsnippet
+
+snippet x "Multiplication Dot"
+\cdot
+endsnippet
+
+snippet e "Scientific Notation"
+\cdot10^{${1:power}}
+endsnippet
+
+snippet cond "Conditions for Equations"
+\begin{conditions}
+    ${1:V} & ${2:Definition of V}
+\end{conditions}
+endsnippet
+
+snippet R "R Code"
+<<label='${1:label}',echo=${2:FALSE},results='${3:asis}'>>=
+${4:1+1}
+@
+endsnippet
+
+snippet csv "Import CSV in R"
+${1:variable_vame} <- read.csv("${2:path/to/file}.csv",
+header=${3:TRUE},
+sep="${4:;}"
+)
+
+endsnippet
+
+snippet xtable "Table made from R matrix"
+print(
+      xtable(${1:matrix_name},
+             caption="${2:Title of the table}",
+             label="tab:${3:table}",
+             digits=matrix($6
+                           c(
+`!p
+from time import sleep
+try:
+	col = int(t[3])-1
+	paragraph = ""
+	for i in range(int(t[4])-1):
+		paragraph += "                            rep(0,"+str(col)+"), <++>,\n"
+	paragraph += "                            rep(0,"+str(col)+"), <++>"
+	snip.rv = paragraph
+except(ValueError):
+	sleep(1)
+# paragraph = ""
+# paragraph = "                            rep(0,"+t[3]+"), 0,\n"
+# for i in range(int(t[4])-2):
+# 	paragraph += "                            rep(0,"+t[3]+"), <++>,\n"
+# paragraph += "                            rep(0,"+t[3]+"), <++>"
+# snip.rv = paragraph
+`
+                           ),
+                           nrow=${5:6},
+                           ncol=${4:3},
+                           byrow=TRUE
+             ),
+             table.placement="H"
+      ),
+      include.rownames=FALSE,
+      table.placement="H"
+)
+
+endsnippet
+
+snippet img "Image"
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=${1:1}]{${2:path/to/image}}
+\label{fig:${3/\s/_/g}}
+\caption{${3:A Title}}
+\end{center}
+\end{figure}
+endsnippet
+
+snippet b "Bold"
+\textbf{${1:text}}
+endsnippet
+
+snippet i "Italix"
+\textit{${1:text}}
+endsnippet
+
+snippet u "Underline"
+\uline{${1:text}}
+endsnippet
+
+snippet 1 "Section"
+\section{${1:Title}}
+endsnippet
+
+snippet 2 "Subsection"
+\subsection{${1:Title}}
+endsnippet
+
+snippet 3 "Subsubsection"
+\subsubsection{${1:Title}}
+endsnippet

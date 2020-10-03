@@ -1,0 +1,24 @@
+#!/bin/sh
+
+layout=$(cat $HOME/.cache/layout)
+
+case "$layout" in
+	ca) setxkbmap -model pc104 -layout us -variant ,,
+			echo us > $HOME/.cache/layout
+			# pkill -RTMIN+46 dwmblocks
+			$SCRIPTS/cron/dwmbar
+			;;
+	us) setxkbmap -model pc104 -layout ca -variant ,,
+			echo ca > $HOME/.cache/layout
+			# pkill -RTMIN+46 dwmblocks
+			$SCRIPTS/cron/dwmbar
+			;;
+		*) setxkbmap -model pc104 -layout us -variant ,,
+			echo us > $HOME/.cache/layout
+			# pkill -RTMIN+46 dwmblocks
+			$SCRIPTS/cron/dwmbar
+			;;
+	esac
+
+# 	[[ "$layout" == "us" ]] && setxkbmap -model pc104 -layout ca -variant ,, ; echo ca > $HOME/.cache/layout && $SCRIPTS/cron/dwmbar
+# 	[[ "$layout" == "us" ]] || setxkbmap -model pc104 -layout ca -variant ,, ; echo ca > $HOME/.cache/layout && $SCRIPTS/cron/dwmbar

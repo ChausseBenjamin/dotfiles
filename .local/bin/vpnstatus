@@ -1,0 +1,25 @@
+#!/bin/bash
+# Outputs if Express VPN is connected or not
+
+vpnstatus=$(expressvpn status | head -n 1)
+
+case "$vpnstatus" in
+	*"Not"*) icon=""
+		;;
+	*"Connected"*) icon=""
+		;;
+	*"Connecting"*) icon=" "
+		;;
+	*) icon=""
+esac
+
+echo " $icon "
+
+
+# \033]01;31\] # pink
+# \033]00m\]   # white
+# \033]01;36\] # bold green
+# \033]02;36\] # green
+# \033]01;34\] # blue
+# \033]01;33\] # bold yellow
+# s/onnected\sto\s//;

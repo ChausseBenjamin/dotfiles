@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Removing unecessary comments and documentation
+raw=$(cat $HOME/.config/shortcutrc | tail -n +19 "$HOME/.config/shortcutrc" | sed "s/^|\s*//g;
+                                                                              s/\(.*\)|\(.*\)|\(.*\)|/\1|\2|\3/g;
+                                                                              s/\s*$//g;
+                                                                              /^$/d")
+# #---NERDTREE---# #
+echo "$raw" | sed "s/\(.*\)\s*|.*|\s\(.*\)/\1\2/g;
+              s/ \{1,\}/ /g;
+              s/.HOME/~/g;
+              s/-*+-*+-*|//g" > $HOME/.NERDTreeBookmarks
+
+# #---ZSH---# #
+# be sure to source $HOME/.cache/zsh-shortcuts in your .zshrc
+echo "$raw" | sed 's/^.*|\s\([A-Za-z0-9]*\)\s*|\s\(.*\)$/alias\ g\1="cd\ \2"/g; /^-*+-*+-*|$/d' > $HOME/.cache/zsh-shortcuts
+
+# #---RANGER---# #
+# Commands implemented:
+# g -> go
+# m -> move to...
+# t -> new tab
+# Y -> copy to...
+# awk '{print "map g"$1" cd "$2"\nmap t"$1" tab_new "$2"\nmap m"$1" shell mv -v %s "$2"\nmap Y"$1" shell cp -rv %s "$2}' >> "$ranger_shortcuts"
+manual=$(sed -n '/Automated Shortcut Generation/q;p' $HOME/.config/ranger/shortcuts.conf)
+printf '\n\n# #---Automated Shortcut Generation---#' >> $HOME/.config/ranger/shortcuts.conf
+echo "$raw" | sed 's/^.*|\s\(.*\)\s|\s\(.*\)$/map\ g\1\ cd\ \2\nmap\ t\1\ tab_new\ \2\nmap\ m\1\ shell\ mv\ -v\ %s\ \2\nmap\ Y\1\ shell\ cp\ -rv\ %s\ \2\n/g;
+                s/.HOME/~/g;
+                s/^-*+-*+-*|$//g' >> $HOME/.config/ranger/shortcuts.conf
+
+# #---ENVIRONMENTAL VARIABLES---# #
+echo "$raw" | sed 's/[A-z,a-z,0-9]*\s*|\s*/g/;
+                   s/\s*|\s*/=/; s/$/"/;
+									 s/-*+-*+.*$//
+									 s/^[A-z]*=/\U&/g
+									 s/"$//g' > ~/.cache/shell-vars
+
+# #---Vifm---# #
+vifm=$(echo "$raw" | sed "
+            s/^[A-Z,a-z,0-9]*\s*|//;
+						s/|/:cd/;
+						s/\$HOME/~/;
+						s/^-.*//"
+)
+vifmgo=$( echo "$vifm" | sed "
+				s/\s*/nnoremap\ g/;
+				s/$/<cr>/"
+)
+echo "$vifmgo" > ~/.cache/vifm-shortcuts
+
+# #---Testing---# #
+# echo "$raw" | sed "s/[A-z,a-z,0-9]*\s*|//"
+
+# echo "$raw"

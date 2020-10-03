@@ -1,0 +1,19 @@
+#!/bin/sh
+
+config=$(cat $HOME/.config/sxhkd/sxhkdrc | sed "
+s/^\s.*//g;
+s/^#\s.*//;
+s/^##\s/##\n-\ \*\*/;
+s/#-#\s*/##\n-->/;
+s/\s*#-#$/\n##/;
+/^$/d" | awk '/##/{if (x)print x;x="";next}{x=(!x)?$0:x"**:`"$0;}STOP{print x;}' |
+	sed "s/-->/##\ /;
+			s/:\(.*\)$/:\1\`/;
+			s/\s+\s/+/g;
+			s/#\*\*:.*//")
+
+manual=$(cat $HOME/.config/manual.part)
+
+printf " $manual \n $config" | gd2pdf
+
+# printf " $manual \n $config"

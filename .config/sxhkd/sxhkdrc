@@ -1,0 +1,257 @@
+#           _     _       _
+#          | |   | |     | |
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+#
+#
+
+# Commands are procedurally added to the manual.
+
+# To do so, for every command, add a line starting
+# with `##` which has a generic description of what
+# the command does.
+
+# The pdf will associate it with the binding BELOW IT.
+
+# `#` followed by a space will be ignored and treated
+# as regular comments.
+
+# `#-#` at the beggining of a line will be converted to
+# a header in the manual.
+
+#-# dwm #-#
+## Quit dwm
+super + shift + q
+	dwmc quit
+## Toggle the dwm bar
+super + b
+	dwmc togglebar
+## Change layout to {tiling, monocle}
+super + {_,shift} t
+	dwmc setlayoutex {0,2}
+## Change layout to {grid, floating}
+super + {_,shift} g
+	dwmc setlayoutex {5,1}
+## Change layout to {centeredmaster, floatingcenteredmaster}
+super + {_,shift} m
+	dwmc setlayoutex {3,4}
+## Make window fullscreen
+super + f
+	dwmc togglefullscr
+## Make current window floating
+super + shift + space
+	dwmc togglefloating
+## Cycle up and down the window stack (change focus)
+super + {j,k}
+	dwmc focusstack {+,-}1
+## Rotate clockwise/counterclockwise the window stack
+super + shift + {j,k}
+	dwmc rotatestack {+,-}1
+## Move current window up/down the stack
+super + shift + {h,l}
+	dwmc movestack {-,+}1
+## Change focus to/swap the master window
+super + {_, shift} + s
+	dwmc {focusmaster,  zoom}
+## Add/Remove windows from the master stack
+super + {_,shift} + i
+	dwmc incnmaster {+,-}1
+## Increase/Decrease master stack width
+super + {h,l}
+	dwmc setmfact {-,+}0.05
+## Toggle view next tag
+super + Tab
+	dwmc view
+## Cycle forward/backward through monitor focus
+super + {comma,period}
+	dwmc focusmon {-,+}1
+## Move current window to previous/next monitor
+super + shift + {comma,period}
+	dwmc tagmon {-,+}1
+## View all tags
+super + 0
+	dwmc viewall
+## Move current window to tag {1-9}
+super + shift + {1-9}
+	dwmc tagex {0-8}
+## Only view the tag {1-9}
+super + {1-9}
+	dwmc viewex {0-8}
+## Toggle the visibility tag {1-9}
+super + alt + {1-9}
+	dwmc toggleviewex {0-8}
+## Toggle (pin/unpin) the current window on tag {1-9}
+alt + {1-9}
+	dwmc toggletagex {0-8}
+## Pin current window to all tags
+super + shift + 0
+	dwmc tagall
+# ## Decrease/increase gaps
+# super + {minus, shift + equal}
+# 	dwmc setgaps {-,+}1
+# ## Set gaps to zero
+# super + equal
+# 	dwmc setgaps 0
+
+#-#   Miscellaneous #-#
+## Quit Current App
+super + q
+	kill -15 `xdotool getwindowfocus getwindowpid`
+## Change Keyboard Layout
+alt + Return
+	layouttoggle
+## Find your cursor
+super + BackSpace
+	 find-cursor -l 4 -c "#66aabb" -s 150
+## Toggle Compositor
+super + c
+		killall picom || setsid picom
+## Toggle Screenkey
+super + Insert
+	killall screenkey || screenkey --bg-color "#222d32" -s small -f HackGen -t 1 --font-color "#BABABA"
+## Open this manual
+super + alt + shift + h
+    $SCRIPTS/generation/manualgen
+## Start colorpicker
+super + shift + c
+		$SCRIPTS/handling/colorhandler
+
+#-# Standard Applications #-#
+## Terminal window
+super + Return
+    $TERMINAL
+## Default Browser
+super + w
+    $BROWSER
+## TUI Email Client (neomutt)
+super + e
+    killall neomutt || $TERMINAL -e neomutt ; $SCRIPTS/cron/dwmbar
+## TUI Calendar (calcurse)
+super + shift + e
+    killall calcurse || $TERMINAL -t dropdown_calendar -e calcurse
+## TUI RSS Reader (newsboat)
+super + n
+    killall newsboat || $TERMINAL -e newsboat ; $SCRIPTS/cron/dwmbar
+
+#-#   Floating Apps/Utilities   #-#
+## Network Manager
+super + shift + n
+    killall nmtui || dropdowntoggle network nmtui
+## TUI Audio Mixer (alsamixer)
+super + p
+    killall alsamixer || dropdowntoggle audio alsamixer -c 0
+## TODOs (todotxt-machine)
+super + space
+    killall todotxt-machine || dropdowntoggle todos todotxt-machine
+## Terminal Calculator
+super + a
+    dropdowntoggle calc tmux-r
+## Terminal Shell
+super + shift + a
+    dropdowntoggle shell tmux-shell
+## TUI Youtube (youtube-viewer)
+super + v
+    killall youtube || dropdowntoggle youtube tmux-yt-viewer
+## TUI Hacker News
+super + shift + v
+		killall hacker-news || dropdowntoggle hacker-news tmux-hn
+## Webcam
+super + shift + w
+   $SCRIPTS/utilities/camtoggle
+## Force Start VLC Podcast
+super + shift + p
+    $SCRIPTS/utilities/tmux-vlc
+
+#-#   Prompts (dmenu)   #-#
+## Application Launcher
+alt + d
+    j4-dmenu-desktop
+## Power Utility
+alt + q
+    powermenu
+## Quickly Search Google
+alt + shift + d
+    websearch
+## Open a bookmark in surf
+alt + shift + o
+		surfmenu
+## Emoji & Font-Awesome Selector
+alt + grave
+    emoji-copy
+## Mount/Unmount Devices Utility
+alt + {_,shift} + m
+    { mountmenu, umountmenu }
+## Recording Utility
+alt + r
+    recordmenu kill || recordmenu
+## Preview Fonts
+alt + f
+		fontpreview
+## Start SSH session
+alt + s
+		$SCRIPTS/handling/pickssh
+
+#-#   PrintScreen Utilities   #-#
+## Entire Screen
+Print
+    scrot -q 100 -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
+## Current window
+alt + Print
+    scrot -q 100 -u -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Window screenshot completed"
+## Cursor Selection
+super +  Print
+    scrot -q 100 -s -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Selection screenshot completed"
+
+#-#   Special Keys   #-#
+## Increase/decrease Volume
+{XF86AudioRaiseVolume, XF86AudioLowerVolume}
+    volumectl 5 {+,-}
+## Max-Out Volume
+shift + XF86AudioRaiseVolume
+    volumectl 100
+## Set Volume to 5 percent
+shift + XF86AudioLowerVolume
+    volumectl 5
+## Mute Audio
+XF86AudioMute
+	 volumectl mute
+## Quit Current App
+super + q
+	kill -15 `xdotool getwindowfocus getwindowpid`
+## Increase/decrease Brightness
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+    xbacklight -time 50 -fps 60 -{inc,dec} 5 && screenstatus
+## Max-Out Brightness
+shift + XF86MonBrightnessUp
+    xbacklight -time 100 -fps 60 -set 100 && screenstatus
+## Set Brightness to 5 percent
+shift + XF86MonBrightnessDown
+    xbacklight -time 100 -fps 60 -set 5 && screenstatus
+## Display Setup Utility (mirror or extend displays)
+XF86Display
+    displaymenu
+## Disable Trackpad
+XF86Favorites
+    trackpadtoggle 0
+## Enable Trackpad
+shift + XF86Favorites
+    trackpadtoggle 1
+## Unmount Devices
+shift + XF86Tools
+	umountmenu
+## Mount Devices
+XF86Tools
+	mountmenu
+
+#-# Music Controls (using `playerctl`) #-#
+## Next/Previous Song (using playerctl)
+super + {bracketright, bracketleft}
+		playerctl {next, previous}
+## Higher/Lower music volume (using pla)
+super + shift + {bracketright, bracketleft}
+		playerctl volume 5 {+, -}
+## Toggle music playback
+super + backslash
+		playerctl play-pause

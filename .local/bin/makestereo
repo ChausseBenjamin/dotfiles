@@ -1,0 +1,9 @@
+#!/bin/sh
+
+file=$(readlink -f "$1")
+dir=$(dirname "$file")
+base="${file##*/}"
+ext="${base##*.}"
+
+ffmpeg -i $file  -af "pan=stereo|FL < 1.0*FL + 0.707*FC + 0.707*BL|FR < 1.0*FR + 0.707*FC + 0.707*BR" "$dir/stereo-$base.$ext"
+

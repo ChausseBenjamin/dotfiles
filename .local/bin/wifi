@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$(cat /sys/class/net/wlp0s20f3/operstate)" in
+	up) echo "  " ;;
+	down) echo "  " ;;
+esac
+
+# 
+# 
+# 

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sdcv --color $1 | less

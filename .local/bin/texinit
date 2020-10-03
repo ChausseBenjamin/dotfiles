@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cp $HOME/Dropbox/A/Scholar/All/Templates/Text/LaTeX/001personal/cegep-lanaudiere/article/* ./
+ln $BIB/citations.bib ./citations.bib
+mkdir archives
+

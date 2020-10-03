@@ -1,0 +1,23 @@
+#!/bin/sh
+
+file=$(readlink -f "$1")
+dir=$(dirname "$file")
+base="${file%.*}"
+
+contents="$1"
+shift
+for i in "$@"; do
+    output=$output"\n"$(cat "$contents" | grep -n "$i" | sed 's/\([0-9]*\):.*'"$i"'.\(.*\)$/-\ \*\*'"$i"':\*\*\ \2\ (line \1)/g'
+        )
+done
+
+
+if [ "$#" -eq $(printf $output | wc -l ) ];
+then
+    rm "$base"-tdtable.pdf
+    exit 0
+else
+    echo -e '---\ntitle: Checklist:\n.PP'"$output" | groffdown | refer -PS -e "-p$REFERBIB" | groff -me -ms -kejpt -T pdf > "$base"-tdtable.pdf
+fi
+# Uncomment for debugging:
+# echo -e '---\ntitle: TODOs\n.PP'"$output" > "$base"-tdtable.gd

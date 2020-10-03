@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Runs a prompt to choose an emoji to copy
+# to the clipboard. Some font-awesome icons are
+# also supported.
+
+choice=$( cat $SCRIPTS/utilities/.emoji-list.txt | dmenu -i -p "Emojis & Font Awesome")
+
+icon=$(echo $choice | sed "s/\(.\).*$/\1/")
+label=$(echo $choice | sed "s/^..\(.*\)/\1/")
+
+printf $icon | xsel -b
+
+echo "$icon"
+
+if [[ "$icon" == "" ]]; then
+	notify-send "Operation Cancelled"
+else
+	notify-send -i "$HOME/.fonts/svgs/$label.svg" "Clipboard:" "$label has been copied!"
+fi

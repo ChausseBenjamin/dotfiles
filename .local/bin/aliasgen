@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Removing unecessary comments and documentation
+raw=$(cat $HOME/.config/aliasrc | tail -n +17 "$HOME/.config/aliasrc" | sed "s/^|\s*//g;
+		s/\(.*\)|\(.*\)|\(.*\)|/\1|\2|\3/g;
+		s/\s*$//g;
+		/^$/d")
+
+# #---zsh---# #
+echo "$raw" | sed "s/^/alias\ /;
+                s/\s*|\s*/=\"/;
+                s/^.*-*+-*=\"$//;
+                s/\s*|$/\"/" > $HOME/.cache/zsh-aliases
+

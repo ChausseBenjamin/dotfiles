@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Clears the build files of a LaTeX/XeLaTeX build.
+# I have vim run this file whenever I exit a .tex file.
+
+case "$1" in
+	*.tex)
+		file=$(readlink -f "$1")
+		dir=$(dirname "$file")
+		base="${file%.*}"
+		find "$dir"  -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|tmp|pyc|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete
+		;;
+	*.rnw)
+		file=$(readlink -f "$1")
+		dir=$(dirname "$file")
+		base="${file%.*}"
+		find "$dir"  -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|tmp|pyc|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl|tex|Rout)" -delete
+		rm "$dir"/Rplots.pdf
+		rm "$dir"/.Rhistory
+		# rm "$dir"/.Rhistory
+		;;
+	*.rmd)
+		file=$(readlink -f "$1")
+		dir=$(dirname "$file")
+		base="${file%.*}"
+		find "$dir"  -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|tmp|pyc|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl|tex|Rout)" -delete
+		rm "$dir"/Rplots.pdf
+		rm "$dir"/.Rhistory
+		;;
+	*) printf "Give .tex, .rnw, or .rmd file as argument.\\n" ;;
+esac
+

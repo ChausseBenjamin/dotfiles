@@ -1,0 +1,27 @@
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set statusbar-basename true
+set window-title-basename true
+set window-title-page true
+set default-bg              "rgba( 0,   0,   0,   0    )"
+set recolor-lightcolor      "rgba( 24,  32,  36,  0.72 )"
+set recolor-darkcolor       "rgba( 186, 196, 199, 1    )"
+set inputbar-fg             "rgba( 186, 196, 199, 1    )"
+set inputbar-bg             "rgba( 34,  45,  50,  0.9  )"
+set statusbar-fg            "rgba( 186, 196, 199, 1    )"
+set statusbar-bg            "rgba( 34,  45,  50,  0.9  )"
+set notification-warning-bg "rgba( 233, 217, 176, 0.9  )"
+set notification-warning-fg "rgba( 34,  45,  50,  1    )"
+set notification-error-bg   "rgba( 102, 170, 187, 0.9  )"
+set notification-error-fg   "rgba( 34,  45,  50,  1    )"
+set selection-clipboard clipboard
+set page-padding 1
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map J zoom in
+map K zoom out
+map i recolor
+map p print
