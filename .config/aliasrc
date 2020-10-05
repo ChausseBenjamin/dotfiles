@@ -23,7 +23,7 @@
 | dfa     | yadm add                                                             |
 | dfc     | yadm commit                                                          |
 | dfp     | yadm pull                                                            |
-| dfup    | yadm commit -a && yadm push && dwmbar                                |
+| dfup    | yadm commit -a && yadm push all master && dwmbar                     |
 | e       | $EDITOR                                                              |
 | ew      | nvim ./main.rnw                                                      |
 | fetch   | clear && printf '\n$(pfetch)\n$(bars)\n'                             |
