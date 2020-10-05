@@ -82,9 +82,6 @@ source $HOME/.cache/zsh-aliases*
 source $HOME/.cache/zsh-shortcuts
 source $HOME/.cache/shell-vars
 
-# Making ranger useful:
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-
 # Vifm with sensible cd option
 vicd()
 {

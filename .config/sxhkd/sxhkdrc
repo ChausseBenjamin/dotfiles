@@ -70,6 +70,9 @@ super + {comma,period}
 ## Move current window to previous/next monitor
 super + shift + {comma,period}
 	dwmc tagmon {-,+}1
+## Set the master monitor to be the previous/next monitor
+super + alt + {comma,period}
+	dwmc setmastermon {-,+}1
 ## View all tags
 super + 0
 	dwmc viewall
@@ -113,10 +116,10 @@ super + Insert
 	killall screenkey || screenkey --bg-color "#222d32" -s small -f HackGen -t 1 --font-color "#BABABA"
 ## Open this manual
 super + alt + shift + h
-    $SCRIPTS/generation/manualgen
+    manualgen
 ## Start colorpicker
 super + shift + c
-		$SCRIPTS/handling/colorhandler
+		colorhandler
 
 #-# Standard Applications #-#
 ## Terminal window
@@ -127,13 +130,13 @@ super + w
     $BROWSER
 ## TUI Email Client (neomutt)
 super + e
-    killall neomutt || $TERMINAL -e neomutt ; $SCRIPTS/cron/dwmbar
+    killall neomutt || $TERMINAL -e neomutt ; dwmbar
 ## TUI Calendar (calcurse)
 super + shift + e
     killall calcurse || $TERMINAL -t dropdown_calendar -e calcurse
 ## TUI RSS Reader (newsboat)
 super + n
-    killall newsboat || $TERMINAL -e newsboat ; $SCRIPTS/cron/dwmbar
+    killall newsboat || $TERMINAL -e newsboat ; dwmbar
 
 #-#   Floating Apps/Utilities   #-#
 ## Network Manager
@@ -159,10 +162,10 @@ super + shift + v
 		killall hacker-news || dropdowntoggle hacker-news tmux-hn
 ## Webcam
 super + shift + w
-   $SCRIPTS/utilities/camtoggle
+   camtoggle
 ## Force Start VLC Podcast
 super + shift + p
-    $SCRIPTS/utilities/tmux-vlc
+    tmux-vlc
 
 #-#   Prompts (dmenu)   #-#
 ## Application Launcher
@@ -191,7 +194,7 @@ alt + f
 		fontpreview
 ## Start SSH session
 alt + s
-		$SCRIPTS/handling/pickssh
+		pickssh
 
 #-#   PrintScreen Utilities   #-#
 ## Entire Screen

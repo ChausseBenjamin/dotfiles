@@ -37,9 +37,6 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 startx
 fi
 
-# Map CAPS_LOCK correctly:
-$SCRIPTS/remaps
-
 # gh completion
 eval "$(gh completion -s zsh)"
 
