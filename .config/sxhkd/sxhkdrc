@@ -39,7 +39,7 @@ super + {_,shift} m
 	dwmc setlayoutex {3,4}
 ## Make window fullscreen
 super + f
-	dwmc togglefullscr
+	dwmc fullscreen
 ## Make current window floating
 super + shift + space
 	dwmc togglefloating
