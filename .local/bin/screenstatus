@@ -1,4 +1,4 @@
 #!/bin/sh
 
-notify-send.sh  --replace-file /tmp/vol-notif -a  "Screen Brightness" "$(xbacklight -get)%"
+notify-send.sh  --replace-file /tmp/vol-notif -a  "Screen Brightness" "$(xbacklight -get | sed 's/\..*$//g')%"
 

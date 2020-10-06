@@ -186,6 +186,7 @@ autocmd FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<Return>
 " Vimtex pdf viewer
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
+let g:tex_flavor = 'latex'
 
 " #---Document Compilation/Visualisation---# "
 " Compile document, be it groff/LaTeX/markdown/etc.
@@ -194,6 +195,8 @@ autocmd InsertLeave,TextChanged *.gd,*.ms,*.mom :w! | :execute 'silent AsyncRun 
 " autocmd InsertLeave *.rmd,*.rnw,*.tex :w! | :execute 'silent AsyncRun compiler %; todotable % TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK'
 autocmd VimLeave *.rmd,*.rnw,*.tex !texclear %
 map <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
+" Have dwmblocks automatically recompile and run when you edit this file in
+autocmd BufWritePost ~/compilation/dwmblocks/config.h !cd ~/compilation/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 " Open corresponding .pdf/.html or preview
     map <leader>p :! opout <c-r>%<CR><CR>
 " Open corresponding .pdf/.html or preview
