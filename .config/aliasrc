@@ -13,45 +13,45 @@
 # First column contains the alias
 # Second column contains the command to execute
 
-|---------+----------------------------------------------------------------------|
-| :e      | $EDITOR                                                              |
-| :q      | exit                                                                 |
-| adog    | git log --all --decorate --oneline --graph                           |
-| cdd     | cd ..                                                                |
-| cs      | cowsay -f sodomized                                                  |
-| df      | yadm                                                                 |
-| dfa     | yadm add                                                             |
-| dfc     | yadm commit                                                          |
-| dfp     | yadm pull                                                            |
-| dfup    | yadm commit -a ; yadm push && yadm push all master && kill -39 $(pidof dwmblocks)|
-| e       | $EDITOR                                                              |
-| ew      | nvim ./main.rnw                                                      |
-| fetch   | clear && printf '\n$(pfetch)\n$(bars)\n'                             |
-| fp      | fontpreview                                                          |
-| fu      | fuck                                                                 |
-| f       | vicd                                                                 |
-| g       | git                                                                  |
-| goobook | goobook -c $HOME/.config/goobook/config                              |
-| gor     | go run *.go                                                          |
-| less    | nvimpager                                                            |
-| mmi     | make && sudo make install                                            |
-| op      | e main.rnw                                                           |
-| R       | R -q                                                                 |
-| td      | todotxt-machine -c ~/.config/todotxt-machine/config                  |
-| tm      | tmux                                                                 |
-| tmcd    | tmux attach-session -t                                               |
-| tmdd    | tmux  kill-session -t                                                |
-| tmls    | tmux list-sessions                                                   |
-| t       | todo.sh -d $HOME/.config/todo/todo.cfg                               |
-| ta      | todo.sh -d $HOME/.config/todo/todo.cfg a                             |
-| tl      | todo.sh -d $HOME/.config/todo/todo.cfg ls                            |
-| v       | nvim                                                                 |
-| vc      | expressvpn connect && dwmbar                                         |
-| vd      | expressvpn disconnect && dwmbar                                      |
-| vm      | expressvpn connect camo && dwmbar                                    |
-| vpn     | expressvpn                                                           |
-| vs      | expressvpn connect smart && dwmbar                                   |
-| xx      | chmod +x                                                             |
-| yadog   | yadm log --all --decorate --oneline --graph                          |
-|---------+----------------------------------------------------------------------|
+|---------+-----------------------------------------------------------------------------------|
+| :e      | $EDITOR                                                                           |
+| :q      | exit                                                                              |
+| adog    | git log --all --decorate --oneline --graph                                        |
+| cdd     | cd ..                                                                             |
+| cs      | cowsay -f sodomized                                                               |
+| df      | yadm                                                                              |
+| dfa     | yadm add                                                                          |
+| dfc     | yadm commit                                                                       |
+| dfp     | yadm pull                                                                         |
+| dfup    | yadm commit -a ; yadm push && yadm push all master && kill -39 $(pidof dwmblocks) |
+| e       | $EDITOR                                                                           |
+| ew      | nvim ./main.rnw                                                                   |
+| fetch   | clear && printf '\n$(pfetch)\n$(bars)\n'                                          |
+| fp      | fontpreview                                                                       |
+| fu      | fuck                                                                              |
+| f       | vicd                                                                              |
+| g       | git                                                                               |
+| goobook | goobook -c $HOME/.config/goobook/config                                           |
+| gor     | go run *.go                                                                       |
+| less    | nvimpager                                                                         |
+| mmi     | make && sudo make install                                                         |
+| op      | e main.rnw                                                                        |
+| R       | R -q                                                                              |
+| td      | todotxt-machine -c ~/.config/todotxt-machine/config                               |
+| tm      | tmux                                                                              |
+| tmcd    | tmux attach-session -t                                                            |
+| tmdd    | tmux  kill-session -t                                                             |
+| tmls    | tmux list-sessions                                                                |
+| t       | todo.sh -d $HOME/.config/todo/todo.cfg                                            |
+| ta      | todo.sh -d $HOME/.config/todo/todo.cfg a                                          |
+| tl      | todo.sh -d $HOME/.config/todo/todo.cfg ls                                         |
+| v       | nvim                                                                              |
+| vc      | expressvpn connect && dwmbar                                                      |
+| vd      | expressvpn disconnect && dwmbar                                                   |
+| vm      | expressvpn connect camo && dwmbar                                                 |
+| vpn     | expressvpn                                                                        |
+| vs      | expressvpn connect smart && dwmbar                                                |
+| xx      | chmod +x                                                                          |
+| yadog   | yadm log --all --decorate --oneline --graph                                       |
+|---------+-----------------------------------------------------------------------------------|
 
