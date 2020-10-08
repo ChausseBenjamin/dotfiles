@@ -136,7 +136,7 @@ super + shift + e
     killall calcurse || $TERMINAL -t dropdown_calendar -e calcurse
 ## TUI RSS Reader (newsboat)
 super + n
-    killall newsboat || $TERMINAL -e newsboat ; dwmbar
+    killall newsboat || $TERMINAL -e newsboat ; kill -37 $(pidof dwmblocks)
 
 #-#   Floating Apps/Utilities   #-#
 ## Network Manager
