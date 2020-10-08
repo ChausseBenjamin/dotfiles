@@ -140,7 +140,7 @@ super + n
 
 #-#   Floating Apps/Utilities   #-#
 ## Network Manager
-super + shift + n
+XF86WLAN
     killall nmtui || dropdowntoggle network nmtui
 ## TUI Audio Mixer (alsamixer)
 super + p
@@ -258,3 +258,6 @@ super + shift + {bracketright, bracketleft}
 ## Toggle music playback
 super + backslash
 		playerctl play-pause
+# ## Network Manager
+# super + shift + n
+#     killall nmtui || dropdowntoggle network nmtui

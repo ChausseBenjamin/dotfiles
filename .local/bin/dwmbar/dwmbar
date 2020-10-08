@@ -6,17 +6,17 @@
 # When given the echo option, echo to stdout instead
 # of refreshing (useful for debugging)
 
-battery=$(battery)
-datetime=$(datetime)
+battery=$(dwmb-bat)
+datetime=$(dwmb-date)
 # dropbox=$(dropbox-status)
-kblayout=$(kblayout)
+kblayout=$(dwmb-layout)
 # mailbox=$(mailbox)
-news=$(news)
-vpnstatus=$(vpnstatus)
+news=$(dwmb-news)
+vpnstatus=$(dwmb-vpn)
 # wifi=$(wifi)
-yadms=$(yadms)
+dotfiles=$(dwmb-dotfiles)
 
-bar="$yadms|$news|$datetime|$kblayout|$vpnstatus|$battery |"
+bar="$dotfiles|$news|$datetime|$kblayout|$vpnstatus|$battery "
 
 case "$1" in
 	echo) echo "$bar" ;;

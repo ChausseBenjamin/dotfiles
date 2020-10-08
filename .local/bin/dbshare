@@ -1,0 +1,14 @@
+#!/bin/bash
+
+output="$(dropbox-cli sharelink $1)"
+
+case "$output" in
+	https*)
+		echo "$output" | xsel -b
+		notify-send -a " Dropbox" "Your file $1 can now be shared. It's url is:
+$output
+It has been copied to your clipboard." ;;
+	*)
+		notify-send -a " Dropbox" "ERROR:
+Your file could not be shared." ;;
+esac

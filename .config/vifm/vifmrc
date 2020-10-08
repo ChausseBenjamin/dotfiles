@@ -137,7 +137,7 @@ set rulerformat=
 
 
 " CSV/Excel
-filetype *.csv,*.xlsx libreoffice %c %i
+filetype *.xlsx libreoffice %c %i
 fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 " HTMLs
@@ -145,8 +145,8 @@ fileviewer *.html w3m -dump %c
 filextype *.html,*.htm firefox %f 2>/dev/null &
 
 " Text based files
-filetype <text/*> nvim
-fileviewer <text/*> env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
+filetype <*.csv,text/*> nvim
+fileviewer <*.csv,text/*> env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
 fileviewer *.[ch],*.[ch]pp,*.[ch]xx env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
 
 " PDFs
@@ -260,7 +260,7 @@ nnoremap gb :file &<cr>l
 nnoremap yd :!echo %d | xclip -i -selection clipboard %i<cr>
 
 " Yank current file path into the clipboard
-nnoremap yf :!echo %c:p | xclip -i -selection clipboard %i<cr>
+nnoremap yf :!echo %c:p | xsel -b %i<cr>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
@@ -269,6 +269,9 @@ nnoremap A cw
 
 " Extract an archive
 nnoremap x :!/home/siddharth/bin/utils/extract %f &<cr>
+
+" Share Files with dropbox
+ nnoremap s :!dbshare %d/%b &<cr>
 
 " Make a new directory
 nnoremap mkd :mkdir<space>

@@ -30,5 +30,5 @@
 | Scripts        | sc  | $HOME/.local/bin                                 |
 | Hotkeys        | sx  | $HOME/.config/sxhkd                              |
 | Images         | img | $HOME/Dropbox/A/Personnal/Photos/unsorted        |
-| Compilation    | cmp | $HOME/compilation                                |
+| Compilation    | cmp | $HOME/Compilation                                |
 |----------------+-----+--------------------------------------------------|

@@ -8,8 +8,7 @@ ping -q -c 1 1.1.1.1 > /dev/null || exit
 
 pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 
-echo "" > /tmp/newsupdate && dwmbar
-pkill -RTMIN+6 i3blocks
+echo "   " > /tmp/newsupdate && kill -37 $(pidof dwmblocks)
 /usr/bin/newsboat -x reload
 rm -f /tmp/newsupdate
-/usr/bin/notify-send -t 1 -i "$HOME/.fonts/svg/rss.svg" -a RSS "RSS feed update complete." && dwmbar
+/usr/bin/notify-send -t 1 -a " RSS" "RSS feed update complete." && kill -37 $(pidof dwmblocks)
