@@ -196,7 +196,7 @@ autocmd InsertLeave,TextChanged *.gd,*.ms,*.mom :w! | :execute 'silent AsyncRun 
 autocmd VimLeave *.rmd,*.rnw,*.tex !texclear %
 map <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
 " Have dwmblocks automatically recompile and run when you edit this file in
-autocmd BufWritePost ~/compilation/dwmblocks/config.h !cd ~/compilation/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblocks/; make && sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 " Open corresponding .pdf/.html or preview
     map <leader>p :! opout <c-r>%<CR><CR>
 " Open corresponding .pdf/.html or preview
