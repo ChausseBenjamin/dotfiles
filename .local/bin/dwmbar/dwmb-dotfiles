@@ -7,9 +7,9 @@ dotfiles=$(yadm status | sed '1,3d;
 if [[ ${dotfiles:0:1} == "n" ]]; then
     warn=""
 else
-    warn="  "
+    warn=" "
 fi
 
 
 
-echo " $warn"
+echo " $warn "
