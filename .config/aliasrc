@@ -33,7 +33,6 @@
 | g       | git                                                                               |
 | goobook | goobook -c $HOME/.config/goobook/config                                           |
 | gor     | go run *.go                                                                       |
-| less    | nvimpager                                                                         |
 | mmi     | make && sudo make install                                                         |
 | op      | e main.rnw                                                                        |
 | R       | R -q                                                                              |
