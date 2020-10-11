@@ -58,7 +58,7 @@ super + {_, shift} + s
 ## Add/Remove windows from the master stack
 super + {_,shift} + i
 	dwmc incnmaster {+,-}1
-## Increase/Decrease master stack width haha
+## Increase/Decrease master stack width
 super + {h,l}
 	dwmc setmfact {-,+}0.05
 ## Toggle view next tag
