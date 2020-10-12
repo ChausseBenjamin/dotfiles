@@ -1,5 +1,5 @@
 export GOPATH=$HOME/.go
-export SCRIPTS=$HOME/.scripts
+export SCRIPTS=$HOME/.local/bin
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
 export PATH=$PATH:/root/.local/bin
 export PATH=$PATH:$HOME/.local/bin
@@ -20,7 +20,7 @@ export DISTRIB_RELEASE=$(uname -r)
 # export GOROOT=/usr/bin/go
 
 # fix "xdg-open fork-bomb" export your preferred browser from here
-export BROWSER=firefox
+export BROWSER=$(which firefox)
 
 # less/man colors
 export LESS=-R

@@ -41,8 +41,6 @@ Plug 'tpope/vim-sensible'
 Plug 'dhruvasagar/vim-table-mode'
 " Html linter enabler (for prettier AUR package)
 Plug 'dense-analysis/ale'
-" Vim Goyo
-Plug 'junegunn/goyo.vim'
 " Vim css hex highlight
 Plug 'chrisbra/Colorizer'
 " Bracket Completion
@@ -83,6 +81,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Vimtex
 Plug 'lervag/vimtex'
+" Tags for latex
+Plug 'ludovicchabant/vim-gutentags'
 " C developement in vim
 Plug 'vim-scripts/c.vim'
 " NERDTree
@@ -184,8 +184,8 @@ let g:go_term_mode = "silent keepalt rightbelow 35 vsplit"
 let g:go_def_reuse_buffer = 1
 autocmd FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<Return>
 " Vimtex pdf viewer
-let g:latex_view_general_viewer = 'zathura'
-let g:vimtex_view_method = "zathura"
+let g:vimtex_view_general_viewer = 'open'
+let g:vimtex_view_general_options = '-a zathura'
 let g:tex_flavor = 'latex'
 
 " #---Document Compilation/Visualisation---# "

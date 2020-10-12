@@ -6,7 +6,6 @@ dunst &
 protonmail-bridge --no-window &
 xautolock -time 5 -detectsleep -locker slock &
 picom -b &
-echo "/tmp/imapsyncicon_$USER" | entr $SCRIPTS/cron/dwmbar &
 echo "" > $HOME/.local/share/newsboat/queue
 echo us > $HOME/.cache/layout
 xrdb -load $HOME/.Xresources
