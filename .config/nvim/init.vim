@@ -205,6 +205,9 @@ autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblock
 set tabstop=2
 " when indenting with '>', use 4 spaces width
 set shiftwidth=2
+" 80 col warning
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 " #---Custom Keymaps---# "
 " Tab Buffer Navigation
