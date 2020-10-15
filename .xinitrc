@@ -10,6 +10,6 @@ echo "" > $HOME/.local/share/newsboat/queue
 echo us > $HOME/.cache/layout
 xrdb -load $HOME/.Xresources
 dwmblocks &
-flashfocus -n 30 -o 0.9 -v ERROR &
+flashfocus -n 30 -o 0.75 -v ERROR &
 exec dwm
 # vim:filetype=sh
