@@ -23,7 +23,7 @@
 | dfa     | yadm add                                                                          |
 | dfc     | yadm commit                                                                       |
 | dfp     | yadm pull                                                                         |
-| dfup    | yadm commit -a ; yadm push && kill -40 $(pidof dwmblocks) |
+| dfup    | yadm commit -a ; yadm push && kill -41 $(pidof dwmblocks) |
 | e       | $EDITOR                                                                           |
 | ew      | nvim ./main.rnw                                                                   |
 | fetch   | clear && printf '\n$(pfetch)\n$(bars)\n'                                          |
