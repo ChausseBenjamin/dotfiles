@@ -4,10 +4,9 @@
 #	Run by itself, set the wallpaper (at X start).
 #	If given a file, set that as the new wallpaper.
 #	If given a directory, choose random file in it.
-#	If wal is installed, also generate a colorscheme.
 
 # Location of link to wallpaper link.
-bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/wall.png"
+bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}wall.png"
 
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
 
