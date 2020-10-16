@@ -4,17 +4,12 @@
 # to the clipboard. Some font-awesome icons are
 # also supported.
 
-choice=$( cat $SCRIPTS/utilities/.emoji-list.txt | dmenu -i -p "Emojis & Font Awesome")
+choice=$( cat ~/.local/share/emoji | dmenu -i -p "Font Awesome & Emojis: ")
 
-icon=$(echo $choice | sed "s/\(.\).*$/\1/")
-label=$(echo $choice | sed "s/^..\(.*\)/\1/")
+icon=$(echo $choice | sed "s/^\(.\).*$/\1/")
 
-printf $icon | xsel -b
+printf "$icon" | xsel -b
 
-echo "$icon"
 
-if [[ "$icon" == "" ]]; then
-	notify-send "Operation Cancelled"
-else
-	notify-send -i "$HOME/.fonts/svgs/$label.svg" "Clipboard:" "$label has been copied!"
-fi
+[ -z "$icon" ] && notify-send -a "Clipboard:" "Operation Cancelled"
+[ -z "$icon" ] || notify-send -a "Clipboard:" "$icon has been copied!"
