@@ -4,11 +4,11 @@
 vpnstatus=$(expressvpn status | head -n 1)
 
 case "$vpnstatus" in
-	*"Not"*) icon=""
+	*"Not"*) icon=""
 		;;
-	*"Connected"*) icon=""
+	*"Connected"*) icon=""
 		;;
-	*"Connecting"*) icon=" "
+	*"Connecting"*) icon=" "
 		;;
 	*) icon=""
 esac
