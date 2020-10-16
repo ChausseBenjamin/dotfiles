@@ -1,9 +1,0 @@
-#!/bin/sh
-
-case "$(dropbox-cli status | head -n 1)" in
-	"Up to date") icon="" ;;
-	"Syncing"*)   icon=" " ;;
-	*)            icon=" "
-esac
-
-echo " $icon "
