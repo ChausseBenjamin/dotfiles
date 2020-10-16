@@ -11,4 +11,7 @@ echo "$raw" | sed "s/^/alias\ /;
                 s/\s*|\s*/=\"/;
                 s/^.*-*+-*=\"$//;
                 s/\s*|$/\"/" > $HOME/.cache/zsh-aliases
-
+case "$SHELL" in
+	*zsh) $HOME/.cache/zsh-aliases ;;
+	*) ;;
+esac
