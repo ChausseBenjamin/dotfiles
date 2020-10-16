@@ -19,7 +19,7 @@ ico=""
 
 # Change the underscore color according to the charging state
 case "$batstatus" in
-  *Charging*) ico=" ";;
+  *Charging*) ico="  ";;
   *Discharging*) ico="  " ;;
   *) ico="  " ;;
 esac
