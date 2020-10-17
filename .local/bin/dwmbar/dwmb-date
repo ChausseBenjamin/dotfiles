@@ -1,3 +1,7 @@
 #!/bin/sh
 
 date +"  %a %b %d "
+
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac

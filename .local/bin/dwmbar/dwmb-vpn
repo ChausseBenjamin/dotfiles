@@ -6,9 +6,9 @@ vpnstatus=$(expressvpn status | head -n 1)
 case "$vpnstatus" in
 	*"Not"*) icon=""
 		;;
-	*"Connected"*) icon=""
+	*"Connected"*) icon=""
 		;;
-	*"Connecting"*) icon=" "
+	*"Connecting"*) icon=" "
 		;;
 	*) icon=""
 esac
@@ -23,3 +23,7 @@ echo " $icon "
 # \033]01;34\] # blue
 # \033]01;33\] # bold yellow
 # s/onnected\sto\s//;
+case $BLOCK_BUTTON in
+	1) ~/.local/bin/vpnmenu ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
