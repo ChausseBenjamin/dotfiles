@@ -30,14 +30,12 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-browser $SCRIPTS/handling/linkhandler
-# external-url-viewer "less"
+browser ~/.local/bin/linkhandler
 macro , open-in-browser
 macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
 macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
 macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
-# macro P external-url-viewer "grep"
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkandler
 
 player "$SCRIPTS/handling/pod-dl"

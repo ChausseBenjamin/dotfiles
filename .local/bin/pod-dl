@@ -1,12 +1,12 @@
 #!/bin/sh
 
-tmux kill-session -t Podcast 2 > /dev/null
+# tmux kill-session -t Podcast 2 &> /dev/null
 
 file=$(tail -n 1 $HOME/.local/share/newsboat/queue)
 url=$(echo $file | sed 's/."\/home.*$//')
 dir=$(echo $file | sed 's/^.*"\/home/\/home/; s/.$//')
 
-$TERMINAL -c dropdown -t Podcast -e $SCRIPTS/utilities/tmux-vlc "$url"
+$TERMINAL -c dropdown -t Podcast -e ~/.local/bin/tmux-vlc "$url"
 
 # notify-send -i "$HOME/.fonts/svg/rss.svg" "Download initiated"
 # wget -LO $dir $url && \
