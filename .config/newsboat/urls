@@ -36,7 +36,7 @@ https://lukesmith.xyz/rss.xml                          "Website" "~Website: Luke
 # https://spacenews.com/feed/                          "Website" "~Website: SpaceNews"
 
 # #---Facebook---# #
-https://bridge.noisebridge.info/?action=display&bridge=Facebook&context=User&u=LaDebarqueEscalade&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: La Debarque"
+https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=LaDebarqueEscalade&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: La Debarque"
 
 # #---Flickr---# #
 https://www.flickr.com/services/feeds/photos_public.gne?id=130608600@N05&lang=en-us&format=rss_200 "Flickr" "~Flickr: Spacex Latest"
