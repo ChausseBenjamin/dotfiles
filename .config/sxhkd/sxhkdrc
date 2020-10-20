@@ -130,7 +130,7 @@ super + w
     $BROWSER
 ## TUI Email Client (neomutt)
 super + e
-    killall neomutt || $TERMINAL -e neomutt ; dwmbar
+    killall neomutt || $TERMINAL -e neomutt && mw -Y
 ## TUI Calendar (calcurse)
 super + shift + e
     killall calcurse || $TERMINAL -t dropdown_calendar -e calcurse
