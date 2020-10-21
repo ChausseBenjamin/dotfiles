@@ -4,7 +4,7 @@
 raw=$(cat $HOME/.config/shortcutrc | tail -n +19 "$HOME/.config/shortcutrc" | sed "s/^|\s*//g;
                                                                               s/\(.*\)|\(.*\)|\(.*\)|/\1|\2|\3/g;
                                                                               s/\s*$//g;
-                                                                              /^$/d")
+                                                                              /^$/d" | head -n -1)
 # #---NERDTREE---# #
 echo "$raw" | sed "s/\(.*\)\s*|.*|\s\(.*\)/\1\2/g;
               s/ \{1,\}/ /g;
@@ -38,17 +38,24 @@ echo "$raw" | sed 's/[A-z,a-z,0-9]*\s*|\s*/g/;
 # #---Vifm---# #
 vifm=$(echo "$raw" | sed "
             s/^[A-Z,a-z,0-9]*\s*|//;
-						s/|/:cd/;
 						s/\$HOME/~/;
-						s/^-.*//"
+						s/$/<cr>/"
 )
-vifmgo=$( echo "$vifm" | sed "
-				s/\s*/nnoremap\ g/;
-				s/$/<cr>/"
+vifmcd=$( echo "$vifm" | sed "
+				s/^\s*/nnoremap\ g/;
+				s/|/:cd/;"
 )
-echo "$vifmgo" > ~/.cache/vifm-shortcuts
+vifmv=$( echo "$vifm" | sed "
+				s/^\s*/nnoremap\ m/;
+				s/|/:move/")
+vifmy=$( echo "$vifm" | sed "
+				s/^\s*/nnoremap\ y/;
+				s/|/:copy/")
+echo "$vifmcd\n\n$vifmv\n\n$vifmy" > ~/.cache/vifm-shortcuts
 
 # #---Testing---# #
 # echo "$raw" | sed "s/[A-z,a-z,0-9]*\s*|//"
 
-# echo "$raw"
+clear
+# echo "$vifmv"
+cat ~/.cache/vifm-shortcuts

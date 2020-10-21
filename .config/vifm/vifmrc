@@ -237,6 +237,8 @@ nnoremap gg ggj
 
 " Quick shortcuts to some dirs
 source ~/.cache/vifm-shortcuts
+
+" Easily go back home
 nnoremap cd :cd<cr>
 
 
