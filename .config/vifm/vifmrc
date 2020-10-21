@@ -138,7 +138,7 @@ set rulerformat=
 
 " CSV/Excel
 filetype *.xlsx libreoffice %c %i
-fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
+" fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 " HTMLs
 fileviewer *.html w3m -dump %c
@@ -146,8 +146,10 @@ filextype *.html,*.htm firefox %f 2>/dev/null &
 
 " Text based files
 filetype <*.csv,text/*> nvim
-fileviewer <*.csv,text/*> env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
-fileviewer *.[ch],*.[ch]pp,*.[ch]xx env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
+fileviewer <*.csv,text/*> env -uCOLORTERM highlight -i %c --stdout -O ansi
+" fileviewer <*.csv,text/*> env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
+fileviewer *.[ch],*.[ch]pp,*.[ch]xx env -uCOLORTERM highlight -i %c --stdout -O ansi
+" fileviewer *.[ch],*.[ch]pp,*.[ch]xx env -uCOLORTERM bat --color always --theme base16 --wrap never --pager never %c -p
 
 " PDFs
 filextype *.pdf zathura %c %i &
