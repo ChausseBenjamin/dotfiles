@@ -143,6 +143,7 @@ set linebreak
 " #---Plugin Preferences---# "
 " Nvim-R
 let R_rconsole_width = 0
+let R_openpdf = 0
 " Emmet Expansion
 let g:user_emmet_leader_key=','
 " Enable kite autocompletion
