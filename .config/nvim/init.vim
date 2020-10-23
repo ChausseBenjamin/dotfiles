@@ -144,6 +144,8 @@ set linebreak
 " Nvim-R
 let R_rconsole_width = 0
 let R_openpdf = 0
+au BufWritePost *.rmd,*.rnw,      silent! :call RWeave("nobib", 1, 1)
+au VimLeave    *.rmd,*.rnw,*.tex !texclear %
 " Emmet Expansion
 let g:user_emmet_leader_key=','
 " Enable kite autocompletion
@@ -194,7 +196,6 @@ let g:tex_flavor = 'latex'
 map <leader>c :w! \| AsyncRun compiler <c-r>%<CR><CR>
 autocmd InsertLeave,TextChanged *.gd,*.ms,*.mom :w! | :execute 'silent AsyncRun compiler %'
 " autocmd InsertLeave *.rmd,*.rnw,*.tex :w! | :execute 'silent AsyncRun compiler %; todotable % TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK'
-autocmd VimLeave *.rmd,*.rnw,*.tex !texclear %
 map <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
 " Have dwmblocks automatically recompile and run when you edit this file in
 autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblocks/; make && sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
