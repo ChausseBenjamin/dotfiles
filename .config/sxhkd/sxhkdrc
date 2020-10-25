@@ -234,7 +234,7 @@ shift + XF86MonBrightnessDown
     xbacklight -time 100 -set 5 && screenstatus
 ## Display Setup Utility (mirror or extend displays)
 XF86Display
-    displaymenu
+    arandr
 ## Disable Trackpad
 XF86Favorites
     trackpadtoggle 0
