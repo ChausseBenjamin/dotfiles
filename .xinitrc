@@ -1,5 +1,6 @@
 xwallpaper --zoom ~/.cache/wall.png &
 dropbox-cli start &
+/opt/piavpn/bin/pia-daemon &
 sxhkd &
 remaps &
 dunst &

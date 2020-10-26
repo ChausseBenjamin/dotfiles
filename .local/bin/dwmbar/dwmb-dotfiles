@@ -14,5 +14,7 @@ fi
 
 echo " $warn "
 case $BLOCK_BUTTON in
+		1) $TERMINAL -c dropdown -e yadm diff ;;
+		3) $TERMINAL -c dropdown -e dfup ;;
     6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac

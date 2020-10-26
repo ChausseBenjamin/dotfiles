@@ -269,8 +269,6 @@ augroup END
 autocmd BufWritePre * %s/\s\+$//e
 " Soft Tabs
 filetype plugin indent on
-" Delete ctags when leaving vim
-au VimLeave * :!rm ./tags*<CR>
 " NERDTRee Hotkey map
 map <C-n> :NERDTreeToggle<CR>
     let NERDTreeDirArrowExpandable="|"

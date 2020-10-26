@@ -1,14 +1,10 @@
 #!/bin/sh
 
-current=$(expressvpn status | sed "s/.......................//; 1q")
+region="$(piactl get regions | dmenu -p "Select Region: ")"
+update=$(kill -36 $(pidof dwmblocks))
 
-location=$(expressvpn list recomend | sed "1,4d; s/^.*\t//" | head | dmenu -l 10)
-
-if [ ! -n "$location" ]
-then
-	notify-send -i "$HOME/.fonts/svg/shield.svg" -a "VPN Module" "Operation aborted"
-else
-	expressvpn disconnect; expressvpn connect "$location"
-fi
-
-# expressvpn disconnect; expressvpn connect "$location"
+[ "$region" == "" ] && notify-send -a " VPN" "Operation aborted"
+[ "$region" 	!= "" ] && piactl set region "$region" && \
+	 $update && notify-send -a " VPN" "Changed region to $region" && \
+	sleep 3 && $update
+# Comment next line if not using the vpn dwmblock

@@ -3,5 +3,6 @@
 date +"  %a %b %d "
 
 case $BLOCK_BUTTON in
+	1) notify-send -a " Calendar" "$(cal | tail -n +2)" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac

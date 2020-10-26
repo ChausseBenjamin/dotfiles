@@ -2,6 +2,7 @@
 
 output="$(dropbox-cli sharelink $1)"
 
+
 case "$output" in
 	https*)
 		echo "$output" | xsel -b
@@ -10,5 +11,6 @@ $output
 It has been copied to your clipboard." ;;
 	*)
 		notify-send -a " Dropbox" "ERROR:
-Your file could not be shared." ;;
+Your file could not be shared.
+$output" ;;
 esac

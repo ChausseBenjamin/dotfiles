@@ -1,19 +1,29 @@
 #!/bin/bash
 # Outputs if Express VPN is connected or not
 
-vpnstatus=$(expressvpn status | head -n 1)
+vpnstatus="$(piactl get connectionstate)"
 
 case "$vpnstatus" in
-	*"Not"*) icon=""
-		;;
-	*"Connected"*) icon=""
-		;;
-	*"Connecting"*) icon=" "
-		;;
-	*) icon=""
+	Disconnected) icon=" " ;;
+	Connecting) icon="  " ;;
+	Connected) icon=" " ;;
+	Interrupted) icon="  " ;;
+	Reconnecting) icon="  " ;;
+	DisconnectingToReconnect) icon="  ";;
+	Disconnecting) icon="  " ;;
 esac
 
-echo " $icon "
+# case "$vpnstatus" in
+# 	*"Not"*) icon=""
+# 		;;
+# 	*"Connected"*) icon=""
+# 		;;
+# 	*"Connecting"*) icon=" "
+# 		;;
+# 	*) icon=""
+# esac
+
+echo " $icon"
 
 
 # \033]01;31\] # pink
@@ -24,6 +34,8 @@ echo " $icon "
 # \033]01;33\] # bold yellow
 # s/onnected\sto\s//;
 case $BLOCK_BUTTON in
-	1) ~/.local/bin/vpnmenu ;;
+	1) piactl connect && notify-send -a "VPN" "Connected" && kill -36 $(pidof dwmblocks);;
+	2) vpnmenu ;;
+	3) piactl disconnect && notify-send -a "VPN" "Disonnected" && kill -36 $(pidof dwmblocks);;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
