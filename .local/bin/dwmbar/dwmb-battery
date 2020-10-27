@@ -1,10 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) notify-send hey ;;
-	2) setsid -f "$TERMINAL" -e calcurse ;;
-	3) notify-send " Time/date module" "\- Left click to show upcoming appointments for the next three days via \`calcurse -d3\` and show the month via \`cal\`
-- Middle click opens calcurse if installed" ;;
+	1) notify-send -a "  Battery" "$(acpi -b)" ;;
+	3) notify-send -a "  Battery" "$(acpi -V)" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

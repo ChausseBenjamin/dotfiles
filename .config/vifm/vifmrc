@@ -231,8 +231,6 @@ nnoremap bg :!sh ~/.scripts/control/setbg %c &<cr>
 " Upload highlighted file to 0x0.st and then save url to clipboard
 nnoremap 0x0 :!curl -s -F'file=@%c' https://0x0.st > /dev/null | xclip -sel clip && notify-send "vifm" "File uploaded: $(xclip -o -selection clipboard)" &<cr>
 
-" Reverse image search with Tiney
-nnoremap re :!bash ~/bin/utils/tineye %c &<cr>
 
 " Go to the file that is right before "../" for going to the top most file
 nnoremap gg ggj
@@ -275,7 +273,8 @@ nnoremap A cw
 nnoremap x :!/home/siddharth/bin/utils/extract %f &<cr>
 
 " Share Files with dropbox
- nnoremap s :!dbshare %d/%b &<cr>
+nnoremap s :!dbshare %d/%b &<cr>
+nnoremap re :!tmpfunc %d/%b &<cr>
 
 " Make a new directory
 nnoremap mkd :mkdir<space>
@@ -287,7 +286,7 @@ nnoremap mkd :mkdir<space>
 set classify='  :dir:/,  :exe:,  :reg:,  :link:'
 " various file names
 set classify+='  ::../::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
-set classify+='  ::*.go::,  ::*.vim,,vimrc::,  ::*.tex,,*.aux,,*.toc,,*.rnw,,*.rmd::,  ::*.js::,  ::*.css::,  ::*.log,,*.db::,  ::*.py,,*.pyc,,*.pyd,,*.pyo::,  ::*.md::, ::*.json::,  ::*.vcf::, ::*.rss::'
+set classify+='  ::*.go::,  ::*.vim,,vimrc::,  ::*.tex,,*.aux,,*.toc,,*.rnw,,*.rmd::,  ::*.js::,  ::*.css::,  ::*.log,,*.db::,  ::*.py,,*.pyc,,*.pyd,,*.pyo::,  ::*.md::,  ::*.json::,  ::*.vcf::, ::*.rss::'
 " archives
 set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
 " images

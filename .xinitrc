@@ -10,8 +10,9 @@ picom -b &
 echo "" > $HOME/.local/share/newsboat/queue
 echo us > $HOME/.cache/layout
 xrdb -load $HOME/.Xresources
-dwmblocks &
 flashfocus -n 30 -o 0.75 -v ERROR &
+dwmblocks &
+sudo /opt/piavpn/bin/pia-daemon &
 # exec icewm
 exec dwm
 # vim:filetype=sh

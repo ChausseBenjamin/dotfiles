@@ -4,5 +4,6 @@ nb=$(cat /tmp/newsupdate 2>/dev/null || echo "$(newsboat -x print-unread | awk '
 echo " $nb"
 case $BLOCK_BUTTON in
 	1) "$TERMINAL" -e newsboat ;;
+	3) newsup  ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
