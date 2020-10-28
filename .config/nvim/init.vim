@@ -120,6 +120,7 @@ set t_Co=256
 set encoding=utf-8
 set path+=** " Provides tab-completion for all file related tasks
 set wildmenu " Display all matching file when we tab complete
+runtime macros/matchit.vim
 " Spelling
 set complete+=kspell " Better Spell Checking
 set spelllang=fr

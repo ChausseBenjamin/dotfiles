@@ -1,0 +1,19 @@
+# These are my personal configs on top of mutt-wizard.
+# Add the following line to your muttrc to have them:
+# source $HOME/.config/mutt/goobook
+
+# GOOBOOK:
+# goobook let's you query google for contact information.
+# You install it with pip: pip install --user goobook
+set query_command="goobook query %s"
+# Note that if you use an old version of mutt-wizard,
+# you will need to disable abook in it's script:
+# sed -i "s/^set\squery_command.*$//" /usr/share/mutt-wizard/mutt-wizard.muttrc
+
+# PGP Encryption:
+# I want pgp encryption by default when possible.
+# The following line makes this possible:
+set crypt_use_gpgme=yes
+set crypt_autosign
+
+# vim: filetype=neomuttrc
