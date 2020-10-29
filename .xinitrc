@@ -12,5 +12,8 @@ xrdb -load $HOME/.Xresources
 flashfocus -n 30 -o 0.75 -v ERROR &
 dwmblocks &
 # exec icewm
-exec dwm
+while true; do
+	dwm >/dev/null
+done
+# exec dwm
 # vim:filetype=sh

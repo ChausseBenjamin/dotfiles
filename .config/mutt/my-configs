@@ -15,5 +15,6 @@ set query_command="goobook query %s"
 # The following line makes this possible:
 set crypt_use_gpgme=yes
 set crypt_autosign
+set pgp_auto_decode
 
 # vim: filetype=neomuttrc

@@ -82,7 +82,7 @@ Plug 'tpope/vim-repeat'
 " Vimtex
 Plug 'lervag/vimtex'
 " Tags for latex
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " C developement in vim
 Plug 'vim-scripts/c.vim'
 " NERDTree
