@@ -204,10 +204,10 @@ autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblock
     map <leader>p :! opout <c-r>%<CR><CR>
 " Open corresponding .pdf/.html or preview
     map <leader>o :! tdout <c-r>%<CR><CR>
-" Width tabstop
+" Spaces are superior to tabs
 set tabstop=2
-" when indenting with '>', use 4 spaces width
 set shiftwidth=2
+set expandtab
 " 80 col warning
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
