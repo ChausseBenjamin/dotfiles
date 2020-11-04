@@ -291,6 +291,9 @@ nmap <C-Enter> <leader>l
 " Nvim folding
     let r_syntax_folding = 1
     set foldnestmax=1
+" Arduino settings
+let g:arduino_cmd = '/usr/bin/arduino'
+let g:arduino_dir = '/usr/share/arduino'
 
 
 " #---Universal Macros---# "
