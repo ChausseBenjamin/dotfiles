@@ -11,9 +11,9 @@ echo us > $HOME/.cache/layout
 xrdb -load $HOME/.Xresources
 flashfocus -n 30 -o 0.75 -v ERROR &
 dwmblocks &
-# exec icewm
+newsup &
 while true; do
 	dwm >/dev/null
 done
-# exec dwm
+# exec icewm
 # vim:filetype=sh

@@ -37,6 +37,10 @@ Plug 'hisaknown/deoplete-latex'
 Plug 'jalvesaq/Nvim-R'
 " Vim Sensible
 Plug 'tpope/vim-sensible'
+" Kite copilot
+Plug 'kiteco/vim-plugin'
+" Using vim to compile arduino code
+Plug 'stevearc/vim-arduino'
 " Vim org tables
 Plug 'dhruvasagar/vim-table-mode'
 " Html linter enabler (for prettier AUR package)
@@ -150,7 +154,7 @@ au VimLeave    *.rmd,*.rnw,*.tex !texclear %
 " Emmet Expansion
 let g:user_emmet_leader_key=','
 " Enable kite autocompletion
-let g:kite_auto_complete=1
+" let g:kite_auto_complete=1
 " MarkdownPreview
 " let g:mkdp_browser = 'surf'
 " Bracey
