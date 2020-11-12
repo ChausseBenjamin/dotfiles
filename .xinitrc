@@ -3,6 +3,7 @@ dropbox-cli start &
 sxhkd &
 remaps &
 dunst &
+unclutter &
 protonmail-bridge --no-window &
 xautolock -time 5 -detectsleep -locker slock &
 picom -b &
@@ -12,8 +13,6 @@ xrdb -load $HOME/.Xresources
 flashfocus -n 30 -o 0.75 -v ERROR &
 dwmblocks &
 newsup &
-while true; do
-	dwm >/dev/null
-done
+exec	dwm
 # exec icewm
 # vim:filetype=sh

@@ -217,9 +217,6 @@ highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 " #---Custom Keymaps---# "
-" Tab Buffer Navigation
-    nnoremap <S-k> :bp<CR>
-    nnoremap <S-j> :bn<CR>
 " Vim split resize
     map <Up>    <Esc>:resize<Space>+3<CR>
     map <Down>  <Esc>:resize<Space>-3<CR>
@@ -235,9 +232,6 @@ call matchadd('ColorColumn', '\%81v', 100)
     map <C-j> <C-w>j
     map <C-k> <C-w>k
     map <C-l> <C-w>l
-" Create blank lines using Shift J and Shift K
-    nnoremap J o<Esc>
-    nnoremap K O<Esc>
 " Figlet dotfile titles
 command RcTitle .!figlet -s -f big
 " Easily escape terminal mode
