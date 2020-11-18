@@ -1,8 +1,11 @@
 #https://rss.app/feeds/nxTRC66uslhT5E22.xml #---Podcasts---# #
-http://feeds.wnyc.org/science-friday                       "Podcast" "~Podcast: Science Friday "
-https://feeds.buzzsprout.com/191338.rss                    "Podcast" "~Podcast: Our Ludicrous Future (Tim Dodd) "
-https://carpoolcritics.libsyn.com/rss                      "Podcast" "~Podcast: Carpool Critics "
-https://linustechtips.libsyn.com/wanshow "Podcast" "~Podcast: The WAN Show"
+http://feeds.wnyc.org/science-friday          "Podcast" "~Podcast: Science Friday "
+https://feeds.buzzsprout.com/191338.rss       "Podcast" "~Podcast: Our Ludicrous Future (Tim Dodd) "
+https://carpoolcritics.libsyn.com/rss         "Podcast" "~Podcast: Carpool Critics "
+https://linustechtips.libsyn.com/wanshow      "Podcast" "~Podcast: The WAN Show"
+https://anchor.fm/s/3a6f26f8/podcast/rss      "Podcast" "~Podcast: Total Space"
+http://festivalofthespokennerd.libsyn.com/rss "Podcast" "~Podcast: A Podcast of Unnecessary Details"
+http://aproblemsquared.libsyn.com/rss         "Podcast" "~Podcast: A Problem Squared"
 
 # #---Youtube---# #
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtI0Hodo5o5dUb67FeUjDeA "Youtube" "~Youtube: SpaceX"

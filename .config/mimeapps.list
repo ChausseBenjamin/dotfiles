@@ -19,3 +19,4 @@ x-scheme-handler/lbry=lbry.desktop
 inode/directory=file.desktop
 x-scheme-handler/kite=kite-copilot.desktop
 application/x-osptracker=tracker.desktop
+x-scheme-handler/msteams=teams.desktop

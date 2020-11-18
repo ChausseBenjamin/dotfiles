@@ -6,6 +6,8 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 "
 "
+
+
 " #---Plug Installer---# "
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -43,8 +45,6 @@ Plug 'kiteco/vim-plugin'
 Plug 'stevearc/vim-arduino'
 " Vim org tables
 Plug 'dhruvasagar/vim-table-mode'
-" Html linter enabler (for prettier AUR package)
-Plug 'dense-analysis/ale'
 " Vim css hex highlight
 Plug 'chrisbra/Colorizer'
 " Bracket Completion
@@ -89,10 +89,6 @@ Plug 'lervag/vimtex'
 " Plug 'ludovicchabant/vim-gutentags'
 " C developement in vim
 Plug 'vim-scripts/c.vim'
-" NERDTree
-Plug 'scrooloose/nerdtree'
-" Git plugin for NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'
 " Icons in NERDTree and Airline
 Plug 'ryanoasis/vim-devicons'
 " lightline
@@ -146,11 +142,6 @@ set wrap
 set linebreak
 
 " #---Plugin Preferences---# "
-" Nvim-R
-let R_rconsole_width = 0
-let R_openpdf = 0
-au BufWritePost *.rmd,*.rnw,      silent! :call RWeave("nobib", 1, 1)
-au VimLeave    *.rmd,*.rnw,*.tex !texclear %
 " Emmet Expansion
 let g:user_emmet_leader_key=','
 " Enable kite autocompletion
@@ -158,12 +149,9 @@ let g:user_emmet_leader_key=','
 " MarkdownPreview
 " let g:mkdp_browser = 'surf'
 " Bracey
-let g:bracey_browser_command = "chromium"
+let g:bracey_browser_command = "firefox"
 " Grammalecte path
 let g:grammalecte_cli_py = "/usr/bin/grammalecte-cli"
-" Ale Linter with prettier
-let g:ale_linters_explicit = 1
-" autocmd BufWrite, *.css,*.html,*.js :ALEFix prettier
 " Ultisnips
     " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
     let g:UltiSnipsExpandTrigger="<Tab>"
@@ -173,24 +161,8 @@ let g:ale_linters_explicit = 1
     let g:UltiSnipsEditSplit="vertical"
     " Snippet directory
     let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
-" Go deoplete
-let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
 " Hexokinase
 let g:Hexokinase_highlighters = ['virtual']
-" GoRun Split Reuse
-function! ReuseVimGoTerm(cmd) abort
-    for w in nvim_list_wins()
-        if "goterm" == nvim_buf_get_option(nvim_win_get_buf(w), 'filetype')
-            call nvim_win_close(w, v:true)
-            break
-        endif
-    endfor
-    execute a:cmd
-endfunction
-let g:go_term_enabled = 1
-let g:go_term_mode = "silent keepalt rightbelow 35 vsplit"
-let g:go_def_reuse_buffer = 1
-autocmd FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<Return>
 " Vimtex pdf viewer
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
@@ -237,7 +209,7 @@ command RcTitle .!figlet -s -f big
 " Easily escape terminal mode
 tnoremap <Esc> <C-\><C-n>
 " Pressing shift semicolon was too long:
-nnoremap <Space> :
+nmap <Space> <Leader>
 " Fastest :w in the west
 nnoremap <leader>w :w<CR>
 " #---Visual Enhancements---# "
@@ -250,11 +222,6 @@ let g:lightline = {
       \ 'colorscheme': 'friffle',
       \ }
 set noshowmode
-" Vim-go breakpoints and debug
-nnoremap mp :GoDebugBreakpoint<CR>
-nnoremap mn :GoDebugNext<CR>
-nnoremap ms :GoDebugStart<CR>
-nnoremap mq :GoDebugStop<CR>
 
 " #---Ease Of Use---# "
 " Normal/relative number toggle
@@ -268,18 +235,6 @@ augroup END
 autocmd BufWritePre * %s/\s\+$//e
 " Soft Tabs
 filetype plugin indent on
-" NERDTRee Hotkey map
-map <C-n> :NERDTreeToggle<CR>
-    let NERDTreeDirArrowExpandable="|"
-    let NERDTreeDirArrowCollapsible="-"
-" Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Other NERDTree Preferences
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeShowBookmarks=1
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeQuitOnOpen = 1
 " Nvim-R send line
 nmap <C-Enter> <leader>l
 " Nvim folding
