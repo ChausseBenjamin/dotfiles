@@ -145,9 +145,9 @@ XF86WLAN
 ## TUI Audio Mixer (alsamixer)
 super + p
     killall alsamixer || dropdowntoggle audio alsamixer -c 0
-## TODOs (todotxt-machine)
+## TODOs (Todoist.nvim)
 super + space
-    killall todotxt-machine || dropdowntoggle todos todotxt-machine
+    dropdowntoggle todoist nvim +Todoist
 ## Terminal Calculator
 super + a
     dropdowntoggle calc tmux-r

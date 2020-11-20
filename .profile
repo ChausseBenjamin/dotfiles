@@ -18,6 +18,7 @@ export REFERBIB=$HOME/Dropbox/A/Scholar/All/References/bibliography.refer
 export DISTRIB_ID=arch
 export DISTRIB_RELEASE=$(uname -r)
 export XDG_CONFIG_HOME=$HOME/.config
+export TODOIST_API_KEY="$(pass Todoist/api)"
 # export GOROOT=/usr/bin/go
 
 # fix "xdg-open fork-bomb" export your preferred browser from here

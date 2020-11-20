@@ -33,6 +33,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Go Deoplete sources
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+" Todoist with vim?
+Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 " LaTeX deoplete
 Plug 'hisaknown/deoplete-latex'
 " Turning vim into an R IDE
@@ -220,6 +222,13 @@ let g:tex_no_error=1
 " Lightline config
 let g:lightline = {
       \ 'colorscheme': 'friffle',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \   },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \   },
       \ }
 set noshowmode
 
@@ -243,6 +252,11 @@ nmap <C-Enter> <leader>l
 " Arduino settings
 let g:arduino_cmd = '/usr/bin/arduino'
 let g:arduino_dir = '/usr/share/arduino'
+" Vim fugitive settings
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+nmap <leader>gc :Gcommit<CR>
 
 
 " #---Universal Macros---# "

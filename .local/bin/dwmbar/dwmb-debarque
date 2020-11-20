@@ -1,0 +1,13 @@
+#!/bin/sh
+
+count="$(curl https://www.ladebarque.com/achalandage |
+  grep "il y a " |
+  sed 's/.*il\ y\ a\ en\ ce\ moment.nbsp;\s//; s/.nbsp.*//')"
+
+echo "  $count "
+
+case $BLOCK_BUTTON in
+		1) $BROWSER https://www.ladebarque.com/achalandage ;;
+    2) notify-send -a "  La Débarque" "Syncing..." && kill -51 $(pidof dwmblocks) && notify-send -a "  La Débarque" "Done!" ;;
+    3) notify-send -a "La Débarque" "This block shows the number of people currently climbing at my local gym." ;;
+esac
