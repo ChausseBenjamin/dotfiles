@@ -137,7 +137,7 @@ set rulerformat=
 
 
 " CSV/Excel
-filetype *.xlsx libreoffice %c %i
+" filetype *.xlsx libreoffice %c %i
 " fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 " HTMLs
