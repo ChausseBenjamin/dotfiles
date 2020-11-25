@@ -1,8 +1,8 @@
 #!/bin/sh
 
 count="$(curl https://www.ladebarque.com/achalandage |
-  grep 'il y a ' |
-  sed 's/.*il\sy\sa\sen\sce\smoment\s//; s/\sgrimpeurs.*//')"
+  grep -i 'il y a ' |
+  sed 's/.*il\sy\sa\sen\sce\smoment\s//; s/\([0-9]*\).*/\1/')"
 
 echo "  $count "
 
