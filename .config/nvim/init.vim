@@ -39,6 +39,8 @@ Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 Plug 'hisaknown/deoplete-latex'
 " Turning vim into an R IDE
 Plug 'jalvesaq/Nvim-R'
+" Vim Clap
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 " Vim Sensible
 Plug 'tpope/vim-sensible'
 " Kite copilot
@@ -79,6 +81,8 @@ Plug 'dylanaraps/wal.vim'
 Plug 'arcticicestudio/nord-vim'
 " My personal colorscheme
 Plug 'ChausseBenjamin/friffle-vim'
+" Retro, yet relaxed colorscheme
+Plug 'ryuta69/elly.vim'
 " Vim Fugitive
 Plug 'tpope/vim-fugitive'
 " Vim-Surround
@@ -118,6 +122,7 @@ call plug#end()
 syntax on
 filetype plugin on
 set termguicolors
+set lazyredraw
 set t_Co=256
 set encoding=utf-8
 set path+=** " Provides tab-completion for all file related tasks
@@ -178,6 +183,7 @@ autocmd InsertLeave,TextChanged *.gd,*.ms,*.mom :w! | :execute 'silent AsyncRun 
 map <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
 " Have dwmblocks automatically recompile and run when you edit this file in
 autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblocks/; make && sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+autocmd BufWritePost ~/.Xresources !xrdb -load %
 " Open corresponding .pdf/.html or preview
     map <leader>p :! opout <c-r>%<CR><CR>
 " Open corresponding .pdf/.html or preview
@@ -206,22 +212,22 @@ call matchadd('ColorColumn', '\%81v', 100)
     map <C-j> <C-w>j
     map <C-k> <C-w>k
     map <C-l> <C-w>l
-" Figlet dotfile titles
-command RcTitle .!figlet -s -f big
 " Easily escape terminal mode
 tnoremap <Esc> <C-\><C-n>
-" Pressing shift semicolon was too long:
+" Space is my leader
 nmap <Space> <Leader>
-" Fastest :w in the west
+" Fastest save in the west
 nnoremap <leader>w :w<CR>
+
 " #---Visual Enhancements---# "
-colorscheme friffle
+colorscheme elly
+" colorscheme friffle
 " Remove latex underscore errors
 let g:tex_no_error=1
 " let g:airline_powerline_fonts = 1
 " Lightline config
 let g:lightline = {
-      \ 'colorscheme': 'friffle',
+      \ 'colorscheme': 'elly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -257,6 +263,22 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 nmap <leader>gc :Gcommit<CR>
+" Todoist icons
+  let todoist = {
+  \ 'icons': {
+  \   'unchecked': ' ',
+  \   'checked':   ' ',
+  \   'loading':   ' ',
+  \   'error':     ' ',
+  \ },
+  \}
+" Todoist with vim Clap
+let clap_provider_todoist = {
+\ 'source': {-> Todoist__listProjects()},
+\ 'sink': 'Todoist',
+\}
+
+
 
 
 " #---Universal Macros---# "
@@ -266,3 +288,4 @@ inoremap ;; <Esc>/<++><CR>"_c4l
 inoremap << «
 inoremap >> »
 " #---Filetype Specific Settings---# "
+set runtimepath^=~/.vim/bundle/todoist.nvim

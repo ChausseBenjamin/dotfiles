@@ -38,7 +38,8 @@ set undolevels=100
 set norunexec
 
 " Selected color scheme
-colorscheme minimal
+colorscheme elly
+" colorscheme minimal
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -138,7 +139,7 @@ set rulerformat=
 
 " CSV/Excel
 " filetype *.xlsx libreoffice %c %i
-" fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
+fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 " HTMLs
 fileviewer *.html w3m -dump %c
@@ -226,7 +227,7 @@ nmap q ZQ
 nnoremap , :
 
 " Set highlighted image as wallpaper
-nnoremap bg :!sh ~/.scripts/control/setbg %c &<cr>
+nnoremap bg :!sh $SCRIPTS/setbg %c &<cr>
 
 " Upload highlighted file to 0x0.st and then save url to clipboard
 nnoremap 0x0 :!curl -s -F'file=@%c' https://0x0.st > /dev/null | xclip -sel clip && notify-send "vifm" "File uploaded: $(xclip -o -selection clipboard)" &<cr>
@@ -240,10 +241,6 @@ source ~/.cache/vifm-shortcuts
 
 " Easily go back home
 nnoremap cd :cd<cr>
-
-
-" Start shell in current directory
-nnoremap s :shell<cr>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
@@ -274,7 +271,6 @@ nnoremap x :!/home/siddharth/bin/utils/extract %f &<cr>
 
 " Share Files with dropbox
 nnoremap s :!dbshare %d/%b &<cr>
-nnoremap re :!tmpfunc %d/%b &<cr>
 
 " Make a new directory
 nnoremap mkd :mkdir<space>

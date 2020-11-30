@@ -5,7 +5,7 @@ remaps &
 dunst &
 unclutter &
 protonmail-bridge --no-window &
-xautolock -time 5 -detectsleep -locker slock &
+xautolock -time 5 -detectsleep -secure -locker /usr/local/bin/slock &
 picom -b &
 echo "" > $HOME/.local/share/newsboat/queue
 echo us > $HOME/.cache/layout
@@ -13,6 +13,9 @@ xrdb -load $HOME/.Xresources
 flashfocus -n 30 -o 0.75 -v ERROR &
 dwmblocks &
 newsup &
-exec	dwm
+while true;
+do
+  exec	dwm
+done
 # exec icewm
 # vim:filetype=sh
