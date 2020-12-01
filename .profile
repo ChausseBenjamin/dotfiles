@@ -1,23 +1,23 @@
 export GOPATH=$HOME/.go
 export SCRIPTS=$HOME/.local/bin
-export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
+export PATH=$PATH$( find $HOME/.local/bin/ -type d -printf ":%p" )
+export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:/root/.local/bin
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH$( find $HOME/.local/bin/ -type d -printf ":%p" )
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export EDITOR=/usr/bin/nvim
 export READER=/usr/bin/zathura
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GRDB="dropbox://default@/git-private"
-export TERM=st
 export TERMINAL=st
+export TERM=st
 export BIB=$HOME/Dropbox/A/Scholar/All/References
 export REFERBIB=$HOME/Dropbox/A/Scholar/All/References/bibliography.refer
 export DISTRIB_ID=arch
 export DISTRIB_RELEASE=$(uname -r)
 export XDG_CONFIG_HOME=$HOME/.config
+export R_PROFILE_USER=$HOME/.config/R/Rprofile
 export TODOIST_API_KEY="$(pass Todoist/api)"
 # export GOROOT=/usr/bin/go
 
@@ -26,13 +26,13 @@ export BROWSER=$(which firefox)
 
 # less/man colors
 export LESS=-R
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')" # begin bold
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')" # begin blink
-export LESS_TERMCAP_me="$(printf '%b' '[0m')" # reset bold/blink
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')" # begin reverse video
-export LESS_TERMCAP_se="$(printf '%b' '[0m')" # reset reverse video
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')" #begin underline
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')" # reset underline
+export LESS_TERMCAP_md=$'\e[01;36;74m'  # begin bold
+export LESS_TERMCAP_mb=$'\e[01;31;4m'   # begin blinking
+export LESS_TERMCAP_us=$'\e[04;32;146m' # begin underline
+export LESS_TERMCAP_so=$'\e[30;42;146m' # begin reverse video
+export LESS_TERMCAP_se=$'\e[0m'         # end reverse video
+export LESS_TERMCAP_me=$'\e[0m'         # end mode
+export LESS_TERMCAP_ue=$'\e[0m'         # end underline
 
 # Start Desktop Environment if on the main TTY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then

@@ -1,3 +1,10 @@
+" __     _____ _____ __  __ ____   ____
+" \ \   / /_ _|  ___|  \/  |  _ \ / ___|
+"  \ \ / / | || |_  | |\/| | |_) | |
+"   \ V /  | ||  _| | |  | |  _ <| |___
+"    \_/  |___|_|   |_|  |_|_| \_\\____|
+"
+
 " {{{ General config
 " This is the actual command used to start vi.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile

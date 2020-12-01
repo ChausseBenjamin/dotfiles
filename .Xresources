@@ -1,3 +1,10 @@
+! __  __
+! \ \/ /_ __ ___  ___  ___  _   _ _ __ ___ ___  ___
+!  \  /| '__/ _ \/ __|/ _ \| | | | '__/ __/ _ \/ __|
+!  /  \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
+! /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
+!
+
 !black
 *color0: #111A1F
 *color8: #666666
@@ -17,13 +24,13 @@
 *color5: #B7416E
 *color13: #E16A98
 !cyan
-*color6: #738C9C
-*color14: #42717B
+*color6: #42717B
+*color14: #738C9C
 !white
 *color7: #C0C7Ca
 *color15: #C0C7Ca
-!st terminal
-st.alpha: 0.92
+!other
+*.alpha: 0.92
 ! SXIV COLORS
 Sxiv.background: #111A1F
 Sxiv.foreground: #9B9257

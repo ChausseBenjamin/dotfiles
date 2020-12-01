@@ -17,17 +17,6 @@ endif
 
 " #---Vim Plugins---# "
 call plug#begin()
-" if has('nvim')
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-" Latex Deoplete source
-" Plug 'hisaknown/deoplete-latex'
-" Comment frames (for comment aesthetics)
-Plug 'cometsong/CommentFrame.vim'
 " Deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Go Deoplete sources
@@ -39,12 +28,8 @@ Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 Plug 'hisaknown/deoplete-latex'
 " Turning vim into an R IDE
 Plug 'jalvesaq/Nvim-R'
-" Vim Clap
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 " Vim Sensible
 Plug 'tpope/vim-sensible'
-" Kite copilot
-Plug 'kiteco/vim-plugin'
 " Using vim to compile arduino code
 Plug 'stevearc/vim-arduino'
 " Vim org tables
@@ -63,26 +48,20 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'ivyl/vim-bling'
 " Vim Hard Mode
 Plug 'wikitopian/hardmode'
-" I want to be a python ninja!
+" Make vim behave like Jupyter
 Plug 'metakirby5/codi.vim'
-" Quickrun for python
-Plug 'thinca/vim-quickrun'
 " markdown preview vim
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " Emmet expansion for html
 Plug 'mattn/emmet-vim'
 " html preview
 Plug 'turbio/bracey.vim'
-" VimCompletesMe for VimTex
-Plug 'ajh17/VimCompletesMe'
-" Xresources colors
-Plug 'dylanaraps/wal.vim'
-" Nord colors
-Plug 'arcticicestudio/nord-vim'
-" My personal colorscheme
+" My colorscheme
 Plug 'ChausseBenjamin/friffle-vim'
-" Retro, yet relaxed colorscheme
+" Elly colorscheme
 Plug 'ryuta69/elly.vim'
+" Nord colorscheme
+Plug 'arcticicestudio/nord-vim'
 " Vim Fugitive
 Plug 'tpope/vim-fugitive'
 " Vim-Surround
@@ -91,12 +70,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Vimtex
 Plug 'lervag/vimtex'
-" Tags for latex
-" Plug 'ludovicchabant/vim-gutentags'
-" C developement in vim
-Plug 'vim-scripts/c.vim'
-" Icons in NERDTree and Airline
-Plug 'ryanoasis/vim-devicons'
 " lightline
 Plug 'itchyny/lightline.vim'
 " Commentary
@@ -116,7 +89,6 @@ Plug 'dpelle/vim-Grammalecte'
 " All purpose grammar checker
 Plug 'dpelle/vim-LanguageTool'
 call plug#end()
-
 
 " #---Basics/Recomended---# "
 syntax on
@@ -252,7 +224,9 @@ autocmd BufWritePre * %s/\s\+$//e
 filetype plugin indent on
 " Nvim-R send line
 nmap <C-Enter> <leader>l
-" Nvim folding
+" Nvim-R match colorscheme
+let rout_follow_colorscheme = 1
+" Nvim-R folding
     let r_syntax_folding = 1
     set foldnestmax=1
 " Arduino settings
@@ -272,11 +246,6 @@ nmap <leader>gc :Gcommit<CR>
   \   'error':     ' ',
   \ },
   \}
-" Todoist with vim Clap
-let clap_provider_todoist = {
-\ 'source': {-> Todoist__listProjects()},
-\ 'sink': 'Todoist',
-\}
 
 
 

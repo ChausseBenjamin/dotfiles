@@ -1,6 +1,6 @@
 # These are my personal configs on top of mutt-wizard.
 # Add the following line to your muttrc to have them:
-# source $HOME/.config/mutt/goobook
+# source $HOME/.config/mutt/my-configs
 
 # GOOBOOK:
 # goobook let's you query google for contact information.
@@ -16,5 +16,10 @@ set query_command="goobook query %s"
 set crypt_use_gpgme=yes
 set crypt_autosign
 set pgp_auto_decode
+
+# Muttprint:
+set print_command="muttprint"
+# Dump all headers
+# macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
 
 # vim: filetype=neomuttrc

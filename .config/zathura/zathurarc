@@ -1,3 +1,10 @@
+#  _____     _   _
+# |__  /__ _| |_| |__  _   _ _ __ __ _
+#   / // _` | __| '_ \| | | | '__/ _` |
+#  / /| (_| | |_| | | | |_| | | | (_| |
+# /____\__,_|\__|_| |_|\__,_|_|  \__,_|
+#
+
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set statusbar-basename true
@@ -7,8 +14,8 @@ set window-title-page true
 set default-bg              "rgba( 0,   0,   0,   0    )"
 set recolor-lightcolor      "rgba( 8,  11,  12,  0.82 )"
 set recolor-darkcolor       "rgba( 256, 256, 256, 1    )"
-# set recolor-lightcolor      "rgba( 24,  32,  36,  0.72 )"
-# set recolor-darkcolor       "rgba( 186, 196, 199, 1    )"
+# set recolor-lightcolor    "rgba( 24,  32,  36,  0.72 )"
+# set recolor-darkcolor     "rgba( 186, 196, 199, 1    )"
 set inputbar-fg             "rgba( 186, 196, 199, 1    )"
 set inputbar-bg             "rgba( 34,  45,  50,  0.9  )"
 set statusbar-fg            "rgba( 186, 196, 199, 1    )"
