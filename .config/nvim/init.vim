@@ -192,14 +192,14 @@ nmap <Space> <Leader>
 nnoremap <leader>w :w<CR>
 
 " #---Visual Enhancements---# "
-colorscheme elly
+colorscheme friffle
 " colorscheme friffle
 " Remove latex underscore errors
 let g:tex_no_error=1
 " let g:airline_powerline_fonts = 1
 " Lightline config
 let g:lightline = {
-      \ 'colorscheme': 'elly',
+      \ 'colorscheme': 'friffle',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -225,7 +225,7 @@ filetype plugin indent on
 " Nvim-R send line
 nmap <C-Enter> <leader>l
 " Nvim-R match colorscheme
-let rout_follow_colorscheme = 1
+let rout_follow_colorscheme = 0
 " Nvim-R folding
     let r_syntax_folding = 1
     set foldnestmax=1

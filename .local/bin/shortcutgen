@@ -56,6 +56,6 @@ echo "$vifmcd\n\n$vifmv\n\n$vifmy" > ~/.cache/vifm-shortcuts
 # #---Testing---# #
 # echo "$raw" | sed "s/[A-z,a-z,0-9]*\s*|//"
 
-clear
+# clear
 # echo "$vifmv"
-cat ~/.cache/vifm-shortcuts
+# cat ~/.cache/vifm-shortcuts
