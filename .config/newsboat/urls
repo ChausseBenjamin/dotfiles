@@ -6,24 +6,24 @@
 #
 
 # #--- Podcasts ---# #
-http://feeds.wnyc.org/science-friday          "Podcast" "~Podcast: Science Friday "
+# http://feeds.wnyc.org/science-friday          "Podcast" "~Podcast: Science Friday "
 https://feeds.buzzsprout.com/191338.rss       "Podcast" "~Podcast: Our Ludicrous Future (Tim Dodd) "
-https://carpoolcritics.libsyn.com/rss         "Podcast" "~Podcast: Carpool Critics "
-https://linustechtips.libsyn.com/wanshow      "Podcast" "~Podcast: The WAN Show"
-https://anchor.fm/s/3a6f26f8/podcast/rss      "Podcast" "~Podcast: Total Space"
+# https://carpoolcritics.libsyn.com/rss         "Podcast" "~Podcast: Carpool Critics "
+# https://linustechtips.libsyn.com/wanshow      "Podcast" "~Podcast: The WAN Show"
+# https://anchor.fm/s/3a6f26f8/podcast/rss      "Podcast" "~Podcast: Total Space"
 http://festivalofthespokennerd.libsyn.com/rss "Podcast" "~Podcast: A Podcast of Unnecessary Details"
 http://aproblemsquared.libsyn.com/rss         "Podcast" "~Podcast: A Problem Squared"
 
 # #---Youtube---# #
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtI0Hodo5o5dUb67FeUjDeA "Youtube" "~Youtube: SpaceX"
+# https://www.youtube.com/feeds/videos.xml?channel_id=UCtI0Hodo5o5dUb67FeUjDeA "Youtube" "~Youtube: SpaceX"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCxzC4EngIsMrPmbm6Nxvb-A "Youtube" "~Youtube: Scott Manley "
-https://www.youtube.com/feeds/videos.xml?channel_id=UC6uKrU_WqJ1R2HMTY3LIx5Q "Youtube" "~Youtube: Everyday Astronaut "
+# https://www.youtube.com/feeds/videos.xml?channel_id=UC6uKrU_WqJ1R2HMTY3LIx5Q "Youtube" "~Youtube: Everyday Astronaut "
 https://www.youtube.com/feeds/videos.xml?channel_id=UCRS3mwPLCNjuNM8qhBlsIUg "Youtube" "~Youtube: SpaceXentric "
 https://www.youtube.com/feeds/videos.xml?channel_id=UC8jkbVLPvztz8TuE98OYo8Q "Youtube" "~Youtube: Front Page Tech"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Youtube" "~Youtube: Linus Tech Tips"
+# https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw "Youtube" "~Youtube: Linus Tech Tips"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCeeFfhMcJa1kjtfZAGskOCA "Youtube" "~Youtube: Techlinked"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCdBK94H6oZT2Q7l0-b0xmMg "Youtube" "~Youtube: Short Circuit"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCFLFc8Lpbwt4jPtY1_Ai5yA "Youtube" "~Youtube: LMG Clips"
+# https://www.youtube.com/feeds/videos.xml?channel_id=UCdBK94H6oZT2Q7l0-b0xmMg "Youtube" "~Youtube: Short Circuit"
+# https://www.youtube.com/feeds/videos.xml?channel_id=UCFLFc8Lpbwt4jPtY1_Ai5yA "Youtube" "~Youtube: LMG Clips"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eEGT06FrWFU6VBnPOR9lg "Youtube" "~Youtube: Girlfriend Reviews"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC6107grRI4m0o2-emgoDnAA "Youtube" "~Youtube: Smarter Everyday "
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3DkFux8Iv-aYnTRWzwaiBA "Youtube" "~Youtube: Peter Mckinnon "
@@ -33,11 +33,11 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A "Yo
 
 # #---Twitter---# #
 http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=benchausse&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: Me "
-http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=SpaceX&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: SpaceX "
-http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=Erdayastronaut&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: Everyday Astronaut "
+# http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=SpaceX&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: SpaceX "
+# http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=Erdayastronaut&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: Everyday Astronaut "
 
 # #---Websites---# #
-https://www.spacex.com/news.xml                        "Website" "~Website: SpaceX Feed "
+# https://www.spacex.com/news.xml                        "Website" "~Website: SpaceX Feed "
 https://xkcd.com/rss.xml                               "Website" "~Website: XKCD "
 https://www.archlinux.org/feeds/news/                  "Website" "~Website: Arch Linux News"
 # https://blogues.desjardins.com/press_release/atom.xml  "Website" "~Website: Desjardins - Nouvelles"

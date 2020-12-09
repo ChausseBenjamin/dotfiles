@@ -12,8 +12,8 @@ set zoom-center true
 set window-title-basename true
 set window-title-page true
 set default-bg              "rgba( 0,   0,   0,   0    )"
-set recolor-lightcolor      "rgba( 8,  11,  12,  0.82 )"
-set recolor-darkcolor       "rgba( 256, 256, 256, 1    )"
+set recolor-lightcolor      "rgba( 15,  23,  28,  0.92 )"
+set recolor-darkcolor       "rgba( 242, 241, 240, 1    )"
 # set recolor-lightcolor    "rgba( 24,  32,  36,  0.72 )"
 # set recolor-darkcolor     "rgba( 186, 196, 199, 1    )"
 set inputbar-fg             "rgba( 186, 196, 199, 1    )"
@@ -35,3 +35,5 @@ map J zoom in
 map K zoom out
 map i recolor
 map p print
+
+# map <C-o> focus_inputbar ":exec lpr $FILE"<cr>

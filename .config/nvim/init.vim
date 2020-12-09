@@ -22,6 +22,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Go Deoplete sources
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+" Automated vim bulletpoints
+Plug 'dkarter/bullets.vim'
 " Todoist with vim?
 Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 " LaTeX deoplete
@@ -256,5 +258,35 @@ nmap <leader>gc :Gcommit<CR>
 inoremap ;; <Esc>/<++><CR>"_c4l
 inoremap << «
 inoremap >> »
+" Spelling quickfixes
+function! QuickFixSpell(dir)
+  " -1 Means previous spelling err
+  if a:dir == -1
+    normal! ms[s1z=`s<cr>
+  " 1 Means next spelling err
+  elseif a:dir== 1
+    :normal! ms]s1z=`s<cr>
+  endif
+  execute 'delmark s'
+endfunction
+
+nnoremap <s :call QuickFixSpell(-1)<cr>
+nnoremap >s :call QuickFixSpell(1)<cr>
+
+" Markdown Heading underline
+function! UnderlineHeading(level)
+  if a:level == 1
+    normal! yypVr=
+  elseif a:level == 2
+    normal! yypVr-
+  else
+    normal! I###<space>
+  endif
+endfunction
+
+nnoremap <leader>u1 :call UnderlineHeading(1)<cr>
+nnoremap <leader>u2 :call UnderlineHeading(2)<cr>
+nnoremap <leader>u3 :call UnderlineHeading(3)<cr>
+
 " #---Filetype Specific Settings---# "
 set runtimepath^=~/.vim/bundle/todoist.nvim
