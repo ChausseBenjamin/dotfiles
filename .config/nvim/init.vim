@@ -125,10 +125,8 @@ set linebreak
 " #---Plugin Preferences---# "
 " Emmet Expansion
 let g:user_emmet_leader_key=','
-" Enable kite autocompletion
-" let g:kite_auto_complete=1
 " MarkdownPreview
-" let g:mkdp_browser = 'surf'
+let g:mkdp_browser = 'firefox'
 " Bracey
 let g:bracey_browser_command = "firefox"
 " Grammalecte path
@@ -148,20 +146,22 @@ let g:Hexokinase_highlighters = ['virtual']
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
 let g:tex_flavor = 'latex'
+" Vimtex TOC
+nnoremap <C-n> :VimtexTocToggle<cr>
 
 " #---Document Compilation/Visualisation---# "
 " Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>c :w! \| AsyncRun compiler <c-r>%<CR><CR>
+nnoremap <leader>c :w! \| AsyncRun compiler <c-r>%<CR><CR>
 autocmd InsertLeave,TextChanged *.gd,*.ms,*.mom :w! | :execute 'silent AsyncRun compiler %'
 " autocmd InsertLeave *.rmd,*.rnw,*.tex :w! | :execute 'silent AsyncRun compiler %; todotable % TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK'
-map <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
+nnoremap <leader>x :w! \| AsyncRun todotable <c-r>% TODO FIXME CHANGED XXX IDEA HACK NOTE REVIEW NB BUG QUESTION COMBAK TEMP<CR><CR>
 " Have dwmblocks automatically recompile and run when you edit this file in
 autocmd BufWritePost ~/Compilation/dwmblocks/config.h !cd ~/Compilation/dwmblocks/; make && sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 autocmd BufWritePost ~/.Xresources !xrdb -load %
 " Open corresponding .pdf/.html or preview
-    map <leader>p :! opout <c-r>%<CR><CR>
+    nnoremap <leader>p :! opout <c-r>%<CR><CR>
 " Open corresponding .pdf/.html or preview
-    map <leader>o :! tdout <c-r>%<CR><CR>
+    nnoremap <leader>o :! tdout <c-r>%<CR><CR>
 " Spaces are superior to tabs
 set tabstop=2
 set shiftwidth=2
@@ -178,14 +178,11 @@ call matchadd('ColorColumn', '\%81v', 100)
     map <Right> <Esc>:vertical<Space>resize<Space>+3<CR>
     map <C-_>   <Esc>:split<CR>
     map <C-\>   <Esc>:vsplit<CR>
-" Ninja python execution
-    map <F5>    <Esc>:Codi!!<CR>
-    map <F6>    <Esc>:QuickRun<CR>
 " Shortcutting split navigation, saving a keypress:
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
 " Easily escape terminal mode
 tnoremap <Esc> <C-\><C-n>
 " Space is my leader
@@ -225,7 +222,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Soft Tabs
 filetype plugin indent on
 " Nvim-R send line
-nmap <C-Enter> <leader>l
+" nmap <C-Enter> <leader>l
 " Nvim-R match colorscheme
 let rout_follow_colorscheme = 0
 " Nvim-R folding
@@ -276,11 +273,11 @@ nnoremap >s :call QuickFixSpell(1)<cr>
 " Markdown Heading underline
 function! UnderlineHeading(level)
   if a:level == 1
-    normal! yypVr=
+    execute "normal! yypVr=k$"
   elseif a:level == 2
-    normal! yypVr-
+    execute "normal! yypVr-k$"
   else
-    normal! I###<space>
+    execute "normal! I### \e$"
   endif
 endfunction
 

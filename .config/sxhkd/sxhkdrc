@@ -131,9 +131,6 @@ super + w
 ## TUI Email Client (neomutt)
 super + e
     killall neomutt || $TERMINAL -e neomutt && mw -Y
-## TUI Calendar (calcurse)
-super + shift + e
-    killall calcurse || $TERMINAL -t dropdown_calendar -e calcurse
 ## TUI RSS Reader (newsboat)
 super + n
     killall newsboat || $TERMINAL -e newsboat ; kill -37 $(pidof dwmblocks)
@@ -156,7 +153,7 @@ super + shift + a
     dropdowntoggle shell tmux-shell
 ## TUI Youtube (youtube-viewer)
 super + v
-    killall youtube-viewer || $TERMINAL -c youtube -t YouTube -e youtube-viewer
+    killall youtube-viewer || $TERMINAL -c youtube -t YouTube -e youtube-viewer -SV
 ## TUI Hacker News
 super + shift + v
 		killall hacker-news || dropdowntoggle hacker-news tmux-hn

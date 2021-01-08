@@ -1,13 +1,26 @@
 #!/bin/sh
 
-count="$(curl https://www.ladebarque.com/achalandage |
-  grep -i 'il y a ' |
-  sed 's/.*il\sy\sa\sen\sce\smoment\s//; s/\([0-9]*\).*/\1/')"
+# count="$(curl https://www.ladebarque.com/achalandage |
+				# grep 'il y a' |
+				# sed 's/.*il\sy\sa\sen\sce\smoment\s//; s/\sgrimpeurs.*//')"
 
-echo "  $count "
+count="$(curl -L ladebarque.com/achalandage |
+				grep -i 'moment' |
+				sed  's/\s//g;
+				      s/Maximum.*//;
+              s/^.*moment//;
+				      s/\([0-9]\+\).*/\1/')"
 
-case $BLOCK_BUTTON in
-		1) $BROWSER https://www.ladebarque.com/achalandage ;;
-    2) notify-send -a "  La Débarque" "Syncing..." && kill -51 $(pidof dwmblocks) && notify-send -a "  La Débarque" "Done!" ;;
-    3) notify-send -a "La Débarque" "This block shows the number of people currently climbing at my local gym." ;;
+# curl https://www.ladebarque.com/achalandage > ~/asdf.html
+
+sep=","
+date="$(TZ='America/Toronto' date +"%Y-%m-%d$sep%R")"
+entry=""$date"$sep"$count""
+
+case "$1" in
+				write) echo "$entry" >> $HOME/.cache/debarque.csv ;;
+				*) echo "  $count " ;;
 esac
+
+
+# echo "$entry"

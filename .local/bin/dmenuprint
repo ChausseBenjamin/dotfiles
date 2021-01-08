@@ -1,0 +1,15 @@
+#!/bin/sh
+
+choice="$(lpstat -p -d | sed 's/.*default.*//g;
+                              s/[^ ]* //;
+                              s/is\sidle.//g
+                              s/.*disabled.*//g' |
+                          dmenu -p "Which printer?" |
+                          sed 's/\s.*//g' )"
+
+lpr -P $choice "$@"
+
+# printer Canon_iP110_series is idle.  enabled since Tue 10 Nov 2020 04:22:34 PM
+# printer HP_OfficeJet_Pro_9010 is idle.  enabled since Wed 09 Dec 2020 01:57:06 AM
+# printer HP_OfficeJet_Pro_9010_fax is idle.  enabled since Tue 27 Oct 2020 08:40:56 PM
+# system default destination: HP_OfficeJet_Pro_9010

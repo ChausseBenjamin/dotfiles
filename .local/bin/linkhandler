@@ -11,7 +11,8 @@
 
 case "$1" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*video.twimg.com*)
-		mpv --no-config "$1" ;;
+		mpv "$1" ;;
+		# mpv --no-config "$1" ;;
 		# setsid -f mpv --no-config "$1" ;;
 	*png|*jpg|*jpe|*jpeg|*gif|*.webp)
 		curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 & ;;

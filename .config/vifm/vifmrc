@@ -228,7 +228,7 @@ fileviewer * file -b %c
 
 "{{{ Key mappings
 " Easily quit vifm by hitting q
-nmap q ZQ
+nmap q :q<cr>
 
 " Use comma to enter command mode
 nnoremap , :
