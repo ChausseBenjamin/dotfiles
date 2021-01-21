@@ -25,11 +25,13 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 " Automated vim bulletpoints
 Plug 'dkarter/bullets.vim'
 " Todoist with vim?
-Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
+Plug 'ChausseBenjamin/todoist.nvim', { 'do': ':TodoistInstall' }
 " LaTeX deoplete
 Plug 'hisaknown/deoplete-latex'
 " Turning vim into an R IDE
 Plug 'jalvesaq/Nvim-R'
+" Google cal inside vim
+Plug 'itchyny/calendar.vim'
 " Vim Sensible
 Plug 'tpope/vim-sensible'
 " Using vim to compile arduino code
@@ -148,6 +150,10 @@ let g:vimtex_view_general_options = '-a zathura'
 let g:tex_flavor = 'latex'
 " Vimtex TOC
 nnoremap <C-n> :VimtexTocToggle<cr>
+" Calendar setup
+let g:calendar_google_calendar = 1
+let g:calendar_frame = 'default'
+source ~/.cache/calendar.vim/credentials.vim
 
 " #---Document Compilation/Visualisation---# "
 " Compile document, be it groff/LaTeX/markdown/etc.
@@ -167,8 +173,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 " 80 col warning
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
 
 " #---Custom Keymaps---# "
 " Vim split resize
@@ -228,6 +234,7 @@ let rout_follow_colorscheme = 0
 " Nvim-R folding
     let r_syntax_folding = 1
     set foldnestmax=1
+    set foldmethod=marker
 " Arduino settings
 let g:arduino_cmd = '/usr/bin/arduino'
 let g:arduino_dir = '/usr/share/arduino'

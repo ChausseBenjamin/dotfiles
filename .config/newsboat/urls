@@ -44,7 +44,7 @@ https://www.archlinux.org/feeds/news/                  "Website" "~Website: Arch
 https://chausse.xyz/rss.xml                            "Website" "~Website: My personal Blog"
 # https://www.ledevoir.com/rss/section/societe/science.xml "Website" "~Website: Le Devoir Sciences"
 # https://spacenews.com/feed/                          "Website" "~Website: SpaceNews"
-https://www.macleans.ca/feed/ "Website" "~Website: Macleans"
+http://www.usherbrooke.ca/genie/fil/3590/nouvelles.xml "Website" "~Website: USherbrooke Génie"
 
 # #---Facebook---# #
 https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=LaDebarqueEscalade&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: La Debarque"

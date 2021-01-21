@@ -5,7 +5,8 @@ remaps &
 dunst &
 unclutter &
 protonmail-bridge --no-window &
-xautolock -time 5 -detectsleep -secure -locker /usr/local/bin/slock &
+xautolock -time 5 -detectsleep -secure -locker locktoggle &
+cinnamon-screensaver &
 picom -b &
 echo "" > $HOME/.local/share/newsboat/queue
 echo us > $HOME/.cache/layout
