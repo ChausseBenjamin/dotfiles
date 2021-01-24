@@ -278,6 +278,7 @@ nnoremap x :!/home/siddharth/bin/utils/extract %f &<cr>
 
 " Share Files with dropbox
 nnoremap s :!dbshare %d/%b &<cr>
+nnoremap N :!dropbox-cli exclude add %d/%b &<cr>
 
 " Make a new directory
 nnoremap mkd :mkdir<space>
