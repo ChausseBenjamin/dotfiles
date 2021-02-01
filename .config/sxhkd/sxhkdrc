@@ -165,7 +165,7 @@ super + shift + w
    camtoggle
 ## Force Start VLC Podcast
 super + shift + p
-    tmux-vlc
+    dropdowntoggle Podcast pod-dl
 
 #-#   Prompts (dmenu)   #-#
 ## Application Launcher
