@@ -3,9 +3,12 @@
 # source $HOME/.config/mutt/my-configs
 
 # GOOBOOK:
-# goobook let's you query google for contact information.
+# goobook let's you use google contacts information.
 # You install it with pip: pip install --user goobook
+# Query emails
 set query_command="goobook query %s"
+# Add email to contacts
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 # Note that if you use an old version of mutt-wizard,
 # you will need to disable abook in it's script:
 # sed -i "s/^set\squery_command.*$//" /usr/share/mutt-wizard/mutt-wizard.muttrc
