@@ -47,8 +47,6 @@ Plug 'turbio/bracey.vim', { 'for': [ 'html', 'stylesheet', 'javascript'] }
 Plug 'ChausseBenjamin/friffle-vim'
 " Elly colorscheme
 Plug 'ryuta69/elly.vim'
-" Nord colorscheme
-Plug 'arcticicestudio/nord-vim'
 " Vim Fugitive
 Plug 'tpope/vim-fugitive'
 " Vim-Surround
@@ -111,18 +109,21 @@ let g:deoplete#enable_at_startup = 1
 set wrap
 set lbr
 
+" Custom semicolon leader
+let mapleader=";"
+
 " Spelling
 set complete+=kspell " Better Spell Checking
 set spl=fr " French prose
 
 " Tag Editing
 inoremap <leader>t <++>
-inoremap :; <Esc>/<++><CR>"_c4l
+inoremap <leader>: <Esc>/<++><CR>"_c4l
 
-" Space is my leader
-nmap <Space> <Leader>
+" Quickly save
+nnoremap <silent> <Leader>w :update<CR>
 
-" Logical yanks
+" Logical way to Y ank
 nnoremap Y y$
 
 " Easily escape terminal mode
@@ -136,10 +137,19 @@ nnoremap <C-l> <C-w>l
 
 " Saving and quitting buffers
 nnoremap ZF ZQ
-nnoremap <silent> <leader>s :update<CR>
+nnoremap <silent> <leader>w :update<CR>
 
 " Remove trailing white spaces
 autocmd BufWritePre * %s/\s\+$//e
+
+" }}}
+
+" Workflow specific {{{
+
+" 'o'pen pdf for the current document
+nnoremap <silent> <leader>o :!opout <c-r>%<CR><CR>
+nnoremap <silent> <leader>c :update \| :!compiler <c-r>%<CR><CR>
+nnoremap <silent> <leader>r :update \| :!compiler <c-r>%<CR><CR> \| :!sage %:r.sagetex.sage && compiler %<CR><CR>
 
 " }}}
 
@@ -186,6 +196,8 @@ let g:user_emmet_leader_key=','
    nnoremap <C-n> :VimtexTocToggle<cr>
 "  Underscore errors
    let g:tex_no_error=1
+"  Consistent conceal highlighting
+   hi clear Conceal
 
 " Nvim-R
 "  Folding
