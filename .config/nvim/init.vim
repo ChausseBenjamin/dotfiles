@@ -83,7 +83,9 @@ call plug#end()
 " Sensible defaults {{{
 " Aesthetics & basics
 syntax on
-colo friffle " The best colorscheme
+colo elly
+hi Normal guibg=NONE
+hi CursorLineNr guibg=NONE
 set tgc " Use my terminal's colors
 set lz " Lazy redraw -> Quicker vim
 set t_Co=256 " 256 colors

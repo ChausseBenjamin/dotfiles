@@ -4,33 +4,47 @@
 !  /  \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
 ! /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
 !
+!
 
+! X Resources: Generated with Hodler (http://github.com/matttproud/hodler)
 !black
-*color0: #111A1F
-*color8: #666666
+*color0: #111a1f
+*color8: #868b8d
 !red
-*color1: #FF8f40
-*color9: #D23D3D
+*color1: #8d7856
+*color9: #810002
 !green
-*color2: #8D7856
-*color10: #19B596
+*color2: #798362
+*color10: #037500
 !yellow
-*color3: #9B9257
-*color11: #EBCB88
+*color3: #9b9257
+*color11: #ebcb88
 !blue
-*color4: #6998B3
-*color12: #AACCBB
+*color4: #63768a
+*color12: #63768a
 !magenta
-*color5: #B7416E
-*color13: #E16A98
+*color5: #b7416e
+*color13: #738c9c
 !cyan
-*color6: #42717B
-*color14: #1A282f
+*color6: #6998b3
+*color14: #66aabb
 !white
-*color7: #C0C7Ca
-*color15: #C0C7Ca
+*color7: #c0c7ca
+*color15: #c0c7ca
+!other
+*background: #222d32
+*foreground: #acb3b5
+*cursorColor: #ebcb88
+! See "highlightColorMode" and "hm" options in XTerm manual page.
+*highlightTextColor: #2e333c
+*highlightColor: #161f2a
+! No support for cursor text coloring; would be #1e232b.
+! No support for bold coloring; would be #626a73.
+
 !other
 *.alpha: 0.92
 ! SXIV COLORS
 Sxiv.background: #111A1F
 Sxiv.foreground: #9B9257
+
+Xft.dpi: 144
