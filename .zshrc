@@ -72,7 +72,8 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 
 # Prompt theme
-PROMPT=" %B%F{blue}π %b%F{yellow}"
+PROMPT=" %B%F{blue}𝜑 %b%F{yellow}"
+# PROMPT=" %B%F{blue}π %b%F{yellow}"
 # RPROMPT="\$vcs_info_msg_1_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 
