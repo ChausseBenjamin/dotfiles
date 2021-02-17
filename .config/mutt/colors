@@ -2,7 +2,7 @@
 # Default index colors:
 # black color2 color2 color3 color4 color5 color6 color7
 color index color6 default '.*'
-color index_author color10 default '.*'
+color index_author color2 default '.*'
 color index_number color5 default
 # color index_number color12 default
 color index_subject color3 default '.*'
@@ -22,12 +22,12 @@ mono bold bold
 mono underline underline
 mono indicator reverse
 mono error bold
-color normal default default
 color indicator brightblack color4
-color sidebar_highlight color9 default
-color sidebar_divider color4 black
+color sidebar_ordinary color2 default
+color sidebar_highlight color11 default
+color sidebar_divider color1 black
 color sidebar_flagged color2 black
-color sidebar_new color10 black
+color sidebar_new color4 black
 color normal color11 default
 color error color2 default
 color tilde black default
@@ -35,7 +35,7 @@ color message color6 default
 color markers color2 color7
 color attachment color7 default
 color search color13 default
-color status color11 black
+color status color1 black
 color hdrdefault color10 default
 color quoted color2 default
 color quoted1 color4 default
@@ -48,12 +48,12 @@ color bold black default
 color underline black default
 color normal default default
 
-color body color1 default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
-color body color12 default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body color5 default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+color body color13 default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
 color body color2 default "\`[^\`]*\`" # Green text between ` and `
-color body color12 default "^# \.*" # Headings as bold color4
-color body color14 default "^## \.*" # Subheadings as bold color6
-color body color10 default "^### \.*" # Subsubheadings as bold color2
+color body color11 default "^# \.*" # Headings as bold color4
+color body color11 default "^## \.*" # Subheadings as bold color6
+color body color11 default "^### \.*" # Subsubheadings as bold color2
 color body color3 default "^(\t| )*(-|\\*) \.*" # List items as color3
 color body color14 default "[;:][-o][)/(|]" # emoticons
 color body color14 default "[;:][)(|]" # emoticons
@@ -61,9 +61,9 @@ color body color14 default "[ ][*][^*]*[*][ ]?" # more emoticon?
 color body color14 default "[ ]?[*][^*]*[*][ ]" # more emoticon?
 color body color2 default "(BAD signature)"
 color body color6 default "(Good signature)"
-color body brightblack default "^gpg: Good signature .*"
+color body color2 default "^gpg: Good signature .*"
 color body color11 default "^gpg: "
-color body color11 color2 "^gpg: BAD signature from.*"
+color body color7 color9 "^gpg: BAD signature from.*"
 mono body bold "^gpg: Good signature"
 mono body bold "^gpg: BAD signature from.*"
-color body color2 default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+color body color6 default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
