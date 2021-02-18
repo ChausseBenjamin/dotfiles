@@ -9,14 +9,14 @@
 
 " Vim Plug {{{
 
-" Autoinstall
-let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
-if !filereadable(autoload_plug_path)
-  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
-      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Plug Autoinstall {{{
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
 endif
-unlet autoload_plug_path
+" }}}
 
 " Plugins
 call plug#begin()
@@ -32,6 +32,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'hisaknown/deoplete-latex'
 " Todoist with vim?
 Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
+" Minimal writing environment
+Plug 'junegunn/goyo.vim'
 " markdown preview vim
 Plug 'iamcco/markdown-preview.nvim'
 " Nice markdown formatting
@@ -79,13 +81,24 @@ Plug 'qxxxb/vim-searchhi'
 Plug 'simeji/winresizer'
 call plug#end()
 " }}}
-
 " Sensible defaults {{{
 " Aesthetics & basics
 syntax on
 colo elly
+" colorscheme tweaks {{{
 hi Normal guibg=NONE
 hi CursorLineNr guibg=NONE
+hi Constant guibg=NONE
+hi ColorColumn guibg='#738c9c'
+hi Todo guibg='#acb3b5' guifg='#340001'
+hi Search guifg='#810002' guibg='#738c9c'
+" }}}
+" weird Goyo behavior fix {{{
+au User GoyoEnter,GoyoLeave hi Normal guibg=NONE
+au User GoyoEnter,GoyoLeave hi StatusLineNC guibg=NONE
+au User GoyoEnter,GoyoLeave hi StatusLine guibg=NONE
+au User GoyoEnter,GoyoLeave hi VertSplit guibg=NONE
+" }}}
 set tgc " Use my terminal's colors
 set lz " Lazy redraw -> Quicker vim
 set t_Co=256 " 256 colors
@@ -113,6 +126,8 @@ set lbr
 
 " Custom semicolon leader
 let mapleader=";"
+" Tab space for quick commands
+nnoremap <space> :
 
 " Spelling
 set complete+=kspell " Better Spell Checking
@@ -145,7 +160,6 @@ nnoremap <silent> <leader>w :update<CR>
 autocmd BufWritePre * %s/\s\+$//e
 
 " }}}
-
 " Workflow specific {{{
 
 " 'o'pen pdf for the current document
@@ -153,8 +167,10 @@ nnoremap <silent> <leader>o :!opout <c-r>%<CR><CR>
 nnoremap <silent> <leader>c :update \| :!compiler <c-r>%<CR><CR>
 nnoremap <silent> <leader>r :update \| :!compiler <c-r>%<CR><CR> \| :!sage %:r.sagetex.sage && compiler %<CR><CR>
 
-" }}}
+" Auto-enable Goyo for certain filetypes
+au filetype mail,todoist Goyo
 
+" }}}
 " Plugin related {{{
 
 " Todoist.nvim
