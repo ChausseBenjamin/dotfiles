@@ -1,11 +1,9 @@
 # vim: filetype=neomuttrc
 # Default index colors:
-# black color2 color2 color3 color4 color5 color6 color7
-color index color6 default '.*'
-color index_author color2 default '.*'
+color index color13 default '.*'
+color index_author color3 default '.*'
 color index_number color5 default
-# color index_number color12 default
-color index_subject color3 default '.*'
+color index_subject color2 default '.*'
 
 # For new mail:
 color index color11 black "~N"
@@ -15,55 +13,56 @@ color index_subject color11 black "~N"
 # Header colors:
 color header color4 default ".*"
 color header color13 default "^(From)"
-color header color14 default "^(Subject)"
+color header color11 default "^(Subject)"
 color header color15 default "^(CC|BCC)"
 
 mono bold bold
 mono underline underline
 mono indicator reverse
 mono error bold
-color indicator brightblack color4
-color sidebar_ordinary color2 default
-color sidebar_highlight color11 default
-color sidebar_divider color1 black
-color sidebar_flagged color2 black
-color sidebar_new color4 black
+color normal default default
+color indicator brightblack color6
+color sidebar_ordinary color1 default
+color sidebar_highlight color14 default
+color sidebar_divider color4 black
+color sidebar_flagged color9 black
+color sidebar_new color14 black
 color normal color11 default
 color error color2 default
 color tilde black default
 color message color6 default
 color markers color2 color7
-color attachment color7 default
+color attachment color1 default
 color search color13 default
-color status color1 black
-color hdrdefault color10 default
+color status color2 black
+color hdrdefault color14 default
 color quoted color2 default
 color quoted1 color4 default
 color quoted2 color6 default
 color quoted3 color3 default
 color quoted4 color2 default
 color quoted5 color1 default
-color signature color10 default
+color signature color14 default
 color bold black default
 color underline black default
 color normal default default
 
-color body color5 default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
-color body color13 default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body color6 default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+color body color5 default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
 color body color2 default "\`[^\`]*\`" # Green text between ` and `
-color body color11 default "^# \.*" # Headings as bold color4
-color body color11 default "^## \.*" # Subheadings as bold color6
-color body color11 default "^### \.*" # Subsubheadings as bold color2
-color body color3 default "^(\t| )*(-|\\*) \.*" # List items as color3
+color body color12 default "^# \.*" # Headings as bold color4
+color body color14 default "^## \.*" # Subheadings as bold color6
+color body color14 default "^### \.*" # Subsubheadings as bold color2
+color body color5 default "^(\t| )*(-|\\*) \.*" # List items as color3
 color body color14 default "[;:][-o][)/(|]" # emoticons
 color body color14 default "[;:][)(|]" # emoticons
 color body color14 default "[ ][*][^*]*[*][ ]?" # more emoticon?
 color body color14 default "[ ]?[*][^*]*[*][ ]" # more emoticon?
-color body color2 default "(BAD signature)"
-color body color6 default "(Good signature)"
+color body color7 color9 "(BAD signature)"
+color body color2 default "(Good signature)"
 color body color2 default "^gpg: Good signature .*"
 color body color11 default "^gpg: "
-color body color7 color9 "^gpg: BAD signature from.*"
+color body black color9 "^gpg: BAD signature from.*"
 mono body bold "^gpg: Good signature"
 mono body bold "^gpg: BAD signature from.*"
-color body color6 default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+color body color5 default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
