@@ -156,7 +156,7 @@ super + shift + a
     dropdowntoggle shell tmux-shell
 ## TUI Youtube (youtube-viewer)
 super + v
-    killall youtube-viewer || $TERMINAL -c youtube -t YouTube -e youtube-viewer -SV
+	cat ~/.cache/yt-sub | dmenu -p "Query: " | ytfzf -D -
 ## TUI Hacker News
 super + shift + v
 		killall hacker-news || dropdowntoggle hacker-news tmux-hn
