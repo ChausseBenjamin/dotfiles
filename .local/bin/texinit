@@ -1,6 +1,11 @@
 #!/bin/sh
 
-cp $HOME/Dropbox/A/Scholar/All/Templates/Text/LaTeX/001personal/cegep-lanaudiere/article/* ./
-ln $BIB/citations.bib ./citations.bib
+case form in "$1";
+  rnw)
+    cp $HOME/Dropbox/A/Scholar/All/Templates/LaTeX/cegep/main.rnw ;;
+  *)
+    cp $HOME/Dropbox/A/Scholar/All/Templates/LaTeX/cegep/main.tex ;;
+esac
+
 mkdir archives
 

@@ -84,11 +84,13 @@ call plug#end()
 " Sensible defaults {{{
 " Aesthetics & basics
 syntax on
-colo elly
+colo friffle
 " colorscheme tweaks {{{
 hi Normal guibg=NONE
 hi CursorLineNr guibg=NONE
 hi Constant guibg=NONE
+hi Conceal guibg=NONE
+hi Folded guibg=NONE
 hi ColorColumn guibg='#738c9c'
 hi Todo guibg='#acb3b5' guifg='#340001'
 hi Search guifg='#810002' guibg='#738c9c'
@@ -214,8 +216,6 @@ let g:user_emmet_leader_key=','
    nnoremap <C-n> :VimtexTocToggle<cr>
 "  Underscore errors
    let g:tex_no_error=1
-"  Consistent conceal highlighting
-   hi clear Conceal
 
 " Nvim-R
 "  Folding

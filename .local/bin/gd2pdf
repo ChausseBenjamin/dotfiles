@@ -1,3 +1,0 @@
-#!/bin/sh
-
-groffdown "$1" | refer -PS -e -p"$REFERBIB" | groff -me -ms -kejpt -T pdf | zathura -

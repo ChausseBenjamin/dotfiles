@@ -2,6 +2,7 @@
 # auto-reload yes
 
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
+download-full-page yes
 
 bind-key j down
 bind-key k up

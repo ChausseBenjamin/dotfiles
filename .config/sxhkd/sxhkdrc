@@ -113,7 +113,7 @@ super + c
 		killall picom || setsid picom
 ## Toggle Screenkey
 super + Insert
-	killall screenkey || screenkey --bg-color "#222d32" -s small -f HackGen -t 1 --font-color "#BABABA"
+	killall screenkey || screenkey --bg-color "#222d32" -s small -f "Apercu Mono" -t 1 --font-color "#BABABA" --mods-mode tux
 ## Open this manual
 super + alt + shift + h
     manualgen

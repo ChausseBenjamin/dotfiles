@@ -2,18 +2,19 @@
 # Add the following line to your muttrc to have them:
 # source $HOME/.config/mutt/my-configs
 
-# GOOBOOK:
+# GOOBOOK: {{{
 # goobook let's you use google contacts information.
 # You install it with pip: pip install --user goobook
 # Query emails
 set query_command="goobook query %s"
 # Add email to contacts
 macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
 # Note that if you use an old version of mutt-wizard,
 # you will need to disable abook in it's script:
 # sed -i "s/^set\squery_command.*$//" /usr/share/mutt-wizard/mutt-wizard.muttrc
 
-# PGP Encryption:
+# PGP Encryption: {{{
 # I want pgp encryption by default when possible.
 # The following line makes this possible:
 set crypt_use_gpgme=yes
@@ -21,10 +22,15 @@ set crypt_autosign = yes
 set pgp_self_encrypt = yes
 set pgp_default_key = 'ABC4A5A7430D6309ACBD219044F94DD6456590C3'
 set pgp_import_command = "gpg --no-verbose --import -v %f"
+# }}}
 
-# Muttprint:
+# Muttprint: {{{
 set print_command="muttprint"
 # Dump all headers
 # macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+# }}}
+# Colors {{{
+source colors
+# }}}
 
 # vim: filetype=neomuttrc

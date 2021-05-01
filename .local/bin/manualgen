@@ -10,10 +10,10 @@ s/\s*#-#$/\n##/;
 	sed "s/-->/##\ /;
 			s/:\(.*\)$/:\1\`/;
 			s/\s+\s/+/g;
-			s/#\*\*:.*//")
+			s/#\*\*:.*//;
+      s/\(^##.*\)/\1\n/g")
 
 manual=$(cat $HOME/.config/manual.part)
 
-printf " $manual \n $config" | gd2pdf
+printf "$manual\n$config" | lowdown -sTms | pdfroff -itk -mspdf | zathura -
 
-# printf " $manual \n $config"

@@ -20,7 +20,6 @@
 | cdd     | cd ..                                                           |
 | e       | $EDITOR                                                         |
 | ew      | nvim ./main.rnw                                                 |
-| fp      | fontpreview                                                     |
 | fu      | fuck                                                            |
 | f       | vicd                                                            |
 | g       | git                                                             |

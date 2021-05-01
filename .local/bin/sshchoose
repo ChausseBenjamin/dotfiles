@@ -1,0 +1,6 @@
+#!/bin/sh
+
+choice="$(pass ls ssh/ | sed '1d;s/^.*\s//g' | fzf)"
+
+ssh "$(pass ssh/$choice)"
+
