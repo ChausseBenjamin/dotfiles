@@ -1,8 +1,6 @@
----
-title: My dwm configuration
+title: dwm --- my personal configuration
+rcsdate: $Date: 2021/04/08 23:51:08 $
 author: Benjamin Chausse
-date: 2020-01-26
----
 
 The idea behind this configuration is simple. Vim-keybindings, Quick access to frequently used apps, and
 Consistent design!

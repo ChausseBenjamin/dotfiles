@@ -26,7 +26,7 @@ color sidebar_ordinary color1 default
 color sidebar_highlight color14 default
 color sidebar_divider color4 black
 color sidebar_flagged color9 black
-color sidebar_new color14 black
+color sidebar_new color13 black
 color normal color11 default
 color error color2 default
 color tilde black default
