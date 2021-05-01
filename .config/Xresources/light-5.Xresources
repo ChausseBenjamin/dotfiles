@@ -1,0 +1,30 @@
+! Lucious-light Theme
+*.background:  #eeeeee
+*.foreground:  #444444
+*.cursorColor: #5f87af
+! black
+*.color0:      #eeeeee
+*.color8:      #444444
+! red
+*.color1:      #af0000
+*.color9:      #af0000
+! green
+*.color2:      #008700
+*.color10:     #008700
+! yellow / orange
+*.color3:      #af5f00
+*.color11:     #af5f00
+! blue
+*.color4:      #005faf
+*.color12:     #005faf
+! magenta
+*.color5:      #870087
+*.color13:     #870087
+! cyan
+*.color6:      #008787
+*.color14:     #008787
+! white
+*.color7:      #eeeeee
+*.color15:     #444444
+! Transparency
+*.alpha: 0.86

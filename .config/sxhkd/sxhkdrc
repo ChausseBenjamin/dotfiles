@@ -173,7 +173,7 @@ alt + d
     j4-dmenu-desktop
 ## Power Utility
 alt + q
-    powermenu
+    sysact
 ## Quickly Search Google
 alt + shift + d
     websearch
@@ -195,6 +195,9 @@ alt + f
 ## Start SSH session
 alt + s
 		pickssh
+## Select bright or dark .Xresources theme
+alt + Escape
+	theme="$(ls $HOME/.config/Xresources/ | dmenu)" && cat "$HOME/.config/Xresources/$theme" | xrdb -load
 
 #-#   PrintScreen Utilities   #-#
 ## Entire Screen

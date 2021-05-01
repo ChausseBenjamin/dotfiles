@@ -17,8 +17,10 @@ macro index,pager a "<pipe-message>goobook add<return>" "add the sender address 
 # I want pgp encryption by default when possible.
 # The following line makes this possible:
 set crypt_use_gpgme=yes
-set crypt_autosign
-set pgp_auto_decode
+set crypt_autosign = yes
+set pgp_self_encrypt = yes
+set pgp_default_key = 'ABC4A5A7430D6309ACBD219044F94DD6456590C3'
+set pgp_import_command = "gpg --no-verbose --import -v %f"
 
 # Muttprint:
 set print_command="muttprint"

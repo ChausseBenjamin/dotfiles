@@ -31,24 +31,21 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCQ-AAXSt0M5Gx0-A9UGut8g "Yo
 https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A "Youtube" "~Youtube: Tom Scott"
 # https://www.youtube.com/feeds/videos.xml?channel_id=<++> "Youtube" "~Youtube: <++>"
 
-# #---Twitter---# #
-http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=benchausse&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: Me "
-# http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=SpaceX&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: SpaceX "
-# http://rss-bridge.bb8.fun/?action=display&bridge=Twitter&context=By+username&u=Erdayastronaut&norep=on&nopic=on&format=Atom "Twitter" "~Twitter: Everyday Astronaut "
-
 # #---Websites---# #
 # https://www.spacex.com/news.xml                        "Website" "~Website: SpaceX Feed "
 https://xkcd.com/rss.xml                               "Website" "~Website: XKCD "
 https://www.archlinux.org/feeds/news/                  "Website" "~Website: Arch Linux News"
 # https://blogues.desjardins.com/press_release/atom.xml  "Website" "~Website: Desjardins - Nouvelles"
 https://chausse.xyz/rss.xml                            "Website" "~Website: My personal Blog"
+https://chausse.xyz/bp/rss.xml                            "Website"
 # https://www.ledevoir.com/rss/section/societe/science.xml "Website" "~Website: Le Devoir Sciences"
 # https://spacenews.com/feed/                          "Website" "~Website: SpaceNews"
 http://www.usherbrooke.ca/genie/fil/3590/nouvelles.xml "Website" "~Website: USherbrooke Génie"
+https://sidneyliebrand.io/feed.xml                     "Website" "~Website: Sidney Liebrand's Blog"
 
 # #---Facebook---# #
-https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=LaDebarqueEscalade&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: La Debarque"
-https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=Poule-Sauvage-1529939780438862&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: Poule Sauvage"
+# https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=LaDebarqueEscalade&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: La Debarque"
+# https://rss-bridge.bb8.fun/?action=display&bridge=Facebook&context=User&u=Poule-Sauvage-1529939780438862&media_type=all&limit=-1&format=Atom "Facebook" "~Facebook: Poule Sauvage"
 
 # #---Flickr---# #
 https://www.flickr.com/services/feeds/photos_public.gne?id=130608600@N05&lang=en-us&format=rss_200 "Flickr" "~Flickr: Spacex Latest"

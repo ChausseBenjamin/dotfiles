@@ -18,7 +18,7 @@ export DISTRIB_ID=arch
 export DISTRIB_RELEASE=$(uname -r)
 export XDG_CONFIG_HOME=$HOME/.config
 export R_PROFILE_USER=$HOME/.config/R/Rprofile
-export TODOIST_API_KEY="$(pass Todoist/api)"
+export TODOIST_API_KEY="$(pass Todoist/API)"
 # export GOROOT=/usr/bin/go
 
 # fix "xdg-open fork-bomb" export your preferred browser from here

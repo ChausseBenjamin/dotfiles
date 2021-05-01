@@ -36,5 +36,6 @@ case "$file" in
     *\.py) python "$file" ;;
     *\.go) go run "$file" ;;
     *\.sent) setsid sent "$file" 2>/dev/null & ;;
+    *.Xresources) xrdb -load "$file" ;;
     *) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac

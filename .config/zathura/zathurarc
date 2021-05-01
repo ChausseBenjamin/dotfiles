@@ -5,6 +5,7 @@
 # /____\__,_|\__|_| |_|\__,_|_|  \__,_|
 #
 
+set adjust-open "width"
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set statusbar-basename true
@@ -35,5 +36,7 @@ map J zoom in
 map K zoom out
 map i recolor
 map p print
+set synctex true
+set synctex-editor-command "nvr --remote-silent %f -c %l"
 
 # map <C-o> focus_inputbar ":exec lpr $FILE"<cr>
