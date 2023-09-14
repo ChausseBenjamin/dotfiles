@@ -1,1 +1,1 @@
-.xinitrc##hostname.battlestation
+.xinitrc##hostname.intern

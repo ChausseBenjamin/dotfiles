@@ -84,17 +84,6 @@ source $HOME/.cache/zsh-aliases*
 source $HOME/.cache/zsh-shortcuts
 source $HOME/.cache/shell-vars
 
-# Vifm with sensible cd option
-vicd()
-{
-    local dst="$(command vifmrun --choose-dir - "$@")"
-		[[ "$dst" == "" ]] && \
-        echo 'Directory picking cancelled/failed' && \
-        return 1 \
-    || cd "$dst"
-}
-
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-eval $(thefuck --alias)

@@ -38,5 +38,3 @@ map i recolor
 map p print
 set synctex true
 set synctex-editor-command "nvr --remote-silent %f -c %l"
-
-# map <C-o> focus_inputbar ":exec lpr $FILE"<cr>
