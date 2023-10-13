@@ -1,5 +1,6 @@
-xwallpaper --zoom ~/.cache/wall.png &
 $HOME/.dropbox-dist/dropboxd &
+$HOME/.screenlayout/office.sh &
+makewall &
 sxhkd &
 dunst &
 unclutter &
