@@ -2,7 +2,7 @@
 
 col=$(colorpicker --short --one-shot)
 
-sed "s/fill=.*>/fill=\"$col\">/g" $HOME/.cache/circle.svg > /tmp/circle.svg
+sed "s/fill=.*>/fill=\"$col\">/g" $HOME/.local/share/circle.svg > /tmp/circle.svg
 
 echo "$col" | xsel -b
 
