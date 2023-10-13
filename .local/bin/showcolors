@@ -1,0 +1,14 @@
+#!/bin/sh
+
+txt="              "
+
+# Showoff bright backgrounds
+for i in $(seq 100 109); do
+  echo "\033[${i}m$txt\033[0m"
+done
+
+# Showoff bright backgrounds
+for i in $(seq 40 49); do
+  echo "\033[${i}m$txt\033[0m"
+done
+
