@@ -1,9 +1,0 @@
-#!/bin/sh
-
-nb=$(cat /tmp/newsupdate 2>/dev/null || echo "$(newsboat -x print-unread | awk '{ if($1>0) print " " $1}')$(cat "${XDG_CONFIG_HOME:-$HOME/.config}"/newsboat/.update 2>/dev/null) ")
-echo " $nb"
-case $BLOCK_BUTTON in
-	1) "$TERMINAL" -e newsboat ;;
-	3) newsup  ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac

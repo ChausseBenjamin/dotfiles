@@ -1,6 +1,7 @@
 #!/bin/sh
 
-echo "  $(cat $HOME/.cache/layout) "
+# echo "  $(cat $HOME/.cache/layout) "
+echo " $(cat $HOME/.cache/layout) "
 case $BLOCK_BUTTON in
 	  1) layouttoggle ;;
 	  2) remaps && Capslock remaps reinitialized;;
