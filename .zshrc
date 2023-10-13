@@ -72,7 +72,8 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 
 # Prompt theme
-PROMPT=" %B%F{blue}𝜑 %b%F{yellow}"
+PROMPT=" %B%F{blue}𝄞 %b%F{yellow}"
+# PROMPT=" %B%F{blue}𝜑 %b%F{yellow}"
 # PROMPT=" %B%F{blue}π %b%F{yellow}"
 # RPROMPT="\$vcs_info_msg_1_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
@@ -83,6 +84,18 @@ zstyle ':vcs_info:git:*' formats '%b'
 source $HOME/.cache/zsh-aliases*
 source $HOME/.cache/zsh-shortcuts
 source $HOME/.cache/shell-vars
+
+lfcd () {
+    tmp="$(mktemp -uq)"
+    trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
+    lfub -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+alias f='lfcd'
+
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

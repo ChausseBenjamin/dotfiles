@@ -1,1 +1,2 @@
-require("ben")
+require("ben.core")
+require("ben.lazy")

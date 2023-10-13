@@ -20,24 +20,15 @@
 | cdd     | cd ..                                                           |
 | e       | $EDITOR                                                         |
 | ew      | nvim ./main.rnw                                                 |
-| fu      | fuck                                                            |
-| f       | vicd                                                            |
 | g       | git                                                             |
 | goobook | goobook -c $HOME/.config/goobook/config                         |
 | gor     | go run *.go                                                     |
 | info    | info --vi-keys                                                  |
 | mmi     | make && sudo make install && [ -f config.def.h ] && rm config.h |
-| op      | e main.rnw                                                      |
 | R       | R -q                                                            |
-| td      | todotxt-machine -c ~/.config/todotxt-machine/config             |
 | tmcd    | tmux attach-session -t                                          |
 | tmdd    | tmux  kill-session -t                                           |
 | tmls    | tmux list-sessions                                              |
-| vc      | expressvpn connect && dwmbar                                    |
-| vd      | expressvpn disconnect && dwmbar                                 |
-| vm      | expressvpn connect camo && dwmbar                               |
-| vpn     | expressvpn                                                      |
-| vs      | expressvpn connect smart && dwmbar                              |
 | xx      | chmod +x                                                        |
 | yadog   | yadm log --all --decorate --oneline --graph                     |
 |---------+-----------------------------------------------------------------|

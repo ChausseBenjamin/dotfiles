@@ -4,14 +4,15 @@ export PATH=$PATH$( find $HOME/.local/bin/ -type d -printf ":%p" )
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:/root/.local/bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/usr/local/go/bin
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export EDITOR=/usr/bin/nvim
+export EDITOR=/usr/local/bin/nvim
 export READER=/usr/bin/zathura
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GRDB="dropbox://default@/git-private"
-export TERMINAL=st
-export TERM=st
+export TERMINAL=/usr/local/bin/st
+export TERM=/usr/local/bin/st
 export BIB=$HOME/Dropbox/A/Scholar/All/References
 export REFERBIB=$HOME/Dropbox/A/Scholar/All/References/bibliography.refer
 export DISTRIB_ID=arch
@@ -45,3 +46,5 @@ eval "$(gh completion -s zsh)"
 # Generate shortcuts and aliases
 shortcutgen
 aliasgen
+. "$HOME/.cargo/env"
+export PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linuxexport PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linuxexport PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linux

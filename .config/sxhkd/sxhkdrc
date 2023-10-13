@@ -99,6 +99,9 @@ super + shift + 0
 # 	dwmc setgaps 0
 
 #-#   Miscellaneous #-#
+## Lock Screen
+super + BackSpace
+    slock
 ## Quit Current App
 super + q
 	kill -15 `xdotool getwindowfocus getwindowpid`
@@ -144,7 +147,7 @@ XF86WLAN
     killall nmtui || dropdowntoggle network nmtui
 ## TUI Audio Mixer (alsamixer)
 super + p
-    killall alsamixer || dropdowntoggle audio alsamixer -c 0
+    flameshot gui
 ## TODOs (Todoist.nvim)
 super + space
     dropdowntoggle todoist nvim +Todoist
@@ -202,7 +205,7 @@ alt + Escape
 #-#   PrintScreen Utilities   #-#
 ## Entire Screen
 Print
-    scrot -q 100 -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Full screenshot completed"
+    flamehsot gui
 ## Current window
 alt + Print
     scrot -q 100 -u -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Window screenshot completed"

@@ -42,7 +42,7 @@
 ! No support for bold coloring; would be #626a73.
 
 !other
-*.alpha: 0.69
+*.alpha: 0.80
 
 Sxiv.background: #111A1F
 Sxiv.foreground: #9B9257

@@ -1,6 +1,6 @@
 xwallpaper --zoom ~/.cache/wall.png &
+$HOME/.dropbox-dist/dropboxd &
 sxhkd &
-remaps &
 dunst &
 unclutter &
 picom -b &
@@ -8,7 +8,7 @@ echo us > $HOME/.cache/layout
 xrdb -load $HOME/.Xresources
 flashfocus -n 30 -o 0.75 -v ERROR &
 dwmblocks &
-newsup &
+remaps &
 while true; do
   dwm >/dev/null
 done

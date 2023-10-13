@@ -16,18 +16,15 @@
 #  (It can contain environmental variables)
 
 |----------------+-----+--------------------------------------------------|
-| Bibliographies | bb  | $HOME/Dropbox/A/Scholar/All/References           |
 | Config         | cf  | $HOME/.config                                    |
-| Downloads      | dl  | $HOME/Dropbox/Downloads                          |
+| Downloads      | dl  | $HOME/Downloads                                  |
+| Wallpaper      | wp  | $HOME/Pictures/wallpapers                        |
 | Dropbox        | db  | $HOME/Dropbox                                    |
 | Music          | ms  | $HOME/Music                                      |
 | Neovim         | vi  | $HOME/.config/nvim                               |
-| Personnal      | ps  | $HOME/Dropbox/A/Personnal/                       |
-| Wallpapers     | wp  | $HOME/Dropbox/A/Personnal/Photos/Wallpapers      |
-| RSS            | rss | $HOME/.config/newsboat                           |
-| Scholar        | sf  | $HOME/Dropbox/A/Scholar/CEGEP/session6           |
+| VDI            | vdi | $HOME/Workspace/vdi                              |
 | Scripts        | sc  | $HOME/.local/bin                                 |
 | Hotkeys        | sx  | $HOME/.config/sxhkd                              |
 | Images         | img | $HOME/Dropbox/A/Personnal/Photos/unsorted        |
-| Compilation    | cmp | $HOME/.local/src                                 |
+| Compilation    | cp  | $HOME/.local/src                                 |
 |----------------+-----+--------------------------------------------------|
