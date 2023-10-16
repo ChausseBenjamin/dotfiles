@@ -1,1 +1,1 @@
-.profile
+/home/master/.profile

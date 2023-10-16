@@ -1,29 +1,30 @@
-export GOPATH=$HOME/.go
+# Path
 export SCRIPTS=$HOME/.local/bin
-export PATH=$PATH$( find $HOME/.local/bin/ -type d -printf ":%p" )
+export PATH=$PATH$( find $SCRIPTS/ -type d -printf ":%p" )
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:/root/.local/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/.go
+
+# QT & GTK
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export EDITOR=/usr/local/bin/nvim
-export READER=/usr/bin/zathura
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export GRDB="dropbox://default@/git-private"
-export TERMINAL=/usr/local/bin/st
-export TERM=/usr/local/bin/st
-export BIB=$HOME/Dropbox/A/Scholar/All/References
-export REFERBIB=$HOME/Dropbox/A/Scholar/All/References/bibliography.refer
+
+# Misc
 export DISTRIB_ID=arch
 export DISTRIB_RELEASE=$(uname -r)
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export R_PROFILE_USER=$HOME/.config/R/Rprofile
 export ZDOTDIR=$HOME/.config/zsh
-# export GOROOT=/usr/bin/go
 
-# fix "xdg-open fork-bomb" export your preferred browser from here
+# Applications
+export EDITOR=$(which nvim)
+export READER=$(which zathura)
+export TERMINAL=$(which alacritty)
+export TERM=$(which alacritty)
 export BROWSER=$(which firefox)
 
 # less/man colors
@@ -36,16 +37,11 @@ export LESS_TERMCAP_se=$'\e[0m'         # end reverse video
 export LESS_TERMCAP_me=$'\e[0m'         # end mode
 export LESS_TERMCAP_ue=$'\e[0m'         # end underline
 
+# Generate shortcuts and aliases
+shortcutgen
+aliasgen
+
 # Start Desktop Environment if on the main TTY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 startx
 fi
-
-# gh completion
-eval "$(gh completion -s zsh)"
-
-# Generate shortcuts and aliases
-shortcutgen
-aliasgen
-. "$HOME/.cargo/env"
-export PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linuxexport PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linuxexport PATH=$PATH:/home/master/.local/src/Geekbench-6.2.0-Linux
