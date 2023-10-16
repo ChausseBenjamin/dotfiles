@@ -9,3 +9,5 @@ email = benjamin@chausse.xyz
 	autoSetupRemote = true
 [pull]
 	rebase = false
+[commit]
+	gpgsign = true
