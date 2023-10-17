@@ -5,13 +5,18 @@
 # The rest of it is the program/command to be run
 # in the dropdown window.
 
-class="$1"
-title="dropdown_$class"
+title_flag="--title"
+class_flag="--class"
+cmd_flag="--command"
+
+name="$1"
+class="dropdown"
+title="dropdown_$name"
 active="$(xdotool search --name $title | wc -l)"
 shift
 
 
 case "$active" in
-	0) $TERMINAL -c "dropdown" -t "$class" -e "$@" & ;;
+	0) $TERMINAL --class "dropdown" --title "$title" --command "$@" & ;;
 	*) kill -9 `xdotool search --name "$class" getwindowpid` ;;
 esac
