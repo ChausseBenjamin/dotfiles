@@ -3,7 +3,7 @@
 # Please adapt and uncomment the following lines:
 name = Benjamin Chausse
 email = benjamin@chausse.xyz
-	signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
+signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
 [init]
 	defaultBranch = master
 [push]
