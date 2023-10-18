@@ -1,5 +1,6 @@
 $HOME/.dropbox-dist/dropboxd &
 $HOME/.screenlayout/office.sh &
+dbus-launch --sh-syntax --exit-with-session; pulseaudio --kill; pipewire &
 makewall &
 sxhkd &
 dunst &
