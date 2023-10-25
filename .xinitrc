@@ -1,5 +1,5 @@
 $HOME/.dropbox-dist/dropboxd &
-$HOME/.screenlayout/office.sh &
+$XDG_CONFIG_HOME/startup/$(hostname) &
 makewall &
 sxhkd &
 dunst &
@@ -13,5 +13,4 @@ remaps &
 while true; do
   dwm >/dev/null
 done
-# exec icewm
 # vim:filetype=sh

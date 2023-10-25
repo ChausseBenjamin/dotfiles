@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Pipewire setup:
+gentoo-pipewire-launcher &
+
+# Load Nvidia X Server Settings
+nvidia-settings --load-config-only &
+
+# Load stacked dual monitor configuration
+$XDG_CONFIG_HOME ~/.screenlayout/battlestation-dualmon.sh &
