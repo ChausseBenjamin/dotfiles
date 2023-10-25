@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sitename="chausse.xyz"
+
+cd "$HOME/Workspace/$sitename"
+
+hugo
+
+rsync -auvz "$HOME/Workspace/$sitename/public/" "master@$sitename:/var/www/dev"

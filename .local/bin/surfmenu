@@ -1,4 +1,0 @@
-#!/bin/sh
-
-url=$(cat ~/.surf/bookmarks | dmenu -i -p "Go: ")
-surf "$url"
