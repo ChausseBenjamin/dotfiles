@@ -1,8 +1,0 @@
-#!bin/sh
-
-base=$(basename "$1")
-ext="${base##*.}"
-base="${base%.*}"
-# ffmpeg -i "$1" -itsoffset 0.350 -i "$1" -c:v h264 -c:a aac -map 0:0 -map 1:1 "$base"_synced."ext" && \
-ffmpeg -i "$1" -itsoffset 0.250 -i "$1" -map 0:v -map 1:a -c copy "$base"_synced."$ext" && \
-notify-send -i "/home/master/.fonts/svg/headphones.svg" "Audio synced"

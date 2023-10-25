@@ -1,3 +1,0 @@
-#!/bin/sh
-
-lpstat -p -d | sed 's/^printer\ //; s/\ .*$//; s/no//; /^$/d' | dmenu -p "Select printer"
