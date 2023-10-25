@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Pipewire setup:
+dbus-launch --sh-syntax --exit-with-session; pulseaudio --kill; pipewire &
+
+# Standard dual screen layout
+$HOME/.screenlayout/office.sh &
+
