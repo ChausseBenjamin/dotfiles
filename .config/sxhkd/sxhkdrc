@@ -133,7 +133,7 @@ super + w
     $BROWSER
 ## TUI Email Client (neomutt)
 super + e
-    killall neomutt || $TERMINAL -e neomutt && mw -Y
+    kill -46 $(pidof dwmblocks) && killall neomutt || $TERMINAL -e neomutt && kill -46 $(pidof dwmblocks)
 ## TUI calendar (calendar.vim)
 super + shift + e
 	  $TERMINAL -t calendar -e nvim -c ":Calendar -view=week -first_day=monday"

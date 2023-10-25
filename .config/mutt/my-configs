@@ -13,6 +13,7 @@ macro index,pager a "<pipe-message>goobook add<return>" "add the sender address 
 # Note that if you use an old version of mutt-wizard,
 # you will need to disable abook in it's script:
 # sed -i "s/^set\squery_command.*$//" /usr/share/mutt-wizard/mutt-wizard.muttrc
+# }}}
 
 # PGP Encryption: {{{
 # I want pgp encryption by default when possible.
@@ -28,9 +29,6 @@ set pgp_import_command = "gpg --no-verbose --import -v %f"
 set print_command="muttprint"
 # Dump all headers
 # macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
-# }}}
-# Colors {{{
-source colors
 # }}}
 
 # vim: filetype=neomuttrc
