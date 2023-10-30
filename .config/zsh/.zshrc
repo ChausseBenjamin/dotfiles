@@ -102,6 +102,8 @@ lfcd () {
 }
 alias f='lfcd'
 
+# Git Root
+alias gr='cd $(git rev-parse --show-cdup)'
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
