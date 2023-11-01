@@ -1,11 +1,3 @@
 #!/bin/sh
 
-# echo "  $(cat $HOME/.cache/layout) "
-echo " $(cat $HOME/.cache/layout) "
-case $BLOCK_BUTTON in
-	  1) layouttoggle ;;
-	  2) remaps && Capslock remaps reinitialized;;
-		3) notify-send -a " Keyboard" "Click this widget to toggle the keyboard layout between french and english.
-Middle click it to remap Capslock to super (and escape when tapped) if it somehow gets unmapped.";;
-    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac
+echo "   $(cat $HOME/.cache/layout) "

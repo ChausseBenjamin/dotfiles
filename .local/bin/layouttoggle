@@ -1,18 +1,20 @@
 #!/bin/sh
 
-layout=$(cat $HOME/.cache/layout)
+layout=$(cat "$HOME/.cache/layout")
 
 case "$layout" in
-	ca) setxkbmap -model pc104 -layout us -variant ,,
-			echo us > $HOME/.cache/layout
-			;;
-	us) setxkbmap -model pc104 -layout ca -variant ,,
-			echo ca > $HOME/.cache/layout
-			;;
-		*) setxkbmap -model pc104 -layout us -variant ,,
-			echo us > $HOME/.cache/layout
-			;;
-	esac
+ca)
+	setxkbmap -model pc104 -layout us -variant ,,
+	echo us >"$HOME/.cache/layout"
+	;;
+us)
+	setxkbmap -model pc104 -layout ca -variant ,,
+	echo ca >"$HOME/.cache/layout"
+	;;
+*)
+	setxkbmap -model pc104 -layout us -variant ,,
+	echo us >"$HOME/.cache/layout"
+	;;
+esac
 
-kill -38 $(pidof dwmblocks)
-
+kill -38 "$(pidof dwmblocks)"
