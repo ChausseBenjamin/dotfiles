@@ -4,6 +4,6 @@ sitename="chausse.xyz"
 
 cd "$HOME/Workspace/$sitename"
 
-hugo
+hugo --gc=true --minify
 
 rsync -auvz "$HOME/Workspace/$sitename/public/" "master@$sitename:/var/www/dev"

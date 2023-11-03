@@ -148,9 +148,9 @@ XF86WLAN
 ## TUI Audio Mixer (alsamixer)
 super + p
     flameshot gui
-## TODOs (Todoist.nvim)
+## TODOs (orgmode-nvim)
 super + space
-    dropdowntoggle todoist nvim +Todoist
+    dropdowntoggle orgmode nvim $HOME/Dropbox/org/home.org
 ## Terminal Calculator
 super + a
     dropdowntoggle calc tmux-r
