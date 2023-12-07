@@ -10,6 +10,8 @@ ex 󱁼
 *.conf 󱁻
 *.go 
 *.org 
+*.norg 
+*.bak 
 *.sh 
 *.o 󱉟
 *.c 
