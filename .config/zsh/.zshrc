@@ -81,7 +81,7 @@ RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 zstyle ':vcs_info:git:*' formats '%b'
 
 # Quickly navigate to a created directory
-function mkcd() {
+mkcd() {
     mkdir -p -- "$1" &&
     cd -P -- "$1"
 }

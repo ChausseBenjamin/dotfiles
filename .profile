@@ -21,6 +21,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export R_PROFILE_USER=$HOME/.config/R/Rprofile
 export ZDOTDIR=$HOME/.config/zsh
+export TEXMFHOME=$XDG_DATA_HOME/texmf
 
 # Applications
 export EDITOR=$(which nvim)
@@ -42,6 +43,11 @@ export LESS_TERMCAP_ue=$'\e[0m'         # end underline
 # Generate shortcuts and aliases
 shortcutgen
 aliasgen
+
+# Ensure XDG_RUNTIME_DIR is set
+if test -z "$XDG_RUNTIME_DIR"; then
+    export XDG_RUNTIME_DIR=$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)
+fi
 
 # Start Desktop Environment if on the main TTY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then

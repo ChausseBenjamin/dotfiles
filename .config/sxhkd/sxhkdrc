@@ -150,7 +150,7 @@ super + p
     flameshot gui
 ## TODOs (orgmode-nvim)
 super + space
-    dropdowntoggle orgmode nvim $HOME/Dropbox/org/home.org
+    dropdowntoggle orgmode nvim $HOME/Dropbox/org/index.norg
 ## Terminal Calculator
 super + a
     dropdowntoggle calc tmux-r
@@ -216,7 +216,7 @@ super +  Print
 #-#   Special Keys   #-#
 ## Increase/decrease Volume
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    volumectl 5 {+,-}
+    volumectl 1 {+,-}
 ## Max-Out Volume
 shift + XF86AudioRaiseVolume
     volumectl 100
