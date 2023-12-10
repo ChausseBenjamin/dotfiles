@@ -2,8 +2,10 @@
 
 sitename="chausse.xyz"
 
-cd "$HOME/Workspace/$sitename"
+branch="construction"
+
+cd "$HOME/Workspace/$sitename$construction" && git pull origin $branch && git checkout $branch
 
 hugo --gc=true --minify
 
-rsync -auvz "$HOME/Workspace/$sitename/public/" "master@$sitename:/var/www/dev"
+rsync -auvz "$HOME/Workspace/$sitename$construction/public/" "master@$sitename:/var/www/chausse"

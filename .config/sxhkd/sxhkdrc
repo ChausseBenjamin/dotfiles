@@ -150,7 +150,7 @@ super + p
     flameshot gui
 ## TODOs (orgmode-nvim)
 super + space
-    dropdowntoggle orgmode nvim $HOME/Dropbox/org/index.norg
+    dropdowntoggle orgmode nvim +"Neorg index"
 ## Terminal Calculator
 super + a
     dropdowntoggle calc tmux-r
