@@ -1,0 +1,11 @@
+#!/bin/sh
+
+icon=" "
+
+total="$(eselect news count all)"
+unread="$(eselect news count new)"
+
+case "$total" in
+0) echo "" ;;
+*) echo "$icon $unread/$total" ;;
+esac
