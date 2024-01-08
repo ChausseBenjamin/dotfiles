@@ -21,7 +21,7 @@
 *color11: #ebcb88
 !blue
 *color4: #63768a
-*color12: #63768a
+*color12: #779988
 !magenta
 *color5: #b7416e
 *color13: #738c9c
@@ -29,7 +29,7 @@
 *color6: #6998b3
 *color14: #66aabb
 !white
-*color7: #c0c7ca
+*color7: #c5c8c6
 *color15: #c0c7ca
 !other
 *background: #222d32
