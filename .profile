@@ -52,5 +52,5 @@ fi
 
 # Start Desktop Environment if on the main TTY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-startx
+  startx
 fi

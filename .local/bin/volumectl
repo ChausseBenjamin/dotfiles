@@ -10,14 +10,12 @@
 #		If no second argument is given, the audio will be SET
 #		to a set percentage fixed by the first argument.
 case "$1" in
-	mute) amixer set Master toggle ;;
-		 *)  pcnt="$1"
-				 sign="$2"
-				 amixer set Master $pcnt%$sign ;;
+mute) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+*)
+	pcnt="$1"
+	sign="$2"
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$pcnt%$sign"
+	;;
 esac
 
-mute=""
-vol=$(awk '/%/ {gsub(/[\[\]]/,""); print $4}' <(amixer sget Master))
-amixer sget Master | grep off && mute="(muted)"
-notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a Volume "$vol $mute"
-
+notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a $(wpctl get-volume @DEFAULT_AUDIO_SINK@)

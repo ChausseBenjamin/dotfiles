@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Pipewire setup:
+gentoo-pipewire-launcher &
+
+# Automatically start dropbox
+dropbox start &
