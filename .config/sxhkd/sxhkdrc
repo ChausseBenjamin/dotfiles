@@ -231,13 +231,13 @@ super + q
 	kill -15 `xdotool getwindowfocus getwindowpid`
 ## Increase/decrease Brightness
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
-    xbacklight -time 50 -{inc,dec} 5 && screenstatus
+    backlightctl -{i,d} 5
 ## Max-Out Brightness
 shift + XF86MonBrightnessUp
-    xbacklight -time 100 -set 100 && screenstatus
+    backlightctl -s 100
 ## Set Brightness to 5 percent
 shift + XF86MonBrightnessDown
-    xbacklight -time 100 -set 5 && screenstatus
+    backlightctl -s 0
 ## Display Setup Utility (mirror or extend displays)
 XF86Display
     arandr
