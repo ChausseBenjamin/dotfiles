@@ -3,5 +3,8 @@
 # Pipewire setup:
 gentoo-pipewire-launcher &
 
+# Autolock the screen after 5 minutes with xautolock (slock)
+xautolock -time 5 -locker slock &
+
 # Automatically start dropbox
 dropbox start &
