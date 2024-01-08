@@ -1,5 +1,5 @@
+---
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
-
 # Import additional configuration files
 #
 # Imports are loaded in order, skipping all missing files, with the importing
@@ -8,9 +8,8 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
+# import:
 #  - /path/to/alacritty.yml
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -22,7 +21,6 @@ env:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   TERM: alacritty
-
 window:
   # Window dimensions (changes require restart)
   #
@@ -30,7 +28,7 @@ window:
   # must be non-zero for this to take effect. The number of columns must be at
   # least `2`, while using a value of `0` for columns and lines will fall back
   # to the window manager's recommended size
-  #dimensions:
+  # dimensions:
   #  columns: 0
   #  lines: 0
 
@@ -38,7 +36,7 @@ window:
   #
   # Specified in number of pixels.
   # If the position is not set, the window manager will handle the placement.
-  #position:
+  # position:
   #  x: 0
   #  y: 0
 
@@ -51,7 +49,7 @@ window:
     y: 18
 
   # Spread additional padding evenly around the terminal content.
-  #dynamic_padding: false
+  # dynamic_padding: false
 
   # Window decorations
   #
@@ -99,27 +97,24 @@ window:
 # Override the variant of the System theme/GTK theme/Wayland client side
 # decorations. Commonly supported values are `Dark`, `Light`, and `None` for
 # auto pick-up. Set this to `None` to use the default theme variant.
-#decorations_theme_variant: None
-
+# decorations_theme_variant: None
 # Resize increments
 #
 # Prefer resizing window by discrete steps equal to cell dimensions.
-#resize_increments: false
-
+# resize_increments: false
 # Make `Option` key behave as `Alt` (macOS only):
 #   - OnlyLeft
 #   - OnlyRight
 #   - Both
 #   - None (default)
-#option_as_alt: None
-
+# option_as_alt: None
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
   history: 10000
 
   # Scrolling distance multiplier.
-  #multiplier: 3
+  # multiplier: 3
 
   # Font configuration
 font:
@@ -134,7 +129,7 @@ font:
     family: monospace
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    # style: Regular
 
     # Bold font face
   bold:
@@ -170,7 +165,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 11
+  size: 8
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -195,11 +190,10 @@ font:
 
   # If `true`, bold text is drawn using the bright color variants.
   draw_bold_text_with_bright_colors: false
-
 # Colors (Tomorrow Night)
-#colors:
+# colors:
 # Default colors
-#primary:
+# primary:
 #  background: '#1d1f21'
 #  foreground: '#c5c8c6'
 
@@ -209,16 +203,16 @@ font:
 # present. If the bright foreground color is not set, or
 # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
 # color will be used.
-#dim_foreground: '#828482'
-#bright_foreground: '#eaeaea'
+# dim_foreground: '# 828482'
+# bright_foreground: '# eaeaea'
 
 # Cursor colors
 #
 # Colors which should be used to draw the terminal cursor.
 #
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#cursor:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# cursor:
 #  text: CellBackground
 #  cursor: CellForeground
 
@@ -227,39 +221,39 @@ font:
 # Colors for the cursor when the vi mode is active.
 #
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#vi_mode_cursor:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# vi_mode_cursor:
 #  text: CellBackground
 # cursor: CellForeground
 
 # Search colors
 #
 # Colors used for the search bar and match highlighting.
-#search:
+# search:
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#matches:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# matches:
 #  foreground: '#000000'
 #  background: '#ffffff'
-#focused_match:
+# focused_match:
 #  foreground: '#ffffff'
 #  background: '#000000'
 
 # Keyboard hints
-#hints:
+# hints:
 # First character in the hint label
 #
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#start:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# start:
 #  foreground: '#1d1f21'
 #  background: '#e9ff5e'
 
 # All characters after the first one in the hint label
 #
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#end:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# end:
 #  foreground: '#e9ff5e'
 #  background: '#1d1f21'
 
@@ -269,7 +263,7 @@ font:
 # search and vi mode.
 #
 # By default, these will use the opposing primary color.
-#line_indicator:
+# line_indicator:
 #  foreground: None
 #  background: None
 
@@ -278,7 +272,7 @@ font:
 # Color used for the footer bar on the bottom, used by search regex input,
 # hyperlink URI preview, etc.
 #
-#footer_bar:
+# footer_bar:
 #  background: '#c5c8c6'
 #  foreground: '#1d1f21'
 
@@ -287,13 +281,13 @@ font:
 # Colors which should be used to draw the selection area.
 #
 # Allowed values are CellForeground/CellBackground, which reference the
-# affected cell, or hexadecimal colors like #ff00ff.
-#selection:
+#  affected cell, or hexadecimal colors like  # ff00ff.
+# selection:
 #  text: CellBackground
 #  background: CellForeground
 
 # Normal colors
-#normal:
+# normal:
 #  black:   '#1d1f21'
 #  red:     '#cc6666'
 #  green:   '#b5bd68'
@@ -304,7 +298,7 @@ font:
 #  white:   '#c5c8c6'
 
 # Bright colors
-#bright:
+# bright:
 #  black:   '#666666'
 #  red:     '#d54e53'
 #  green:   '#b9ca4a'
@@ -318,7 +312,7 @@ font:
 #
 # If the dim colors are not set, they will be calculated automatically based
 # on the `normal` colors.
-#dim:
+# dim:
 #  black:   '#131415'
 #  red:     '#864343'
 #  green:   '#777c44'
@@ -327,7 +321,6 @@ font:
 #  magenta: '#75617b'
 #  cyan:    '#5b7d78'
 #  white:   '#828482'
-
 # Indexed Colors
 #
 # The indexed colors include all colors from 16 to 256.
@@ -336,15 +329,13 @@ font:
 # Example:
 #   `- { index: 16, color: '#ff00ff' }`
 #
-#indexed_colors: []
-
+# indexed_colors: []
 # Transparent cell backgrounds
 #
 # Whether or not `window.opacity` applies to all cell backgrounds or only to
 # the default background. When set to `true` all cells will be transparent
 # regardless of their background color.
-#transparent_background_colors: false
-
+# transparent_background_colors: false
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
@@ -371,7 +362,7 @@ bell:
   duration: 200
 
   # Visual bell animation color.
-  color: "#7d4b23"
+  color: '#7d4b23'
 
   # Bell Command
   #
@@ -387,17 +378,16 @@ bell:
   # command:
   #   program: notify-send
   #   args: ["Beep!"]
-  #selection:
+  # selection:
 # This string contains all characters that are used as separators for
 # "semantic words" in Alacritty.
-#semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+# semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
 # When set to `true`, selected text will be copied to the primary clipboard.
 save_to_clipboard: true
-
 cursor:
   # Cursor style
-  #style:
+  # style:
   # Cursor shape
   #
   # Values for `shape`:
@@ -413,35 +403,33 @@ cursor:
   #   - Off: Disable blinking by default
   #   - On: Enable blinking by default
   #   - Always: Force the cursor to always blink
-  blinking: Off
-
+  blinking: false
 # Vi mode cursor style
 #
 # If the vi mode cursor style is `None` or not specified, it will fall back to
 # the style of the active value of the normal cursor.
 #
 # See `cursor.style` for available options.
-#vi_mode_style: None
+# vi_mode_style: None
 
 # Cursor blinking interval in milliseconds.
-#blink_interval: 750
+# blink_interval: 750
 
 # Time after which cursor stops blinking, in seconds.
 #
 # Specifying '0' will disable timeout for blinking.
-#blink_timeout: 5
+# blink_timeout: 5
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
-#unfocused_hollow: true
+# unfocused_hollow: true
 
 # Thickness of the cursor relative to the cell width as floating point number
 # from `0.0` to `1.0`.
-#thickness: 0.15
+# thickness: 0.15
 
 # Live config reload (changes require restart)
-#live_config_reload: true
-
+# live_config_reload: true
 # Shell
 #
 # You can set `shell.program` to the path of your favorite shell, e.g.
@@ -455,35 +443,31 @@ cursor:
 # program:
 #  args:
 #    - --login
-
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
 # working_directory: $HOME
-
 # Offer IPC using `alacritty msg` (unix only)
-#ipc_socket: true
-
+# ipc_socket: true
 mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
   # alacritty should wait for accepting multiple clicks as one double
   # or triple click.
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+  double_click: {threshold: 300}
+  triple_click: {threshold: 300}
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
-
 # Hints
 #
 # Terminal hints can be used to find text or hyperlink in the visible part of
 # the terminal and pipe it to other applications.
 hints:
   # Keys used for the hint labels.
-  alphabet: "jfkdls;ahgurieowpq"
+  alphabet: jfkdls;ahgurieowpq
 
   # List with all available hints
   #
@@ -515,9 +499,8 @@ hints:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   enabled:
-    - regex:
-        "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
-        [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
+        -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
       hyperlinks: true
       command: xdg-open
       post_processing: true
@@ -527,7 +510,6 @@ hints:
 #   binding:
 #     key: U
 #     mods: Control|Shift
-
 # Mouse bindings
 #
 # Mouse bindings are specified as a list of objects, much like the key
@@ -556,11 +538,10 @@ hints:
 # And optionally:
 #
 # - `mods` (see key bindings)
-#mouse_bindings:
+# mouse_bindings:
 #  - { mouse: Right,                 action: ExpandSelection }
 #  - { mouse: Right,  mods: Control, action: ExpandSelection }
 #  - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
-
 # Key bindings
 #
 # Key bindings are specified as a list of objects. For example, this is the
@@ -781,12 +762,12 @@ key_bindings:
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
   # (Windows, Linux, and BSD only)
-  - { key: V, mods: Alt, action: Paste }
-  - { key: C, mods: Alt, action: Copy }
-  - { key: J, mods: Alt, action: ScrollLineDown }
-  - { key: K, mods: Alt, action: ScrollLineUp }
-  - { key: K, mods: Alt|Shift, action: IncreaseFontSize }
-  - { key: J, mods: Alt|Shift, action: DecreaseFontSize }
+  - {key: V, mods: Alt, action: Paste}
+  - {key: C, mods: Alt, action: Copy}
+  - {key: J, mods: Alt, action: ScrollLineDown}
+  - {key: K, mods: Alt, action: ScrollLineUp}
+  - {key: K, mods: Alt|Shift, action: IncreaseFontSize}
+  - {key: J, mods: Alt|Shift, action: DecreaseFontSize}
   # - { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
   # - { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   # - { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
@@ -797,7 +778,6 @@ key_bindings:
   # - { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   # - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   # - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
-
 # Vi Mode
 #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
 #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
@@ -886,61 +866,58 @@ key_bindings:
 #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
 #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
-#debug:
+# debug:
 # Display the time it takes to redraw each frame.
-#render_timer: false
+# render_timer: false
 
 # Keep the log file after quitting Alacritty.
-#persistent_logging: false
+# persistent_logging: false
 
 # Log level
 #
 # Values for `log_level`:
-#   - Off
+#   - false
 #   - Error
 #   - Warn
 #   - Info
 #   - Debug
 #   - Trace
-#log_level: Warn
+# log_level: Warn
 
 # Renderer override.
 #   - glsl3
 #   - gles2
 #   - gles2_pure
-#renderer: None
-
+# renderer: None
 # Print all received window events.
-#print_events: false
-
+# print_events: false
 # Highlight window damage information.
-#highlight_damage: false
-
+# highlight_damage: false
 # Friffle port from .Xresources using terminal.sexy
 colors:
   # Default colors
   primary:
-    background: "0x111a1f" #111a1f
-    foreground: "0xacb3b5" #acb3b5
+    background: '0x111a1f'  # 111a1f
+    foreground: '0xacb3b5'  # acb3b5
 
   # Normal colors
   normal:
-    black: "0x111a1f" #111a1f
-    red: "0x8d7856" #8d7856
-    green: "0x798362" #798362
-    yellow: "0x9b9257" #9b9257
-    blue: "0x63768a" #63768a
-    magenta: "0xb7416e" #b7416e
-    cyan: "0x6998b3" #6998b3
-    white: "0xc5c8c6" #c5c8c6
+    black: '0x111a1f'  # 111a1f
+    red: '0x8d7856'  # 8d7856
+    green: '0x798362'  # 798362
+    yellow: '0x9b9257'  # 9b9257
+    blue: '0x63768a'  # 63768a
+    magenta: '0xb7416e'  # b7416e
+    cyan: '0x6998b3'  # 6998b3
+    white: '0xc5c8c6'  # c5c8c6
 
   # Bright colors
   bright:
-    black: "0x868b8d" #868b8d
-    red: "0x810002" #810002
-    green: "0x037500" #037500
-    yellow: "0xebcb88" #ebcb88
-    blue: "0x779988" #779988
-    magenta: "0x738c9c" #738c9c
-    cyan: "0x66aabb" #66aabb
-    white: "0xc0c7ca" #c0c7ca
+    black: '0x868b8d'  # 868b8d
+    red: '0x810002'  # 810002
+    green: '0x037500'  # 037500
+    yellow: '0xebcb88'  # ebcb88
+    blue: '0x779988'  # 779988
+    magenta: '0x738c9c'  # 738c9c
+    cyan: '0x66aabb'  # 66aabb
+    white: '0xc0c7ca'  # c0c7ca
