@@ -1,0 +1,11 @@
+#!/bin/sh
+# Gives a dmenu prompt to search Google.
+# Without input, will open Google.com.
+# URLs will be directly handed to the browser.
+# Anything else, it search it.
+
+query=$(printf "                                        " | dmenu -i -p " Search DuckDuckGo")
+
+echo "$query" | head -c 1
+
+$BROWSER "https://duckduckgo.com/?q=$query&t=ffab&atb=v1-1"

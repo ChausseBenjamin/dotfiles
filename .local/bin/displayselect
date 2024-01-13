@@ -1,0 +1,7 @@
+#!/bin/sh
+
+layoutdir="$XDG_CONFIG_HOME/screenlayout"
+
+layout="$(ls "$layoutdir" | dmenu -p "󰍺 Select layout: ")"
+
+[ -z "$layout" ] || sh "$layoutdir/$layout"

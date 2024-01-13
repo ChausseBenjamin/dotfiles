@@ -25,6 +25,9 @@
 ## Quit dwm
 super + shift + q
 	dwmc quit
+## Quit Current/focused App
+super + q
+	kill -15 `xdotool getwindowfocus getwindowpid`
 ## Toggle the dwm bar
 super + b
 	dwmc togglebar
@@ -108,19 +111,13 @@ super + q
 ## Change Keyboard Layout
 alt + Return
 	layouttoggle
-## Find your cursor
-super + BackSpace
-	 find-cursor -l 4 -c "#66aabb" -s 150
 ## Toggle Compositor
 super + c
 		killall picom || setsid picom
-## Toggle Screenkey
-super + Insert
-	killall screenkey || screenkey --bg-color "#222d32" -s small -f "Apercu Mono" -t 1 --font-color "#BABABA" --mods-mode tux
 ## Open this manual
 super + alt + shift + h
     manualgen
-## Start colorpicker
+## Start colorpicker (Jack12816/colorpicker)
 super + shift + c
 		colorhandler
 
@@ -131,23 +128,20 @@ super + Return
 ## Default Browser
 super + w
     $BROWSER
+## Quickly Search DuckDuckGo
+super + shift + w
+    websearch
 ## TUI Email Client (neomutt)
 super + e
     kill -46 $(pidof dwmblocks) && killall neomutt || $TERMINAL -e neomutt && kill -46 $(pidof dwmblocks)
-## TUI calendar (calendar.vim)
-super + shift + e
-	  $TERMINAL -t calendar -e nvim -c ":Calendar -view=week -first_day=monday"
-## TUI RSS Reader (newsboat)
-super + n
-    killall newsboat || $TERMINAL -e newsboat ; kill -37 $(pidof dwmblocks)
 
 #-#   Floating Apps/Utilities   #-#
 ## Network Manager
 XF86WLAN
     killall nmtui || dropdowntoggle network nmtui
-## TUI Audio Mixer (alsamixer)
+## TUI Audio Mixer (pulsemixer)
 super + p
-    flameshot gui
+    killall pulsemixer || dropdowntoggle bluetooth pulsemixer
 ## TODOs (orgmode-nvim)
 super + space
     dropdowntoggle orgmode nvim +"Neorg index"
@@ -157,32 +151,14 @@ super + a
 ## Terminal Shell
 super + shift + a
     dropdowntoggle shell tmux-shell
-## TUI Youtube (youtube-viewer)
-super + v
-	cat ~/.cache/yt-sub | dmenu -p "Query: " | ytfzf -D -
-## TUI Hacker News
-super + shift + v
-		killall hacker-news || dropdowntoggle hacker-news tmux-hn
-## Webcam
-super + shift + w
-   camtoggle
-## Force Start VLC Podcast
-super + shift + p
-    dropdowntoggle Podcast pod-dl
 
 #-#   Prompts (dmenu)   #-#
 ## Application Launcher
-alt + d
+super + d
     j4-dmenu-desktop
-## Power Utility
-alt + q
-    sysact
-## Quickly Search Google
-alt + shift + d
-    websearch
-## Open a bookmark in surf
-alt + shift + o
-		surfmenu
+## Display Layout Selector
+super + shift + d
+    displayselect
 ## Emoji & Font-Awesome Selector
 alt + grave
     emoji-copy
@@ -192,9 +168,6 @@ alt + {_,shift} + m
 ## Recording Utility
 alt + r
     recordmenu kill || recordmenu
-## Preview Fonts
-alt + f
-		fontpreview
 ## Start SSH session
 alt + s
 		pickssh
@@ -203,17 +176,23 @@ alt + Escape
 	theme="$(ls $HOME/.config/Xresources/ | dmenu)" && cat "$HOME/.config/Xresources/$theme" | xrdb -load
 
 #-#   PrintScreen Utilities   #-#
-## Entire Screen
+## All displays
 Print
-    flamehsot gui
+    scrot && notify-send -a " Screenshot" "Stitched screenshot completed"
 ## Current window
 alt + Print
-    scrot -q 100 -u -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Window screenshot completed"
+    scrot -q 100 -u -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a " Screenshot" "Window screenshot completed"
 ## Cursor Selection
 super +  Print
-    scrot -q 100 -s -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a Screenshot "Selection screenshot completed"
+    scrot -q 100 -s -z && notify-send -i "$HOME/.fonts/svg/image.svg" -a " Screenshot" "Selection screenshot completed"
 
 #-#   Special Keys   #-#
+## Control Network Manager
+XF86AudioMedia
+    killall nmtui || dropdowntoggle network nmtui
+## Control Bluetooth
+shift + XF86AudioMedia
+    killall bluetuith || dropdowntoggle bluetooth bluetuith
 ## Increase/decrease Volume
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
     volumectl 1 {+,-}
@@ -226,9 +205,6 @@ shift + XF86AudioLowerVolume
 ## Mute Audio
 XF86AudioMute
 	 volumectl mute
-## Quit Current App
-super + q
-	kill -15 `xdotool getwindowfocus getwindowpid`
 ## Increase/decrease Brightness
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
     backlightctl -{i,d} 5
@@ -238,21 +214,6 @@ shift + XF86MonBrightnessUp
 ## Set Brightness to 5 percent
 shift + XF86MonBrightnessDown
     backlightctl -s 0
-## Display Setup Utility (mirror or extend displays)
-XF86Display
-    arandr
-## Disable Trackpad
-XF86Favorites
-    trackpadtoggle 0
-## Enable Trackpad
-shift + XF86Favorites
-    trackpadtoggle 1
-## Unmount Devices
-shift + XF86Tools
-	umountmenu
-## Mount Devices
-XF86Tools
-	mountmenu
 
 #-# Music Controls (using `playerctl`) #-#
 ## Next/Previous Song (using playerctl)
@@ -264,6 +225,3 @@ super + shift + {bracketright, bracketleft}
 ## Toggle music playback
 super + backslash
 		playerctl play-pause
-# ## Network Manager
-# super + shift + n
-#     killall nmtui || dropdowntoggle network nmtui
