@@ -130,7 +130,7 @@ super + w
     $BROWSER
 ## Quickly Search DuckDuckGo
 super + shift + w
-    websearch
+    ducksearch
 ## TUI Email Client (neomutt)
 super + e
     kill -46 $(pidof dwmblocks) && killall neomutt || $TERMINAL -e neomutt && kill -46 $(pidof dwmblocks)
