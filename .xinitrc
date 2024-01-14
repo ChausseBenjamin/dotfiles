@@ -1,5 +1,4 @@
 $XDG_CONFIG_HOME/startup/$(hostname) &
-makewall &
 sxhkd &
 dunst &
 unclutter &
