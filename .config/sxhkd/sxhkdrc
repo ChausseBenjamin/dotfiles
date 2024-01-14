@@ -32,13 +32,13 @@ super + q
 super + b
 	dwmc togglebar
 ## Change layout to {tiling, monocle}
-super + {_,shift} t
+super + {_,shift} + t
 	dwmc setlayoutex {0,2}
 ## Change layout to {grid, floating}
-super + {_,shift} g
+super + {_,shift} + g
 	dwmc setlayoutex {5,1}
 ## Change layout to {centeredmaster, floatingcenteredmaster}
-super + {_,shift} m
+super + {_,shift} + m
 	dwmc setlayoutex {3,4}
 ## Make window fullscreen
 super + f
