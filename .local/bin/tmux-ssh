@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Usage: tmux-ssh <session-name> user@ip
+
+session="ssh-$1"
+
+tmux has-session -t $session 2>/dev/null
+
+if [ $? != 0 ]; then
+	# Set up your session
+	tmux new-session -d -s "$session" "ssh $2"
+	# R -q --no-save
+	# ([ -e /usr/bin/R ] && R -q --no-save) || python -q
+fi
+
+# Attach to created session
+tmux attach-session -t "$session"

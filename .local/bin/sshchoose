@@ -1,6 +1,10 @@
 #!/bin/sh
 
-choice="$(pass ls ssh/ | sed '1d;s/^.*\s//g' | fzf)"
+# user@host are stored in pass under the ssh/ directory
+available="$(pass ls ssh/ | sed '/^ssh$/d;s/.*─\s//' | sed 's/\x1b\[[0-9;]*m//g')"
 
-ssh "$(pass ssh/$choice)"
+choice="$(echo "$available" | dmenu -p " Choose session")"
 
+addr="$(pass "ssh/$choice")"
+
+dropdowntoggle "ssh-$choice" "tmux-ssh" "choice" "$addr"

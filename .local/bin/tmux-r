@@ -1,5 +1,5 @@
 #!/bin/sh
-# This script ensures that i3 will spawn a youtube tui.
+
 session="R"
 
 # Check if the session exists, discarding output
@@ -7,12 +7,11 @@ session="R"
 tmux has-session -t $session 2>/dev/null
 
 if [ $? != 0 ]; then
-  # Set up your session
-  tmux new-session -d -s "$session" R -q --no-save
-  # R -q --no-save
-  # ([ -e /usr/bin/R ] && R -q --no-save) || python -q
+	# Set up your session
+	tmux new-session -d -s "$session" R -q --no-save
+	# R -q --no-save
+	# ([ -e /usr/bin/R ] && R -q --no-save) || python -q
 fi
 
 # Attach to created session
 tmux attach-session -t $session
-

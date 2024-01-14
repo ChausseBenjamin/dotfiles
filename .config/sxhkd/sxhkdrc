@@ -151,6 +151,9 @@ super + a
 ## Terminal Shell
 super + shift + a
     dropdowntoggle shell tmux-shell
+## Terminal remote session (ssh)
+super + r
+    sshchoose
 
 #-#   Prompts (dmenu)   #-#
 ## Application Launcher
