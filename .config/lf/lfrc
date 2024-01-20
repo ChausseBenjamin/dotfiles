@@ -162,5 +162,5 @@ map gsc  cd ~/.local/bin
 map gcp  cd ~/.local/src
 map gsx  cd ~/.config/sxhkd
 map gimg cd ~/Dropbox/A/Personnal/Photos/unsorted
-map gsf  cd ~/Dropbox/A/scholar/sherbrooke/s3
+map gsf  cd ~/Dropbox/A/scholar/sherbrooke/24-01
 map gcmp cd ~/.local/src
