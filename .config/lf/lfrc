@@ -142,7 +142,8 @@ map V push :!nvim<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 map Y $printf "%s" "$fx" | xclip -selection clipboard
-map E $dropbox-cli exclude add "%s" | notify-send "Dropbox" "Excluded %s from syncing."
+map E $dropbox-cli exclude add "$f" && notify-send -a " Dropbox" "Excluded $f from computer"
+map S $dropbox-cli sharelink "$f" | xsel -b && notify-send -a " Dropbox" "Link copied to clipboard."
 
 # Source Bookmarks
 source "~/.config/lf/shortcuts"

@@ -31,6 +31,7 @@ School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-01
 Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
 Scripts,     sc,  ~/.local/bin
 Hotkeys,     sx,  ~/.config/sxhkd
+OrgMode,     om,  ~/Dropbox/org
 Dropbox,     bx,  ~/Dropbox
 Downloads,   dl,  ~/Downloads
 Wallpapers,  wp,  ~/Pictures/wallpapers

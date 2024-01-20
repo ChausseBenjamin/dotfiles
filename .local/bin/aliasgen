@@ -1,13 +1,7 @@
 #!/bin/sh
 
 # Removing unecessary comments and documentation
-raw=$(cat $HOME/.config/aliasrc | tail -n +17 "$HOME/.config/aliasrc" | sed "s/^|\s*//g;
-		s/\(.*\)|\(.*\)|\(.*\)|/\1|\2|\3/g;
-		s/\s*$//g;
-		/^$/d")
+raw="$(sed 's/^\s*//;s/#.*$//;s/,\s*/,/g;/^$/d' <"$XDG_CONFIG_HOME/aliasrc")"
 
 # #---zsh---# #
-echo "$raw" | sed "s/^/alias\ /;
-                s/\s*|\s*/=\"/;
-                s/^.*-*+-*=\"$//;
-                s/\s*|$/\"/" > $HOME/.cache/zsh-aliases
+echo "$raw" | sed 's/\(.*\),\(.*\)/alias \1="\2"/' >$HOME/.cache/zsh-aliases
