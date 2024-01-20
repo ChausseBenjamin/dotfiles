@@ -22,9 +22,9 @@
 | Dropbox        | db  | $HOME/Dropbox                                    |
 | Music          | ms  | $HOME/Music                                      |
 | Neovim         | vi  | $HOME/.config/nvim                               |
-| VDI            | vdi | $HOME/Workspace/vdi                              |
 | Scripts        | sc  | $HOME/.local/bin                                 |
 | Hotkeys        | sx  | $HOME/.config/sxhkd                              |
 | Images         | img | $HOME/Dropbox/A/Personnal/Photos/unsorted        |
+| School         | sf  | $HOME/Dropbox/A/scholar/sherbrooke/24-01         |
 | Compilation    | cp  | $HOME/.local/src                                 |
 |----------------+-----+--------------------------------------------------|
