@@ -3,7 +3,7 @@
 # user@host are stored in pass under the ssh/ directory
 available="$(pass ls ssh/ | sed '/^ssh$/d;s/.*─\s//' | sed 's/\x1b\[[0-9;]*m//g')"
 
-choice="$(echo "$available" | dmenu -p " Choose session" | sed 's/\s//g')"
+choice="$(echo "$available" | dmenu -p " Choose session: " | sed 's/\s//g')"
 
 addr="$(pass "ssh/$choice")"
 
