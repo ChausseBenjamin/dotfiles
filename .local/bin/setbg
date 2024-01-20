@@ -7,8 +7,6 @@
 
 displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
 
-# selected="$(echo "$displays" | dmenu -w "$(xdotool getactivewindow)" -p "󰍹 Select monitor:")"
-
 # Same as above but use dmenu only if there are multiple displays
 if [ "$(echo "$displays" | wc -l)" -gt 1 ]; then
 	selected="$(echo "$displays" | dmenu -w "$(xdotool getactivewindow)" -p "󰍹 Select monitor:")"
