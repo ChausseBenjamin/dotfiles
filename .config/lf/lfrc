@@ -121,7 +121,7 @@ map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//'
 map D delete
 map <c-n> push :mkdir<space>
 map <c-r> reload
-map <c-s> set hidden!
+map . set hidden!
 map <enter> shell
 map x $$f
 map X !$f
@@ -141,26 +141,8 @@ map <c-y> up
 map V push :!nvim<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
-
 map Y $printf "%s" "$fx" | xclip -selection clipboard
+map E $dropbox-cli exclude add "%s" | notify-send "Dropbox" "Excluded %s from syncing."
 
 # Source Bookmarks
-# source "~/.config/lf/shortcutrc"
-
-# TODO: Automate this
-map gcf  cd ~/.config
-map gbx  cd ~/Dropbox
-map gom  cd ~/Dropbox/org
-map gdl  cd ~/Downloads
-map gwp  cd ~/Pictures/wallpapers
-map gdb  cd ~/Dropbox
-map gvi  cd ~/.config/nvim
-map gvdi cd ~/Workspace/vdi
-map gws  cd ~/Workspace
-map gwb  cd ~/Workspace/website
-map gsc  cd ~/.local/bin
-map gcp  cd ~/.local/src
-map gsx  cd ~/.config/sxhkd
-map gimg cd ~/Dropbox/A/Personnal/Photos/unsorted
-map gsf  cd ~/Dropbox/A/scholar/sherbrooke/24-01
-map gcmp cd ~/.local/src
+source "~/.config/lf/shortcuts"

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Make sure given file is an image
+[ -z "$1" ] && exit
+[ ! -f "$1" ] && exit
+[ -z "$(file "$1" | grep -o 'image data')" ] && exit
+
+displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
+
+# selected="$(echo "$displays" | dmenu -w "$(xdotool getactivewindow)" -p "󰍹 Select monitor:")"
+
+# Same as above but use dmenu only if there are multiple displays
+if [ "$(echo "$displays" | wc -l)" -gt 1 ]; then
+	selected="$(echo "$displays" | dmenu -w "$(xdotool getactivewindow)" -p "󰍹 Select monitor:")"
+else
+	selected="$displays"
+fi
+
+[ -z "$selected" ] && exit
+
+src="$1"
+extension="${1##*.}"
+dest="$XDG_CONFIG_HOME/wallpapers/${selected}.$extension"
+
+ln -sf "$src" "$dest" && notify-send -a "Wallpaper" -i "$src" "Changed monitor: $selected"
+
+# Re-render all wallpapers
+makewall

@@ -1,30 +1,37 @@
 #   _____ _                _             _
-#  / ____| |              | |           | |
+#  / ____| |              | |           | \
 # | (___ | |__   ___  _ __| |_ ___ _   _| |_ _ __ ___
-#  \___ \| '_ \ / _ \| '__| __/ __| | | | __| '__/ __|
+#  \___ \| '_ \ / _ \| '__| __/ __| | | | __| '__/ __\
 #  ____) | | | | (_) | |  | || (__| |_| | |_| | | (__
-# |_____/|_| |_|\___/|_|   \__\___|\__,_|\__|_|  \___|
+# |_____/|_| |_|\___/|_|   \__\___|\__,_|\__|_|  \___\
 #
-
-
-
 # #---Universal Shortcut Configuration File---# #
-# First column should have the directory's Label
-# Second column should contain the shortcut itself
-#   (without the modifier)
-# Third column should contain the directory itself
-#  (It can contain environmental variables)
+# This file aims to provide a simple way to configure
+# universal shortcuts for your system. Treat it in the
+# following way:
+#  - Lines starting with '#' and empty are ignored
+#  - Everything else is treated as a 3 column comma separated csv
+#  - Commas can be escaped with a backslash
+#  - columns 2 and 3 should not contain spaces
+# Columns are as follows (left to right):
+#  1. Name of the shortcut (for display purposes in certain programs)
+#  2. The shortcut itself
+#  3. The path to the directory
+# Here are examples of how I use this file with my shell:
+# - uppercase shortcuts prepended by 'G' are ENV variables to these paths
+# - lowercase shortcuts prepended by 'g' are aliases to these paths
+# Here are examples of how I use this file with my file manager (lf):
+# - lowercase shortcuts prepended by 'g' go to these paths
+# - lowercase shortcuts prepended by 'y' copies selected files to these paths
+# - lowercase shortcuts prepended by 'm' moves selected files to these paths
 
-|----------------+-----+--------------------------------------------------|
-| Config         | cf  | $HOME/.config                                    |
-| Downloads      | dl  | $HOME/Downloads                                  |
-| Wallpaper      | wp  | $HOME/Pictures/wallpapers                        |
-| Dropbox        | db  | $HOME/Dropbox                                    |
-| Music          | ms  | $HOME/Music                                      |
-| Neovim         | vi  | $HOME/.config/nvim                               |
-| Scripts        | sc  | $HOME/.local/bin                                 |
-| Hotkeys        | sx  | $HOME/.config/sxhkd                              |
-| Images         | img | $HOME/Dropbox/A/Personnal/Photos/unsorted        |
-| School         | sf  | $HOME/Dropbox/A/scholar/sherbrooke/24-01         |
-| Compilation    | cp  | $HOME/.local/src                                 |
-|----------------+-----+--------------------------------------------------|
+Config,      cf,  ~/.config
+Neovim,      vi,  ~/.config/nvim
+School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-01
+Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
+Scripts,     sc,  ~/.local/bin
+Hotkeys,     sx,  ~/.config/sxhkd
+Dropbox,     bx,  ~/Dropbox
+Downloads,   dl,  ~/Downloads
+Wallpapers,  wp,  ~/Pictures/wallpapers
+Compilation, cp,  ~/.local/src

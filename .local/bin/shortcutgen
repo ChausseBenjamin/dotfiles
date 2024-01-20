@@ -1,63 +1,15 @@
 #!/bin/sh
 
-# Removing unecessary comments and documentation
-raw=$(cat $HOME/.config/shortcutrc | tail -n +19 "$HOME/.config/shortcutrc" | sed "s/^|\s*//g;
-                                                                              s/\(.*\)|\(.*\)|\(.*\)|/\1|\2|\3/g;
-                                                                              s/\s*$//g;
-                                                                              /^$/d" | head -n -1)
-# #---NERDTREE---# #
-echo "$raw" | sed "s/\(.*\)\s*|.*|\s\(.*\)/\1\2/g;
-              s/ \{1,\}/ /g;
-              s/.HOME/~/g;
-              s/-*+-*+-*|//g" > $HOME/.NERDTreeBookmarks
+# raw (basic processing before converting to specific formats)
+#   - remove comments
+#   - remove empty lines
+#   - remove spacing (keep commas between columns)
+#   - remove trailing whitespace
 
-# #---ZSH---# #
-# be sure to source $HOME/.cache/zsh-shortcuts in your .zshrc
-echo "$raw" | sed 's/^.*|\s\([A-Za-z0-9]*\)\s*|\s\(.*\)$/alias\ g\1="cd\ \2"/g; /^-*+-*+-*|$/d' > $HOME/.cache/zsh-shortcuts
+raw="$(sed 's/#.*//g;s/,\s*/,/g;/^$/d;s/\s*$//g' <"$XDG_CONFIG_HOME/shortcutrc")"
 
-# #---RANGER---# #
-# Commands implemented:
-# g -> go
-# m -> move to...
-# t -> new tab
-# Y -> copy to...
-# awk '{print "map g"$1" cd "$2"\nmap t"$1" tab_new "$2"\nmap m"$1" shell mv -v %s "$2"\nmap Y"$1" shell cp -rv %s "$2}' >> "$ranger_shortcuts"
-manual=$(sed -n '/Automated Shortcut Generation/q;p' $HOME/.config/ranger/shortcuts.conf)
-printf '\n\n# #---Automated Shortcut Generation---#' >> $HOME/.config/ranger/shortcuts.conf
-echo "$raw" | sed 's/^.*|\s\(.*\)\s|\s\(.*\)$/map\ g\1\ cd\ \2\nmap\ t\1\ tab_new\ \2\nmap\ m\1\ shell\ mv\ -v\ %s\ \2\nmap\ Y\1\ shell\ cp\ -rv\ %s\ \2\n/g;
-                s/.HOME/~/g;
-                s/^-*+-*+-*|$//g' >> $HOME/.config/ranger/shortcuts.conf
+# lf
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/map g\2 cd \3/' >"$XDG_CONFIG_HOME/lf/shortcuts"
 
-# #---ENVIRONMENTAL VARIABLES---# #
-echo "$raw" | sed 's/[A-z,a-z,0-9]*\s*|\s*/g/;
-                   s/\s*|\s*/=/; s/$/"/;
-									 s/-*+-*+.*$//
-									 s/^[A-z]*=/\U&/g
-									 s/"$//g' > ~/.cache/shell-vars
-
-# #---Vifm---# #
-vifm=$(echo "$raw" | sed "
-            s/^[A-Z,a-z,0-9]*\s*|//;
-						s/\$HOME/~/;
-						s/$/<cr>/"
-)
-vifmcd=$( echo "$vifm" | sed "
-				s/^\s*/nnoremap\ g/;
-				s/|/:cd/;"
-)
-vifmv=$( echo "$vifm" | sed "
-				s/^\s*/nnoremap\ m/;
-				s/|/:move/")
-vifmy=$( echo "$vifm" | sed "
-				s/^\s*/nnoremap\ y/;
-				s/|/:copy/")
-echo "$vifmcd\n\n$vifmv\n\n$vifmy" > ~/.cache/vifm-shortcuts
-
-
-
-# #---Testing---# #
-# echo "$raw" | sed "s/[A-z,a-z,0-9]*\s*|//"
-
-# clear
-# echo "$vifmv"
-# cat ~/.cache/vifm-shortcuts
+# shell (aliases and environment variables)
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"\nexport G\U\2="\3"/' >"$HOME/.cache/zsh-shortcuts"

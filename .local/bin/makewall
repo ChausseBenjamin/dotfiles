@@ -11,18 +11,19 @@ displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
 # Otherwise, set the wallpaper to the default wallpaper
 # (default.png or default.jpg)
 setDisplay() {
-  case $(ls $wallDir) in
-    *"$1"*)
-      wall=$(ls $wallDir | grep "$1" | head -n 1)
-      xwallpaper --output $1 --zoom $wallDir/$wall ;;
-    *)
-      wall=$(ls $wallDir | grep "default" | head -n 1)
-      xwallpaper --output $1 --zoom $wallDir/$wall ;;
-  esac
+	case $(ls $wallDir) in
+	*"$1"*)
+		wall=$(ls $wallDir | grep "$1" | head -n 1)
+		xwallpaper --output $1 --zoom $wallDir/$wall
+		;;
+	*)
+		wall=$(ls $wallDir | grep "default" | head -n 1)
+		xwallpaper --output $1 --zoom $wallDir/$wall
+		;;
+	esac
 }
 
 # Set the wallpaper for each display
 for display in $displays; do
-  setDisplay $display
+	setDisplay $display
 done
-
