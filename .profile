@@ -1,6 +1,6 @@
 # Path
 export SCRIPTS=$HOME/.local/bin
-export PATH=$PATH$( find $SCRIPTS/ -type d -printf ":%p" )
+export PATH=$PATH$(find $SCRIPTS/ -type d -printf ":%p")
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
@@ -25,11 +25,11 @@ export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXSRC=$HOME/.local/src/sherbrooke-tex
 
 # Applications
-export EDITOR=$(which nvim)
-export READER=$(which zathura)
-export TERMINAL=$(which alacritty)
-export TERM=$(which alacritty)
-export BROWSER=$(which firefox)
+export EDITOR=/usr/bin/nvim
+export READER=/usr/bin/zathura
+export TERMINAL=/usr/bin/alacritty
+export TERM=/usr/bin/alacritty
+export BROWSER=/usr/bin/firefox
 
 # less/man colors
 export LESS=-R
@@ -47,10 +47,10 @@ aliasgen
 
 # Ensure XDG_RUNTIME_DIR is set
 if test -z "$XDG_RUNTIME_DIR"; then
-    export XDG_RUNTIME_DIR=$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)
+	export XDG_RUNTIME_DIR=$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)
 fi
 
 # Start Desktop Environment if on the main TTY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  startx
+	startx
 fi

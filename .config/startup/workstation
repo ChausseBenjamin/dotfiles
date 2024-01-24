@@ -6,5 +6,8 @@ gentoo-pipewire-launcher &
 # Autolock the screen after 5 minutes with xautolock (slock)
 xautolock -time 5 -locker slock &
 
+# Configure monitor layout (and wallpaper)
+"$XDG_CONFIG_HOME/screenlayout/workstation-singlemon" &
+
 # Automatically start dropbox
 dropbox start &
