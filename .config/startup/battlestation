@@ -7,4 +7,4 @@ gentoo-pipewire-launcher &
 nvidia-settings --load-config-only &
 
 # Load stacked dual monitor configuration
-$XDG_CONFIG_HOME/screenlayout/battlestation-dualmon.sh &
+$XDG_CONFIG_HOME/screenlayout/battlestation-dualmon &

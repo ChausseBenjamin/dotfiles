@@ -3,8 +3,8 @@
 region="$(piactl get regions | dmenu -p "Select Region: ")"
 update=$(kill -36 $(pidof dwmblocks))
 
-[ "$region" == "" ] && notify-send -a " VPN" "Operation aborted"
-[ "$region" 	!= "" ] && piactl set region "$region" && \
-	 $update && notify-send -a " VPN" "Changed region to $region" && \
+[ "$region" == "" ] && notify-send -a " VPN" "Operation aborted"
+[ "$region" != "" ] && piactl set region "$region" &&
+	$update && notify-send -a " VPN" "Changed region to $region" &&
 	sleep 3 && $update
 # Comment next line if not using the vpn dwmblock

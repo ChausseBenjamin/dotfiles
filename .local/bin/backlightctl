@@ -31,7 +31,7 @@ get_percent() {
 # $1 is converted to a value between 0-$max within this function
 get_total() {
 	value="$(to_value "$1")"
-	printf "%d" "$(($(get_status) + value))"
+	printf "%d" "$(($(get_status) + $value))"
 }
 
 helpmsg="Usage: backlightctl -[FLAG] [PERCENTAGE]

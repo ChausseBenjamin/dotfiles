@@ -1,5 +1,4 @@
 #!/bin/sh
-for f in $*
-    do
-    sudo R --vanilla -e "install.packages('"$f"', repos='http://cran.us.r-project.org')"
+for f in $*; do
+	sudo R --vanilla -e "install.packages('"$f"', repos='http://cran.us.r-project.org', Ncpus=10)"
 done

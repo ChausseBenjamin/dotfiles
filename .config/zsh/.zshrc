@@ -87,7 +87,7 @@ mkcd() {
 }
 
 # Loading shortcuts made by aliasgen and shortcutgen
-source $HOME/.cache/zsh-aliases*
+source $HOME/.cache/zsh-aliases
 source $HOME/.cache/zsh-shortcuts
 source $HOME/.cache/shell-vars
 

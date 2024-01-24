@@ -25,6 +25,8 @@
 # - lowercase shortcuts prepended by 'y' copies selected files to these paths
 # - lowercase shortcuts prepended by 'm' moves selected files to these paths
 
+CV,          cv,  ~/Dropbox/A/work/Application/CV/current
+Website,     ww,  ~/Workspace/chausse.xyz
 Config,      cf,  ~/.config
 Neovim,      vi,  ~/.config/nvim
 School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-01
