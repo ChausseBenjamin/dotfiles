@@ -29,4 +29,4 @@ case "$status" in
 *D*) icon=" " ;;
 esac
 
-printf " %s" "$icon"
+printf "  %s " "$icon"
