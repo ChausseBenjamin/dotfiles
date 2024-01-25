@@ -1,29 +1,47 @@
 #!/bin/sh
 
-# Prints all batteries, their percentage remaining and an emoji corresponding
-# to charge status.
+# Usage:
+# This script prints a battery icon and percentage charge.
+# If charging, it will show a charging icon instead of a battery
+#
+# By default, it will show the first battery found.
+# If you have multiple batteries, you can specify the battery as an argument to this script.
+#
+# Example:
+# $ dwmb-battery BAT1
+#  󱐋 86%
 
-case $BLOCK_BUTTON in
-3) notify-send "  Battery module" " : discharging
- : charging
-󰚦 : not charging
- : charged
- : discharging
- : battery very low!" ;;
+#  00-19%
+#  20-39%
+#  40-59%
+#  60-79%
+#  80-100%
+# 󱐋 or  charging
+
+[ -z "$1" ] && bat=$(echo /sys/class/power_supply/BAT* | head -n 1) ||
+	bat=/sys/class/power_supply/"$1"
+
+[ ! -d "$bat" ] && echo "No battery found." && exit 1
+
+status=$(cat "$bat"/status)
+capacity=$(cat "$bat"/capacity)
+
+# for debugging, $2 is the percentage to print
+[ -n "$2" ] && capacity=$2
+
+case "$status" in
+Charging) icon="󱐋 " ;;
+*) icon="" ;;
 esac
 
-# acpi alternative
-# acpi | sed "s/Battery [0-9]: //;s/[Dd]ischarging, / /;s/[Nn]ot charging, / /;s/[Cc]harging, / /;s/[Uu]nknown, /♻️/;s/[Ff]ull, / /;s/ \(remaining\|until charged\)//"; exit
+# If the battery is not charging, evaluate its current charge and print an icon accordingly
+[ -z "$icon" ] &&
+	case "$capacity" in
+	[0-9] | [0-1][0-9]) icon=" " ;;
+	[2-3][0-9]) icon=" " ;;
+	[4-5][0-9]) icon=" " ;;
+	[6-7][0-9]) icon=" " ;;
+	[8-9][0-9] | 100) icon=" " ;;
+	esac
 
-# Loop through all attached batteries.
-for battery in /sys/class/power_supply/BAT?; do
-	# Get its remaining capacity and charge status.
-	capacity=$(cat "$battery"/capacity 2>/dev/null) || break
-	status=$(sed "s/[Dd]ischarging/ /;s/[Nn]ot charging/󰚦 /;s/[Cc]harging/ /;s/[Uu]nknown/ /;s/[Ff]ull/ /" "$battery"/status)
-
-	# If it is discharging and 25% or less, we will add a   as a warning.
-	[ "$capacity" -le 25 ] && [ "$status" = " " ] && warn=" "
-
-	printf "%s%s%s%%" " $status" "$warn" "$capacity"
-	unset warn
-done | sed 's/ *$//'
+printf " %s%s%%" "$icon" "$capacity"
