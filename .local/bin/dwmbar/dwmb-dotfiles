@@ -1,20 +1,32 @@
 #!/bin/bash
 
-dotfiles=$(yadm status | sed '1,3d;
-                            5,$d;
-                            s/.$//g')
+# Other icons that could be used:
+# Git:                    
+# Config:  
 
-if [[ ${dotfiles:0:1} == "n" ]]; then
-    warn=""
-else
-    warn=" "
-fi
+# Dotfiles tracker for dwmblocks (using yadm)
+# This block aims to never show up (to be out of sight, out of mind)
+# If the following situation occurs, the following icons will be shown:
+#
+# -  : There are uncommitted changes
+# -  : There are staged changes
+# -  : Unpushed changes
+# -  : Upstream has changes that are not pulled
+#
+# These icons will sit next the this block's base icon
+#
+# Only one icon will be shown at a time, and the order of priority is:
+# uncommitted > staged > unpushed > upstream
 
+status=$(yadm status --porcelain 2>/dev/null)
 
+[ -z "$status" ] && exit 0
 
-echo " $warn "
-case $BLOCK_BUTTON in
-		1) $TERMINAL -c dropdown -e yadm diff ;;
-		3) $TERMINAL -c dropdown -e dfup ;;
-    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+case "$status" in
+*M*) icon=" " ;;
+*A*) icon=" " ;;
+*U*) icon=" " ;;
+*D*) icon=" " ;;
 esac
+
+printf " %s" "$icon"
