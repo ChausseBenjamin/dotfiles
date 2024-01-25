@@ -30,7 +30,7 @@ capacity=$(cat "$bat"/capacity)
 [ -n "$2" ] && capacity=$2
 
 case "$status" in
-Charging) icon="󱐋 " ;;
+Charging) icon="󱐋" ;;
 *) icon="" ;;
 esac
 
