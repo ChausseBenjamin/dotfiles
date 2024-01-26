@@ -28,7 +28,6 @@ super + shift + q
 ## Quit Current/focused App
 super + q
   quitapp
-	# kill -15 `xdotool getwindowfocus getwindowpid`
 ## Toggle the dwm bar
 super + b
 	dwmc togglebar
