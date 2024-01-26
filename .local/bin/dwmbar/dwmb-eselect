@@ -7,5 +7,5 @@ unread="$(eselect news count new)"
 
 case "$total" in
 0) echo "" ;;
-*) echo "$icon $unread/$total" ;;
+*) echo "$icon $unread/$total " ;;
 esac
