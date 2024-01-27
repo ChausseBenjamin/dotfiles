@@ -198,7 +198,7 @@ shift + XF86AudioMedia
     killall bluetuith || dropdowntoggle bluetooth bluetuith
 ## Increase/decrease Volume
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    volumectl 1 {+,-}
+    volumectl 5 {+,-}
 ## Max-Out Volume
 shift + XF86AudioRaiseVolume
     volumectl 100
