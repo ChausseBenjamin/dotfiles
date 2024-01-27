@@ -18,7 +18,7 @@ e,       $EDITOR
 w,       $BROWSER
 g,       git
 gor,     go run *.go
-mmi,     make && sudo make install && [ -f config.def.h ] && rm config.h
+mmi,     make clean && make && sudo make install
 R,       R -q
 tmcd,    tmux attach-session -t
 tmdd,    tmux  kill-session -t
