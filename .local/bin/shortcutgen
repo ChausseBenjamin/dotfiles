@@ -6,10 +6,15 @@
 #   - remove spacing (keep commas between columns)
 #   - remove trailing whitespace
 
+# Strip comments, remove empty lines, condense spacing, remove trailing whitespace
 raw="$(sed 's/#.*//g;s/,\s*/,/g;/^$/d;s/\s*$//g' <"$XDG_CONFIG_HOME/shortcutrc")"
 
-# lf
+# lf (sourced by lfrc)
 echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/map g\2 cd \3/' >"$XDG_CONFIG_HOME/lf/shortcuts"
 
-# shell (aliases and environment variables)
-echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"\nexport G\U\2="\3"/' >"$HOME/.cache/zsh-shortcuts"
+# Shell aliases (read by zshrc)
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"/' >"$HOME/.cache/zsh-shortcuts"
+
+# Environment variables (read by .profile)
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/export G\U\2="\3"/' >"$HOME/.cache/env-shortcuts"
+
