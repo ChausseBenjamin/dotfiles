@@ -38,3 +38,4 @@ Dropbox,     bx,  ~/Dropbox
 Downloads,   dl,  ~/Downloads
 Wallpapers,  wp,  ~/Pictures/wallpapers
 Compilation, cp,  ~/.local/src
+Workspace,   ws,  ~/Workspace
