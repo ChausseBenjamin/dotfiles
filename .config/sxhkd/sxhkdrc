@@ -29,7 +29,7 @@ super + shift + q
 super + q
   quitapp
 ## Toggle the dwm bar
-super + b
+super + shift + b
 	dwmc togglebar
 ## Change layout to {tiling, monocle}
 super + {_,shift} + t
@@ -94,6 +94,12 @@ alt + {1-9}
 ## Pin current window to all tags
 super + shift + 0
 	dwmc tagall
+## Make bigger/minimize window weight
+super + {bracketleft,bracketright}
+	dwmc setcfact {-0.05,+0.05}
+## Nullify window weight
+super + n
+  dwmc setcfact 0
 # ## Decrease/increase gaps
 # super + {minus, shift + equal}
 # 	dwmc setgaps {-,+}1
@@ -222,9 +228,6 @@ shift + XF86MonBrightnessDown
 ## Next/Previous Song (using playerctl)
 super + {bracketright, bracketleft}
 		playerctl {next, previous}
-## Higher/Lower music volume (using pla)
-super + shift + {bracketright, bracketleft}
-		playerctl volume 5 {+, -}
 ## Toggle music playback
 super + backslash
 		playerctl play-pause
