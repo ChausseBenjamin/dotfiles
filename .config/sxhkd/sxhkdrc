@@ -153,7 +153,7 @@ super + space
     dropdowntoggle orgmode nvim +"Neorg index"
 ## Terminal Calculator
 super + a
-    dropdowntoggle calc tmux-r
+    dropdowntoggle calc tmux-py
 ## Terminal Shell
 super + shift + a
     dropdowntoggle shell tmux-shell
