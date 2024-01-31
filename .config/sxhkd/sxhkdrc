@@ -31,13 +31,13 @@ super + q
 ## Toggle the dwm bar
 super + shift + b
 	dwmc togglebar
-## Change layout to {tiling, monocle}
+## Change layout to {tiling, bstackhoriz}
 super + {_,shift} + t
 	dwmc setlayoutex {0,2}
-## Change layout to {grid, floating}
+## Change layout to {nolayout, monocle}
 super + {_,shift} + g
 	dwmc setlayoutex {5,1}
-## Change layout to {centeredmaster, floatingcenteredmaster}
+## Change layout to {centeredmaster, tilewide}
 super + {_,shift} + m
 	dwmc setlayoutex {3,4}
 ## Make window fullscreen
@@ -101,11 +101,11 @@ super + {bracketleft,bracketright}
 super + n
   dwmc setcfact 0
 # ## Decrease/increase gaps
-# super + {minus, shift + equal}
-# 	dwmc setgaps {-,+}1
+super + {minus, shift + equal}
+	dwmc incrgaps {-,+}1
 # ## Set gaps to zero
-# super + equal
-# 	dwmc setgaps 0
+super + equal
+	dwmc incrgaps =
 
 #-#   Miscellaneous #-#
 ## Lock Screen
