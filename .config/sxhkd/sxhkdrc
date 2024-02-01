@@ -105,7 +105,7 @@ super + {minus, shift + equal}
 	dwmc incrgaps {-,+}1
 # ## Set gaps to zero
 super + equal
-	dwmc incrgaps =
+	dwmc defaultgaps
 
 #-#   Miscellaneous #-#
 ## Lock Screen
