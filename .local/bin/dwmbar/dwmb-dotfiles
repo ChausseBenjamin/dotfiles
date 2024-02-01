@@ -22,11 +22,4 @@ status=$(yadm status --porcelain 2>/dev/null)
 
 [ -z "$status" ] && exit 0
 
-case "$status" in
-*M*) icon=" " ;;
-*A*) icon=" " ;;
-*U*) icon=" " ;;
-*D*) icon=" " ;;
-esac
-
-printf "  %s " "$icon"
+printf "  "
