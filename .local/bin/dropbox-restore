@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Usage: dropbox-exclude <initial-path>
+# This script is meant to be run within a file manager such as lf or ranger.
+# When in a directory, you can view which files are not being synced by Dropbox
+# as a dmenu prompt. You can then select a file to start syncing that file again.
+# For readability, the script will only show files in the current directory.
+# If you want to see all excluded files in the Dropbox directory, you can use the
+# `dropbox-cli exclude list` command.
+
+# if $1 is a file, get the directory of the file
+# if $1 is a directory, use it as the directory
+# exit if something else
+if [ -d "$1" ]; then
+	cd "$1" || exit 1
+elif [ -f "$1" ]; then
+	cd "$(dirname "$1")" || exit 1
+else
+	exit 1
+fi
+
+excluded_files=$(dropbox-cli exclude list | awk '{print $1}' | sed 's/\/$//')
+
+if [ -z "$excluded_files" ]; then
+	notify-send -a " Dropbox" "No files are excluded in this directory."
+	exit 1
+fi
+
+echo "$excluded_files" | dmenu -w "$(xdotool getactivewindow)" -p " Select a file to restore:" | while read -r file; do
+	dropbox-cli exclude remove "$file"
+done
