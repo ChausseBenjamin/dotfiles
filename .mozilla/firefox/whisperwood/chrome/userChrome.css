@@ -1,3 +1,7 @@
+/* Ideally, use this in conjunction with the "dwm TabsInTitlebar" firefox extenstion
+ * https://addons.mozilla.org/en-US/firefox/addon/tabs-in-title/
+ * https://github.com/edvardxyz/Tabs-in-title
+ */
 #TabsToolbar {
   visibility: collapse;
 } /* leaves space for the window buttons */
