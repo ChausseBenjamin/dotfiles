@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# load host specific Xresources settings (DPI, etc.)
+xrdb -merge "$XDG_CONFIG_HOME/xresources/workstation"
+
 # Pipewire setup:
 gentoo-pipewire-launcher &
 

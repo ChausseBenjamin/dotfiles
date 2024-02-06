@@ -165,7 +165,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 8
+  size: 16
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -307,7 +307,6 @@ font:
 #  magenta: '#c397d8'
 #  cyan:    '#70c0b1'
 #  white:   '#eaeaea'
-
 # Dim colors
 #
 # If the dim colors are not set, they will be calculated automatically based
@@ -427,7 +426,6 @@ cursor:
 # Thickness of the cursor relative to the cell width as floating point number
 # from `0.0` to `1.0`.
 # thickness: 0.15
-
 # Live config reload (changes require restart)
 # live_config_reload: true
 # Shell
@@ -883,7 +881,6 @@ key_bindings:
 #   - Debug
 #   - Trace
 # log_level: Warn
-
 # Renderer override.
 #   - glsl3
 #   - gles2
