@@ -16,5 +16,7 @@ echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/map g\2 cd \3/' >"$XDG_CONFIG_HOME/lf/
 echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"/' >"$HOME/.cache/zsh-shortcuts"
 
 # Environment variables (read by .profile)
-echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/export G\U\2="\3"/' >"$HOME/.cache/env-shortcuts"
+echo "$raw" | sed 's/^\(.*\),\(.*\),/export G\U\2=,/;s/,\(.*\)/\1/' >"$HOME/.cache/env-shortcuts"
+
+
 

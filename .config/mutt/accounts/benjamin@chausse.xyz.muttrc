@@ -1,0 +1,79 @@
+# vim: filetype=neomuttrc
+# muttrc file for account benjamin@chausse.xyz
+set realname = "Benjamin Chausse"
+set from = "benjamin@chausse.xyz"
+set sendmail = "msmtp -a benjamin@chausse.xyz"
+alias me Benjamin Chausse <benjamin@chausse.xyz>
+set folder = "/home/master/.local/share/mail/benjamin@chausse.xyz"
+set header_cache = /home/master/.cache/mutt-wizard/benjamin@chausse.xyz/headers
+set message_cachedir = /home/master/.cache/mutt-wizard/benjamin@chausse.xyz/bodies
+set mbox_type = Maildir
+set hostname = "chausse.xyz"
+source /usr/share/mutt-wizard/switch.muttrc
+set spoolfile = +INBOX
+set postponed = +Drafts
+set trash = +Trash
+set record = +Sent
+
+set crypt_use_gpgme = yes
+set pgp_default_key = "ABC4A5A7430D6309ACBD219044F94DD6456590C3"
+set pgp_sign_as = "ABC4A5A7430D6309ACBD219044F94DD6456590C3"
+
+macro index o "<shell-escape>mw -y benjamin@chausse.xyz<enter>" "run mbsync to sync benjamin@chausse.xyz"
+macro index \eg "<enter-command>unset wait_key<enter><shell-escape>gpg --list-secret-keys; printf 'Enter email ID of user to publish: '; read eID; printf 'Enter fingerprint of GPG key to publish: '; read eFGPT; /usr/libexec/gpg-wks-client --create \$eFGPT \$eID | msmtp --read-envelope-from --read-recipients -a benjamin@chausse.xyz<enter>"  "publish GPG key to WKS provider"
+macro index \eh "<pipe-message>/usr/libexec/gpg-wks-client --receive | msmtp --read-envelope-from --read-recipients -a benjamin@chausse.xyz<enter>" "confirm GPG publication"
+
+mailboxes "=Trash" "=Junk" "=Archives/2030" "=Archives/2029" "=Archives/2028" "=Archives/2027" "=Archives/2026" "=Archives/2025" "=Archives/2024" "=Archives/2023" "=Archives/2022" "=Archives/2021" "=Archives/2020" "=Bills" "=Sent" "=Drafts" "=INBOX"
+
+macro index,pager ga " <change-folder> =Archives/2024<enter>" "go to current year archive"
+macro index,pager Ma ";<save-message>  =Archives/2024<enter>" "archive message"
+macro index,pager Ca " <copy-message>  =Archives/2024<enter>" "copy message to archive"
+
+macro index,pager g0 " <change-folder> =Archives/2020<enter>" "go to 2020 archives"
+macro index,pager M0 ";<save-message>  =Archives/2020<enter>" "move to 2020 archives"
+macro index,pager g0 " <copy-message>  =Archives/2020<enter>" "copy to 2020 archives"
+
+macro index,pager g1 " <change-folder> =Archives/2021<enter>" "go to 2021 archives"
+macro index,pager M1 ";<save-message>  =Archives/2021<enter>" "move to 2021 archives"
+macro index,pager g1 " <change-folder> =Archives/2021<enter>" "copy to 2021 archives"
+
+macro index,pager g2 " <change-folder> =Archives/2022<enter>" "go to 2022 archives"
+macro index,pager M2 ";<save-message>  =Archives/2022<enter>" "move to 2022 archives"
+macro index,pager g2 " <change-folder> =Archives/2022<enter>" "copy to 2022 archives"
+
+
+macro index,pager g3 " <change-folder> =Archives/2023<enter>" "go to 2023 archives"
+macro index,pager M3 ";<save-message>  =Archives/2023<enter>" "move to 2023 archives"
+macro index,pager g3 " <change-folder> =Archives/2023<enter>" "copy to 2023 archives"
+
+
+macro index,pager g4 " <change-folder> =Archives/2024<enter>" "go to 2024 archives"
+macro index,pager M4 ";<save-message>  =Archives/2024<enter>" "move to 2024 archives"
+macro index,pager g4 " <change-folder> =Archives/2024<enter>" "copy to 2024 archives"
+
+
+macro index,pager g5 " <change-folder> =Archives/2025<enter>" "go to 2025 archives"
+macro index,pager M5 ";<save-message>  =Archives/2025<enter>" "move to 2025 archives"
+macro index,pager g5 " <change-folder> =Archives/2025<enter>" "copy to 2025 archives"
+
+
+macro index,pager g6 " <change-folder> =Archives/2026<enter>" "go to 2026 archives"
+macro index,pager M6 ";<save-message>  =Archives/2026<enter>" "move to 2026 archives"
+macro index,pager g6 " <change-folder> =Archives/2026<enter>" "copy to 2026 archives"
+
+
+macro index,pager g7 " <change-folder> =Archives/2027<enter>" "go to 2027 archives"
+macro index,pager M7 ";<save-message>  =Archives/2027<enter>" "move to 2027 archives"
+macro index,pager g7 " <change-folder> =Archives/2027<enter>" "copy to 2027 archives"
+
+
+macro index,pager g8 " <change-folder> =Archives/2028<enter>" "go to 2028 archives"
+macro index,pager M8 ";<save-message>  =Archives/2028<enter>" "move to 2028 archives"
+macro index,pager g8 " <change-folder> =Archives/2028<enter>" "copy to 2028 archives"
+
+
+macro index,pager g9 " <change-folder> =Archives/2029<enter>" "go to 2029 archives"
+macro index,pager M9 ";<save-message>  =Archives/2029<enter>" "move to 2029 archives"
+macro index,pager g9 " <change-folder> =Archives/2029<enter>" "copy to 2029 archives"
+
+

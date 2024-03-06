@@ -32,7 +32,7 @@
 *color7: #c5c8c6
 *color15: #c0c7ca
 !other
-*background: #222d32
+*background: #111a1f
 *foreground: #acb3b5
 *cursorColor: #ebcb88
 ! See "highlightColorMode" and "hm" options in XTerm manual page.

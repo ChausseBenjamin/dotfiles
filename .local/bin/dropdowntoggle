@@ -8,11 +8,23 @@
 name="$1"
 class="dropdown"
 title="dropdown_$name"
-active="$(xdotool search --name $title | wc -l)"
+active="$(xdotool search --name "$title" | wc -l)"
 shift
 
+case "$TERMINAL" in
+*st)
+	classflag="-c"
+	titleflag="-t"
+	cmdflag="-e"
+	;;
+*alacritty)
+	classflag="--class"
+	titleflag="--title"
+	cmdflag="--command"
+	;;
+esac
 
 case "$active" in
-	0) $TERMINAL --class "dropdown" --title "$title" --command "$@" & ;;
-	*) kill -9 `xdotool search --name "$class" getwindowpid` ;;
+0) $TERMINAL "$classflag" "dropdown" "$titleflag" "$title" "$cmdflag" "$@" & ;;
+*) kill -9 "$(xdotool search --name "$class" getwindowpid)" ;;
 esac

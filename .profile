@@ -27,8 +27,8 @@ export TEXSRC=$HOME/.local/src/sherbrooke-tex
 # Applications
 export EDITOR=$(which nvim)
 export READER=/usr/bin/zathura
-export TERMINAL=/usr/bin/alacritty
-export TERM=/usr/bin/alacritty
+export TERMINAL=/usr/local/bin/st
+export TERM=/usr/local/bin/st
 export BROWSER=/usr/bin/firefox
 
 # less/man colors
@@ -44,6 +44,9 @@ export LESS_TERMCAP_ue=$'\e[0m'         # end underline
 # Generate shortcuts and aliases
 shortcutgen
 aliasgen
+
+# Import shortcut ENV variables
+source "$HOME/.cache/env-shortcuts"
 
 # Ensure XDG_RUNTIME_DIR is set
 if test -z "$XDG_RUNTIME_DIR"; then

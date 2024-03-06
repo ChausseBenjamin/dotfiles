@@ -1,11 +1,28 @@
 #!/bin/sh
 
-sitename="chausse.xyz"
+username="master"
+url="chausse.xyz"
+siteroot="$HOME/Workspace/$url"
 
-branch="construction"
+case "$1" in
+  -d|--dev)
+    url="dev.$url"
+    destdir="/var/www/dev"
+    branch="master"
+    ;;
+  -m|--main)
+    destdir="/var/www/chausse"
+    branch="construction"
+    ;;
+  *)
+    echo "Usage: upsite [dev|main]"
+    exit 1
+    ;;
+esac
 
-cd "$HOME/Workspace/$sitename$construction" && git pull origin $branch && git checkout $branch
-
+cd "$siteroot" || exit 1
+git checkout $branch
+git pull
 hugo --gc=true --minify
+rsync -aucz --delete --progress "$siteroot/public/" "$username@$url:$destdir"
 
-rsync -auvz "$HOME/Workspace/$sitename$construction/public/" "master@$sitename:/var/www/chausse"
