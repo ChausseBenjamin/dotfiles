@@ -74,7 +74,6 @@ video/*)
 	prefix="$(PrefixGen "$1")"
 	suffix="$(SuffixGen "$1")"
 	filename="$prefix-$suffix"
-	# XXX: thumbnail seems to get re-generated every time the file is selected
 	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
 		rm -f "$PREVIEW_DIR/$prefix-*"
 		ffmpegthumbnailer -i "$1" -s 0 -c png -f -o - |
