@@ -4,7 +4,7 @@ time="$($1)"
 [ -z "$1" ] && time="5"
 
 # Prevent "no such file or directory" on 1st run
-genlop -c >/tmp/genlop
+clear && genlop -c >/tmp/genlop
 
 while true; do
 	cat /tmp/genlop

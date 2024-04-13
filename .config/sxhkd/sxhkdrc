@@ -146,8 +146,11 @@ super + e
 XF86WLAN
     killall nmtui || dropdowntoggle network nmtui
 ## TUI Audio Mixer (pulsemixer)
+super + shift + p
+    killall pulsemixer || dropdowntoggle audio pulsemixer
+## Display selector (connect to projector/secondary monitor)
 super + p
-    killall pulsemixer || dropdowntoggle bluetooth pulsemixer
+    displayselect
 ## TODOs (orgmode-nvim)
 super + space
     dropdowntoggle orgmode nvim +"Neorg index"
@@ -165,9 +168,6 @@ super + r
 ## Application Launcher
 super + d
     j4-dmenu-desktop
-## Display Layout Selector
-super + shift + d
-    displayselect
 ## Emoji & Font-Awesome Selector
 alt + grave
     emoji-copy
