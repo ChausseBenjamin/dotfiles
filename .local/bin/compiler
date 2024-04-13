@@ -28,7 +28,7 @@ case "$file" in
 # *\.gd) groffdown "$file" | refer -PS -e "$REFERBIB" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
 *\.mom) refer -PS -e -p"$REFERBIB" "$file" | groff -mom -kejpt -T pdf >"$base".pdf ;;
 *\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
-*\.rnw) Rscript -e "knitr::knit2pdf('""$file""')" ;;
+*\.rnw) Rscript -e "knitr::knit2pdf('""$file""',compiler='xelatex')" ;;
 *\.tex) textype "$file" ;;
 *\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 *config.h) make && sudo make install ;;
