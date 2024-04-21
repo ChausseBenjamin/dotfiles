@@ -84,6 +84,9 @@ video/*)
 application/*zip)
 	atool --list -- "$1"
 	;;
+*spreadsheetml.sheet)
+	xlsx2csv -s 1 "$1" | bat --terminal-width "$(($4 - 2))" -l 'csv'
+	;;
 *opendocument*)
 	odt2txt "$1"
 	;;
