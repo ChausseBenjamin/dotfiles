@@ -12,7 +12,11 @@ PREVIEW_WIDTH=600 # px
 # PrefixGen: generates a hash prefix for the given file
 # This is a unique identifier for the file to preview
 PrefixGen() {
-	sha256sum "$(readlink -f "$1")" | cut -d' ' -f1
+	# The file path is hashed instead of the file itself since large files
+	# can take a long time to hash and the file path is usually enough to
+	# uniquely identify the file. Also, the suffix is used to determine if
+	# the preview is outdated (which removes the need to hash the file).
+	readlink -f "$1" | sha256sum | cut -d' ' -f1
 }
 
 # SuffixGen: generates a hash suffix for the given file
@@ -44,7 +48,28 @@ image/vnd.djvu)
 	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
 		rm -f "$PREVIEW_DIR/$prefix-*"
 		djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
-			convert djvu:- png:- |
+			convert djvu:- ppm:- |
+			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+	}
+	cat "$PREVIEW_DIR/$filename.six"
+	;;
+image/webp)
+	prefix="$(PrefixGen "$1")"
+	suffix="$(SuffixGen "$1")"
+	filename="$prefix-$suffix"
+	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+		rm -f "$PREVIEW_DIR/$prefix-*"
+		dwebp "$1" -tiff -o - | img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+	}
+	cat "$PREVIEW_DIR/$filename.six"
+	;;
+image/heic)
+	prefix="$(PrefixGen "$1")"
+	suffix="$(SuffixGen "$1")"
+	filename="$prefix-$suffix"
+	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+		rm -f "$PREVIEW_DIR/$prefix-*"
+		convert "$1" ppm:- |
 			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
 	}
 	cat "$PREVIEW_DIR/$filename.six"
@@ -65,7 +90,7 @@ image/*)
 	filename="$prefix-$suffix"
 	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
 		rm -f "$PREVIEW_DIR/$prefix-*"
-		pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -png "$1" - |
+		pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - |
 			img2sixel -S -E size -q high -o "$PREVIEW_DIR/$filename.six"
 	}
 	cat "$PREVIEW_DIR/$filename.six"
@@ -76,7 +101,7 @@ video/*)
 	filename="$prefix-$suffix"
 	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
 		rm -f "$PREVIEW_DIR/$prefix-*"
-		ffmpegthumbnailer -i "$1" -s 0 -c png -f -o - |
+		ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - |
 			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
 	}
 	cat "$PREVIEW_DIR/$filename.six"
