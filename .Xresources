@@ -41,6 +41,11 @@
 ! No support for cursor text coloring; would be #1e232b.
 ! No support for bold coloring; would be #626a73.
 
+dmenu.background: #1b1d1b
+dmenu.foreground: #447a6c
+dmenu.color11: #7d4b23
+dmenu.color0: #1b1d1b
+
 !other
 *.alpha: 0.80
 
