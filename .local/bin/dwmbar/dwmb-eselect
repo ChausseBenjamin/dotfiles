@@ -1,6 +1,6 @@
 #!/bin/sh
 
-icon=""
+icon="  "
 
 total="$(eselect news count all)"
 unread="$(eselect news count new)"
