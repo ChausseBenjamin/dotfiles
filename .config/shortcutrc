@@ -34,7 +34,7 @@ Hotkeys,     sx,  ~/.config/sxhkd
 Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
 Neovim,      vi,  ~/.config/nvim
 OrgMode,     om,  ~/Dropbox/org
-School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-01
+School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-05-T2
 Scripts,     sc,  ~/.local/bin
 Wallpapers,  wp,  ~/Pictures/wallpapers
 Website,     ww,  ~/Workspace/chausse.xyz
