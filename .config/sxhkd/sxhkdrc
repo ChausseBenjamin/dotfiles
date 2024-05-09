@@ -223,6 +223,9 @@ shift + XF86MonBrightnessUp
 ## Set Brightness to 5 percent
 shift + XF86MonBrightnessDown
     backlightctl -s 0
+## Fix games with MX Master mouse
+ctrl + alt + Tab
+  dwmc focusmon +1 && sleep 0.1 && dwmc focusmon +1
 
 #-# Music Controls (using `playerctl`) #-#
 ## Next/Previous Song (using playerctl)

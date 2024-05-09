@@ -25,17 +25,17 @@
 # - lowercase shortcuts prepended by 'y' copies selected files to these paths
 # - lowercase shortcuts prepended by 'm' moves selected files to these paths
 
-CV,          cv,  ~/Dropbox/A/work/Application/CV/current
-Website,     ww,  ~/Workspace/chausse.xyz
-Config,      cf,  ~/.config
-Neovim,      vi,  ~/.config/nvim
-School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-01
-Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
-Scripts,     sc,  ~/.local/bin
-Hotkeys,     sx,  ~/.config/sxhkd
-OrgMode,     om,  ~/Dropbox/org
-Dropbox,     bx,  ~/Dropbox
-Downloads,   dl,  ~/Downloads
-Wallpapers,  wp,  ~/Pictures/wallpapers
 Compilation, cp,  ~/.local/src
+Config,      cf,  ~/.config
+CV,          cv,  ~/Dropbox/A/work/Application/CV/current
+Downloads,   dl,  ~/Downloads
+Dropbox,     bx,  ~/Dropbox
+Hotkeys,     sx,  ~/.config/sxhkd
+Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
+Neovim,      vi,  ~/.config/nvim
+OrgMode,     om,  ~/Dropbox/org
+School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-05-T2
+Scripts,     sc,  ~/.local/bin
+Wallpapers,  wp,  ~/Pictures/wallpapers
+Website,     ww,  ~/Workspace/chausse.xyz
 Workspace,   ws,  ~/Workspace
