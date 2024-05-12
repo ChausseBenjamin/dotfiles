@@ -17,7 +17,7 @@ cdd,     cd ..
 e,       $EDITOR
 w,       $BROWSER
 g,       git
-gor,     go run *.go
+gg,      go generate ./...
 mmi,     make clean && make && sudo make install
 R,       R -q
 tmcd,    tmux attach-session -t

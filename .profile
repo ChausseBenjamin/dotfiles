@@ -1,6 +1,13 @@
 #!/bin/sh
 # shellcheck disable=SC2155
 
+# enable certain tools only if on macOS
+case "$OSTYPE" in
+  darwin*)
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    ;;
+esac
+
 unsetopt PROMPT_SP 2>/dev/null
 
 # Applications
@@ -16,7 +23,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 
 # Path
-export PATH="$PATH:$(find $HOME/.local/bin -type d | paste -sd ":" -)"
+export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:/root/.local/bin"
