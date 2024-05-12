@@ -57,9 +57,6 @@ preexec() { echo -ne '\e[4 q' ;}
 
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.cache/zsh-history
-HISTSIZE=1000
-SAVEHIST=10000
 setopt appendhistory autocd extendedglob nomatch
 unsetopt beep notify
 bindkey -v
@@ -83,12 +80,7 @@ mkcd() {
     cd -P -- "$1"
 }
 
-# Loading shortcuts made by aliasgen and shortcutgen
-source $HOME/.cache/zsh-aliases
-source $HOME/.cache/zsh-shortcuts
-source $HOME/.cache/shell-vars
-
-lfcd () {
+f() {
     tmp="$(mktemp -uq)"
     trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
     lf -single -last-dir-path="$tmp" "$@"
@@ -97,11 +89,13 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-alias f='lfcd'
+
+# Commonly used shortcuts
+[ -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases" ] && source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases"
+[ -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" ] && source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts"
 
 # Git Root
 alias gr='cd $(git rev-parse --show-cdup)'
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
+source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh 2>/dev/null

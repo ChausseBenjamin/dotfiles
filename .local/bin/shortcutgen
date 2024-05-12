@@ -1,23 +1,56 @@
 #!/bin/sh
 
+# Quit if a valid configuration source doesn't exist
+[ -f "$XDG_CONFIG_HOME/shortcutrc" ] && src="$XDG_CONFIG_HOME/shortcutrc" || exit 1
 
-# raw (basic processing before converting to specific formats)
-#   - remove comments
-#   - remove empty lines
-#   - remove spacing (keep commas between columns)
-#   - remove trailing whitespace
+# If you do not want to create a specific file, replace it's variable with /dev/null
+awk -v lf_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts" \
+    -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
+    -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
+'
+BEGIN {
+  FS=","
+  OFS=","
+}
 
-# Strip comments, remove empty lines, condense spacing, remove trailing whitespace
-raw="$(sed 's/#.*//g;s/,[[:space:]]*/,/g;/^$/d;s/[[:space:]]*$//g' <"${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc")"
+# Function to remove whitespaces from a string
+function remove_whitespace(str) {
+  gsub(/[[:space:]]/, "", str)
+  return str
+}
 
-# lf (sourced by lfrc)
-echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/map g\2 cd \3/' >"${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts"
+{
+  # Remove comments
+  gsub(/#.*/, "")
 
-# Shell aliases (read by zshrc)
-echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"/' >"${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts"
+  # Remove whitespaces from column 2
+  $2 = remove_whitespace($2)
 
-# Environment variables (read by .profile)
-echo "$raw" | sed 's/^\(.*\),\(.*\),/export G\U\2=,/;s/,\(.*\)/\1/' >"${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts"
+  # Remove leading and trailing whitespaces from column 3
+  gsub(/^[[:space:]]+|[[:space:]]+$/, "", $3)
 
+  # whenever a line contains only commas, replace it with an empty string
+  # so that we can check if a line is empty or not
+  gsub(/^,+$|^,+|,+$|,+,/, "", $0)
 
+  # Check if line is empty or contains only whitespace
+  if (NF) {
 
+    # Convert column 2 to lowercase
+    lc_col2 = tolower($2)
+
+    # Convert column 2 to uppercase
+    uc_col2 = toupper($2)
+
+    # Write to $XDG_CONFIG_HOME/lf/shortcuts
+    print "map g" lc_col2 " cd " $3 > ENVIRON["XDG_CONFIG_HOME"] "/lf/shortcuts"
+
+    # Write to $XDG_CACHE_HOME/zsh-shortcuts
+    # print "alias g" lc_col2 "=\"cd " $3 "\"" > ENVIRON["XDG_CACHE_HOME"] "/zsh-shortcuts"
+    print "g" lc_col2 "() {cd " $3 "}" > ENVIRON["XDG_CACHE_HOME"] "/zsh-shortcuts"
+
+    # Write to $XDG_CACHE_HOME/env-shortcuts
+    print "export G" uc_col2 "=\"" $3 "\"" > ENVIRON["XDG_CACHE_HOME"] "/env-shortcuts"
+  }
+}
+' "$src"
