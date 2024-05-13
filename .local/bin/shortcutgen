@@ -49,7 +49,7 @@ function remove_whitespace(str) {
     print "g" lc_col2 "() {cd " $3 "}" > zsh_filepath
 
     # Write to $XDG_CACHE_HOME/env-shortcuts
-    print "export G" uc_col2 "=\"" $3 "\"" > env_filepath
+    print "export G" uc_col2 "=" $3 "" > env_filepath
   }
 }
 ' "$src"
