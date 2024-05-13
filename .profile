@@ -22,15 +22,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 
-# Path
-export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:/root/.local/bin"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:/usr/local/go/bin"
-
 export DISTRIB_ID=arch
 export DISTRIB_RELEASE="$(uname -r)"
 export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"
@@ -49,6 +40,15 @@ export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export HISTFILE="$XDG_CACHE_HOME/zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=10000
+
+# Path
+export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:/root/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/go/bin"
 
 # Set st as the default terminal when not connected via SSH
 # or xterm when connected via SSH
