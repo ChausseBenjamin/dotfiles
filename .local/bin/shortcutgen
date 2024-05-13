@@ -46,7 +46,6 @@ function remove_whitespace(str) {
     print "map g" lc_col2 " cd " $3 > lf_filepath
 
     # Write to $XDG_CACHE_HOME/zsh-shortcuts
-    # print "alias g" lc_col2 "=\"cd " $3 "\"" > ENVIRON["XDG_CACHE_HOME"] "/zsh-shortcuts"
     print "g" lc_col2 "() {cd " $3 "}" > zsh_filepath
 
     # Write to $XDG_CACHE_HOME/env-shortcuts
