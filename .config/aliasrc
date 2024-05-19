@@ -17,6 +17,7 @@ cdd,     cd ..
 e,       $EDITOR
 w,       $BROWSER
 g,       git
+bi,      brew install
 gg,      go generate ./...
 mmi,     make clean && make && sudo make install
 R,       R -q

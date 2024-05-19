@@ -32,7 +32,7 @@ Downloads,   dl,  ~/Downloads
 Dropbox,     bx,  ~/Dropbox
 Hotkeys,     sx,  ~/.config/sxhkd
 Images,      img, ~/Dropbox/A/Personnal/Photos/unsorted
-Neovim,      vi,  ~/.config/nvim
+Neovim,      vi,  ~/.config/nvim/lua/ben
 OrgMode,     om,  ~/Dropbox/org
 School,      sf,  ~/Dropbox/A/scholar/sherbrooke/24-05-T2
 Scripts,     sc,  ~/.local/bin
