@@ -76,12 +76,6 @@ RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 
 zstyle ':vcs_info:git:*' formats '%b'
 
-# Quickly navigate to a created directory
-mkcd() {
-    mkdir -p -- "$1" &&
-    cd -P -- "$1"
-}
-
 f() {
     tmp="$(mktemp -uq)"
     trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM EXIT' HUP INT QUIT TERM EXIT

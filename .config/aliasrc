@@ -7,9 +7,12 @@
 #
 #
 # #---Universal Shell Alias Configuration File---# #
-# First column contains the alias
-# Second column contains the command to execute
-# Aliases and/or commands cannot contain commas
+# Since the creation of the aliasgen script, alias have been migrated to
+# functions. This facilitates the following:
+# - Escaping quotes
+# - Only evaluating variables (ex: $groot) at runtime
+# For this to work, "$@" is appended to the end of every function here.
+# Take this into consideration when creating new ones.
 
 :e,      $EDITOR
 :q,      exit
@@ -22,6 +25,7 @@ bi,      brew install
 gg,      go generate ./...
 gr,      groot=$(git rev-parse --show-toplevel 2>/dev/null); [ -z "$groot" ] || cd "$groot" || return
 mmi,     make clean && make && sudo make install
+mkcd,    mkdir -p -- "$1" && cd -P --
 R,       R -q
 tmcd,    tmux attach-session -t
 tmdd,    tmux  kill-session -t
