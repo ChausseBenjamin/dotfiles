@@ -12,17 +12,17 @@ PREVIEW_WIDTH=600 # px
 # PrefixGen: generates a hash prefix for the given file
 # This is a unique identifier for the file to preview
 PrefixGen() {
-	# The file path is hashed instead of the file itself since large files
-	# can take a long time to hash and the file path is usually enough to
-	# uniquely identify the file. Also, the suffix is used to determine if
-	# the preview is outdated (which removes the need to hash the file).
-	readlink -f "$1" | sha256sum | cut -d' ' -f1
+  # The file path is hashed instead of the file itself since large files
+  # can take a long time to hash and the file path is usually enough to
+  # uniquely identify the file. Also, the suffix is used to determine if
+  # the preview is outdated (which removes the need to hash the file).
+  readlink -f "$1" | sha256sum | cut -d' ' -f1
 }
 
 # SuffixGen: generates a hash suffix for the given file
 # This suffix is used to determine if the preview is outdated
 SuffixGen() {
-	stat -Lc "%Y" "$1"
+  stat -Lc "%Y" "$1"
 }
 
 # Prevent recursive thumbnails (if the file ends in .six)
@@ -30,94 +30,116 @@ SuffixGen() {
 
 case "$(file --dereference --brief --mime-type -- "$1")" in
 text/html)
-	lynx -width="$4" -display_charset=utf-8 -dump "$1"
-	;;
+  lynx -width="$4" -display_charset=utf-8 -dump "$1"
+  ;;
 text/troff)
-	man ./ "$1" | col -b
-	;;
+  man ./ "$1" | col -b
+  ;;
 text/* | */xml | application/json | application/x-ndjson)
-	bat --terminal-width "$(($4 - 2))" -f "$1"
-	;;
+  bat --terminal-width "$(($4 - 2))" -f "$1"
+  ;;
 audio/* | application/octet-stream)
-	mediainfo "$1" || exit 1
-	;;
+  mediainfo "$1" || exit 1
+  ;;
+font/* | application/vnd.ms-opentype)
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+
+  PREVIEW_TEXT="ABCDEFGHIJKLMNOPQRSTUBWXYZ\n""\
+abcdefghijklmnopqrstuvwxyz\n""\
+1234567890\n""\
+!@#$\%(){}[]-+=_\`~"
+
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] || {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    convert -size "600x412" xc:'#ffffff' \
+      -gravity center -pointsize 28 \
+      -font "$1" \
+      -fill '#000000' \
+      -annotate +0+0 "$PREVIEW_TEXT" \
+      -flatten ppm:- | img2sixel -E size -q high -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+
+  ;;
 image/vnd.djvu)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
-			convert djvu:- ppm:- |
-			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
+      convert djvu:- ppm:- |
+      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 image/webp)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		dwebp "$1" -tiff -o - | img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    dwebp "$1" -tiff -o - | img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 image/heic)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		convert "$1" ppm:- |
-			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    convert "$1" ppm:- |
+      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 image/*)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		img2sixel -S -E size -q high -w $PREVIEW_WIDTH "$1" -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    img2sixel -S -E size -q high -w $PREVIEW_WIDTH "$1" -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 */pdf)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - |
-			img2sixel -S -E size -q high -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - |
+      img2sixel -S -E size -q high -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 video/*)
-	prefix="$(PrefixGen "$1")"
-	suffix="$(SuffixGen "$1")"
-	filename="$prefix-$suffix"
-	[ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-		rm -f "$PREVIEW_DIR/$prefix-*"
-		ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - |
-			img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-	}
-	cat "$PREVIEW_DIR/$filename.six"
-	;;
+  prefix="$(PrefixGen "$1")"
+  suffix="$(SuffixGen "$1")"
+  filename="$prefix-$suffix"
+  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
+    rm -f "$PREVIEW_DIR/$prefix-*"
+    ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - |
+      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
+  }
+  cat "$PREVIEW_DIR/$filename.six"
+  ;;
 application/*zip)
-	atool --list -- "$1"
-	;;
+  atool --list -- "$1"
+  ;;
 *spreadsheetml.sheet)
-	xlsx2csv -s 1 "$1" | bat --terminal-width "$(($4 - 2))" -l 'csv'
-	;;
+  xlsx2csv -s 1 "$1" | bat --terminal-width "$(($4 - 2))" -l 'csv'
+  ;;
 *opendocument*)
-	odt2txt "$1"
-	;;
+  odt2txt "$1"
+  ;;
 application/pgp-encrypted)
-	gpg -d -- "$1"
-	;;
+  gpg -d -- "$1"
+  ;;
 esac
 
 exit 1

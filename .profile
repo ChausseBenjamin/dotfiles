@@ -40,6 +40,7 @@ export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export HISTFILE="$XDG_CACHE_HOME/zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=10000
+export BAT_THEME="ansi"
 
 # Path
 export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"

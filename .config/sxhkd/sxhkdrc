@@ -153,7 +153,7 @@ super + p
     displayselect
 ## TODOs (orgmode-nvim)
 super + space
-    dropdowntoggle orgmode nvim +"Neorg index"
+    dropdowntoggle orgmode nvim "$HOME/Dropbox/org/index.org"
 ## Terminal Calculator
 super + a
     dropdowntoggle calc tmux-py
@@ -217,10 +217,10 @@ XF86AudioMute
 ## Increase/decrease Brightness
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
     backlightctl -{i,d} 5
-## Max-Out Brightness
+## Set brightness to maximum
 shift + XF86MonBrightnessUp
     backlightctl -s 100
-## Set Brightness to 5 percent
+## Set brightness to minimum
 shift + XF86MonBrightnessDown
     backlightctl -s 0
 ## Fix games with MX Master mouse

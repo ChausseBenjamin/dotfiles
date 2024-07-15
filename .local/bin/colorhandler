@@ -1,6 +1,8 @@
 #!/bin/sh
 
-col=$(colorpicker --short --one-shot)
+[ -z "$1" ] && col=$(colorpicker --short --one-shot) ||
+  col="$1"
+
 
 sed "s/fill=.*>/fill=\"$col\">/g" $HOME/.local/share/circle.svg > /tmp/circle.svg
 
