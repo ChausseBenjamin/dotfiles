@@ -72,6 +72,8 @@ setopt prompt_subst
 PROMPT=" %B%F{blue}𝄞 %b%F{yellow}"
 RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 
+[ -z  "$SSH_CONNECTION" ] || PROMPT="$(whoami)@$(hostname)$PROMPT"
+
 zstyle ':vcs_info:git:*' formats '%b'
 
 # Quickly navigate to a created directory
@@ -93,9 +95,6 @@ f() {
 # Commonly used shortcuts
 [ -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases" ] && source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases"
 [ -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" ] && source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts"
-
-# Git Root
-alias gr='cd $(git rev-parse --show-cdup)'
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
