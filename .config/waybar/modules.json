@@ -1,0 +1,66 @@
+{
+  "dwl/tags": {
+    "num-tags": 9,
+    "disable-click": true,
+    "tag-labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+  },
+  "dwl/window": {
+    "format": " <tt>{layout}</tt> {title} ",
+    "tooltip": false,
+    "max-length": 255,
+  },
+  "custom/time": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-time",
+    "interval": 3600,
+    "signal": 8,
+  },
+  "custom/dotfiles": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-dotfiles",
+    "interval": 3600,
+    "signal": 7,
+  },
+  "custom/mail": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-mail",
+    "exec-if": "$HOME/.local/bin/dwmbar/check-mail",
+    "interval": 3600,
+    "signal": 12,
+  },
+  "custom/eselect": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-eselect",
+    "exec-if": "$HOME/.local/bin/dwmbar/check-eselect",
+    "interval": 3600,
+    "signal": 11,
+  },
+  "custom/battery": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-battery",
+    "interval": 3600,
+    "signal": 1,
+  },
+  "custom/date": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-date",
+    "interval": 3600,
+    "signal": 6,
+  },
+}

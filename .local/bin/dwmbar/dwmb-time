@@ -1,3 +1,6 @@
 #!/bin/sh
 
-date +"  %H:%M "
+text="$(date +" %H:%M")"
+
+printf '{ "text": "%s", "class": "block" }\n' "$text"
+

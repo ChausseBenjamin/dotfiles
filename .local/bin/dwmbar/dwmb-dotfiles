@@ -22,4 +22,4 @@ status=$(yadm status --porcelain 2>/dev/null)
 
 [ -z "$status" ] && exit 0
 
-printf "  "
+printf '{"text": "", "class":"block"}\n'

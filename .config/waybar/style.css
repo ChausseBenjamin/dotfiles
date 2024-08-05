@@ -1,0 +1,56 @@
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-size: 11px;
+  padding: 0px;
+  font-family: sans-serif;
+  /* color: #1b1d1b; */
+}
+
+window#waybar {
+  /* background-color: rgba(43, 48, 59, 0); */
+  background-color: rgba(27, 29, 27, 0.78); /* #1b1d1b */
+}
+
+#tags {
+  font-family: sans-serif;
+}
+
+#tags button:not(.occupied):not(.focused) {
+	font-size: 0;
+	min-width: 0;
+	min-height: 0;
+	margin: -17px;
+	padding: 0;
+	border: 0;
+	opacity: 0;
+	box-shadow: none;
+	background-color: transparent;
+}
+
+#tags button.occupied, .block {
+  /* background-color: rgba(27, 29, 27, 0.8); /1* #1b1d1b *1/ */
+  color: rgba(68, 122, 108, 1);            /* #447a6c */
+}
+
+#tags button.focused, #window {
+  background-color: rgba(125,75,35,0.8);   /* #7d4b23 */
+  color: rgba(27, 29, 27, 1);              /* #1b1d1b */
+}
+
+.block {
+  padding-right: 5px;
+}
+
+#workspaces button {
+  background-color: transparent;
+  color: #f2f1f0;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  /* box-shadow: inset 0 -3px transparent; */
+  /* Avoid rounded borders under each button name */
+  margin: -4px 0px;
+  border: none;
+  border-radius: 0;
+}

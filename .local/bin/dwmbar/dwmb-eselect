@@ -1,11 +1,13 @@
 #!/bin/sh
 
-icon="  "
+icon=""
 
 total="$(eselect news count all)"
 unread="$(eselect news count new)"
 
-case "$total" in
-0) echo "" ;;
-*) echo "$icon $unread/$total " ;;
-esac
+# case "$total" in
+# 0) echo "" ;;
+# *) printf '{"text":"%s %s/%s", "class":"block" }' "$icon" "$unread" "$total" ;;
+# esac
+#
+printf '{"text":"%s %s/%s", "class":"block" }' "$icon" "$unread" "$total"

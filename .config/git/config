@@ -12,3 +12,8 @@ signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
 	rebase = false
 [commit]
 	gpgsign = true
+[sendemail]
+	smtpserver = mail.chausse.xyz
+	smtpuser = benjamin
+	smtpserverport = 587
+	smtpencryption = tls

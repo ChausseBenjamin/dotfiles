@@ -7,7 +7,9 @@ IFS="${IFS%_}"
 PREVIEW_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
 PREVIEW_WIDTH=600 # px
 
-# TODO: Render in the original width when it's smaller than PREVIEW_WIDTH
+chafafunc() {
+  chafa -f sixel -O 0 --polite on -c full --color-space din99d -w 9 -t 0.8 --size "$(($1 -2))"x
+}
 
 # PrefixGen: generates a hash prefix for the given file
 # This is a unique identifier for the file to preview
@@ -42,91 +44,39 @@ audio/* | application/octet-stream)
   mediainfo "$1" || exit 1
   ;;
 font/* | application/vnd.ms-opentype)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-
   PREVIEW_TEXT="ABCDEFGHIJKLMNOPQRSTUBWXYZ\n""\
 abcdefghijklmnopqrstuvwxyz\n""\
 1234567890\n""\
 !@#$\%(){}[]-+=_\`~"
 
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] || {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    convert -size "600x412" xc:'#ffffff' \
-      -gravity center -pointsize 28 \
-      -font "$1" \
-      -fill '#000000' \
-      -annotate +0+0 "$PREVIEW_TEXT" \
-      -flatten ppm:- | img2sixel -E size -q high -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
-
+  convert -size "600x412" xc:'#ffffff' \
+    -gravity center -pointsize 28 \
+    -font "$1" \
+    -fill '#000000' \
+    -annotate +0+0 "$PREVIEW_TEXT" \
+    -flatten tiff:- | chafafunc $4
   ;;
 image/vnd.djvu)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
-      convert djvu:- ppm:- |
-      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
+      convert djvu:- jpeg:- | chafafunc $4
   ;;
 image/webp)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    dwebp "$1" -tiff -o - | img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  dwebp "$1" -tiff -o - | chafafunc $4
   ;;
 image/heic)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    convert "$1" ppm:- |
-      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  convert "$1" jpeg:- | chafafunc $4
   ;;
 image/*)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    img2sixel -S -E size -q high -w $PREVIEW_WIDTH "$1" -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  cat "$1" | chafafunc $4
   ;;
 */pdf)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - |
-      img2sixel -S -E size -q high -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - | chafafunc $4
   ;;
 video/*)
   prefix="$(PrefixGen "$1")"
   suffix="$(SuffixGen "$1")"
   filename="$prefix-$suffix"
-  [ ! -f "$PREVIEW_DIR/$filename.six" ] && {
-    rm -f "$PREVIEW_DIR/$prefix-*"
-    ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - |
-      img2sixel -S -E size -q high -w $PREVIEW_WIDTH -o "$PREVIEW_DIR/$filename.six"
-  }
-  cat "$PREVIEW_DIR/$filename.six"
+  ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - | chafafunc $4
   ;;
 application/*zip)
   atool --list -- "$1"

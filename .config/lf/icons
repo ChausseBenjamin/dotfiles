@@ -1,5 +1,6 @@
 di 󰉋
 fi 󰈔
+pi 
 tw 
 ow 󰉋
 ln 󱅷
@@ -9,6 +10,7 @@ ex 󱁼
 *.yaml 󱁻
 *.conf 󱁻
 *.go 
+*.mod 󱉟
 *.org 
 *.norg 
 *.bak 
@@ -107,7 +109,7 @@ ex 󱁼
 *.ged 👪
 *.part 󰴔
 *.torrent 󰻈
-*.jar   
+*.jar 
 *.java 
 *.wiki 
 *.sql 󱙋

@@ -22,6 +22,10 @@ case "$TERMINAL" in
 	titleflag="--title"
 	cmdflag="--command"
 	;;
+ *foot)
+	classflag="-a"
+	titleflag="-T"
+	cmdflag="-e"
 esac
 
 case "$active" in

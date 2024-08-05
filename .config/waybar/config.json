@@ -1,0 +1,27 @@
+{
+  "position": "top",
+   "layer": "top",
+   "height": 12,
+   "spacing": 0,
+
+   "_Modules_": "Choose the order of the modules",
+
+   "modules-left": [
+     "dwl/tags",
+     "dwl/window",
+   ],
+
+   "modules-center": [
+   ],
+
+   "modules-right": [
+     "custom/dotfiles",
+     "custom/mail",
+     "custom/eselect",
+     "custom/date",
+     "custom/time",
+     "custom/battery",
+   ],
+
+   "include": "~/.config/waybar/modules.json"
+}

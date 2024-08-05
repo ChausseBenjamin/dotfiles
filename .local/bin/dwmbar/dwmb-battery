@@ -44,4 +44,4 @@ esac
 	[8-9][0-9] | 100) icon=" " ;;
 	esac
 
-printf " %s%s%%" "$icon" "$capacity"
+printf '{ "text": "%s%s%%", "class":"block"}\n' "$icon" "$capacity"

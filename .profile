@@ -12,9 +12,9 @@ unsetopt PROMPT_SP 2>/dev/null
 
 # Applications
 export EDITOR=nvim
-export TERMINAL=st
-export TERMINAL_PROG=st
-export BROWSER=firefox
+export TERMINAL=foot
+export TERMINAL_PROG=foot
+export BROWSER=firefox-bin
 
 # Misc
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -41,6 +41,7 @@ export HISTFILE="$XDG_CACHE_HOME/zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=10000
 export BAT_THEME="ansi"
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 
 # Path
 export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"
@@ -50,10 +51,11 @@ export PATH="$PATH:/root/.local/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
-# Set st as the default terminal when not connected via SSH
+# Set foot as the default terminal when not connected via SSH
 # or xterm when connected via SSH
-[ -z "$SSH_CONNECTION" ] && export TERM=st || export TERM=xterm
+[ -z "$SSH_CONNECTION" ] && export TERM=foot || export TERM=xterm
 
 # less/man colors
 export LESS="R"
@@ -75,5 +77,11 @@ if test -z "$XDG_RUNTIME_DIR"; then
 	export XDG_RUNTIME_DIR="$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)"
 fi
 
+startw(){
+  dbus-run-session sh -c 'dwl'
+}
+
 # Start Desktop Environment if on the main TTY
-[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
+[ "$(tty)" = "/dev/tty1" ] && ! pidof dwl >/dev/null 2>&1 && {
+  startw
+}

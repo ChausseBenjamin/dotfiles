@@ -1,9 +1,14 @@
 #!/bin/sh
 
+# NOTE: (for wayland migration)
+# wlr-randr --json | jq -r '.[] | select(.enabled) | .name'
+
 wallDir="$XDG_CONFIG_HOME/wallpapers"
 
 # Acquire the list of connected displays
-displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
+# displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
+displays="$(wlr-randr --json | jq -r '.[] | select(.enabled) | .name')"
+echo "$displays"
 
 # If there is a wallpaper with a filename matching the display
 # name, set it as the wallpaper for that display.
@@ -14,16 +19,18 @@ setDisplay() {
 	case $(ls $wallDir) in
 	*"$1"*)
 		wall=$(ls $wallDir | grep "$1" | head -n 1)
-		xwallpaper --output $1 --zoom $wallDir/$wall
+		# xwallpaper --output $1 --zoom $wallDir/$wall
 		;;
 	*)
 		wall=$(ls $wallDir | grep "default" | head -n 1)
-		xwallpaper --output $1 --zoom $wallDir/$wall
+		# xwallpaper --output $1 --zoom $wallDir/$wall
 		;;
 	esac
+  swaybg --output $1 -m fill --image $wallDir/$wall &
 }
 
 # Set the wallpaper for each display
+killall swaybg > /dev/null 2>&1
 for display in $displays; do
 	setDisplay $display
 done
