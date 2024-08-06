@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -z "$1" ] && col=$(colorpicker --short --one-shot) ||
+[ -z "$1" ] && col=$(hyprpicker -an ) ||
   col="$1"
 
 
