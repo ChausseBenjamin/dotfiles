@@ -78,7 +78,7 @@ if test -z "$XDG_RUNTIME_DIR"; then
 fi
 
 startw(){
-  dbus-run-session sh -c 'dwl'
+  dbus-launch --exit-with-session dwl
 }
 
 # Start Desktop Environment if on the main TTY

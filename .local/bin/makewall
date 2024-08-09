@@ -1,12 +1,11 @@
 #!/bin/sh
 
-# NOTE: (for wayland migration)
-# wlr-randr --json | jq -r '.[] | select(.enabled) | .name'
-
 wallDir="$XDG_CONFIG_HOME/wallpapers"
 
+# Reset any existing wallpapers
+killall swaybg
+
 # Acquire the list of connected displays
-# displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
 displays="$(wlr-randr --json | jq -r '.[] | select(.enabled) | .name')"
 echo "$displays"
 

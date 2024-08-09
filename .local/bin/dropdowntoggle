@@ -24,7 +24,7 @@ case "$TERMINAL" in
 	;;
  *foot)
 	classflag="-a"
-	titleflag="-T"
+	titleflag="--title"
 	cmdflag="-e"
 esac
 

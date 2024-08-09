@@ -8,23 +8,7 @@ PREVIEW_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
 PREVIEW_WIDTH=600 # px
 
 chafafunc() {
-  chafa -f sixel -O 0 --polite on -c full --color-space din99d -w 9 -t 0.8 --size "$(($1 -2))"x
-}
-
-# PrefixGen: generates a hash prefix for the given file
-# This is a unique identifier for the file to preview
-PrefixGen() {
-  # The file path is hashed instead of the file itself since large files
-  # can take a long time to hash and the file path is usually enough to
-  # uniquely identify the file. Also, the suffix is used to determine if
-  # the preview is outdated (which removes the need to hash the file).
-  readlink -f "$1" | sha256sum | cut -d' ' -f1
-}
-
-# SuffixGen: generates a hash suffix for the given file
-# This suffix is used to determine if the preview is outdated
-SuffixGen() {
-  stat -Lc "%Y" "$1"
+  chafa -f sixel -O 0 --polite on -c full --color-space din99d -w 9 -t 0.8 --size "$1"x
 }
 
 # Prevent recursive thumbnails (if the file ends in .six)
@@ -49,34 +33,31 @@ abcdefghijklmnopqrstuvwxyz\n""\
 1234567890\n""\
 !@#$\%(){}[]-+=_\`~"
 
-  convert -size "600x412" xc:'#ffffff' \
-    -gravity center -pointsize 28 \
+  convert -size "1920x1080" xc:'#ffffff' \
+    -gravity center -pointsize 76 \
     -font "$1" \
     -fill '#000000' \
     -annotate +0+0 "$PREVIEW_TEXT" \
-    -flatten tiff:- | chafafunc $4
+    -flatten jpeg:- | chafafunc $2
   ;;
 image/vnd.djvu)
   djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
-      convert djvu:- jpeg:- | chafafunc $4
+      convert djvu:- jpeg:- | chafafunc $2
   ;;
 image/webp)
-  dwebp "$1" -tiff -o - | chafafunc $4
+  dwebp "$1" -tiff -o - | chafafunc $2
   ;;
 image/heic)
-  convert "$1" jpeg:- | chafafunc $4
+  convert "$1" jpeg:- | chafafunc $2
   ;;
 image/*)
-  cat "$1" | chafafunc $4
+  cat "$1" | chafafunc $2
   ;;
 */pdf)
-  pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - | chafafunc $4
+  pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - | chafafunc $2
   ;;
 video/*)
-  prefix="$(PrefixGen "$1")"
-  suffix="$(SuffixGen "$1")"
-  filename="$prefix-$suffix"
-  ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - | chafafunc $4
+  ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - | chafafunc $2
   ;;
 application/*zip)
   atool --list -- "$1"

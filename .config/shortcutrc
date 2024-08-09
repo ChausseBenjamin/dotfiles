@@ -36,6 +36,7 @@ Neovim,        vi,  ~/.config/nvim
 OrgMode,       om,  ~/Dropbox/org
 School,        sf,  ~/Dropbox/A/scholar/sherbrooke/24-05-T2
 Scripts,       sc,  ~/.local/bin
+Screenshots,   ss,  ~/Pictures/captures
 Wallpapers,    wp,  ~/Pictures/wallpapers
 Website,       ww,  ~/Workspace/chausse.xyz
 WindowManager, wm,  ~/.local/src/dwl
