@@ -1,9 +1,6 @@
 #!/bin/sh
 
-wallDir="$XDG_CONFIG_HOME/wallpapers"
-
-# Reset any existing wallpapers
-killall swaybg
+wallDir="${XDG_CONFIG_HOME:-$HOME}/wallpapers"
 
 # Acquire the list of connected displays
 displays="$(wlr-randr --json | jq -r '.[] | select(.enabled) | .name')"
@@ -18,11 +15,9 @@ setDisplay() {
 	case $(ls $wallDir) in
 	*"$1"*)
 		wall=$(ls $wallDir | grep "$1" | head -n 1)
-		# xwallpaper --output $1 --zoom $wallDir/$wall
 		;;
 	*)
 		wall=$(ls $wallDir | grep "default" | head -n 1)
-		# xwallpaper --output $1 --zoom $wallDir/$wall
 		;;
 	esac
   swaybg --output $1 -m fill --image $wallDir/$wall &
