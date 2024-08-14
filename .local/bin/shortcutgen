@@ -59,7 +59,7 @@ function fullpath(str) {
     print "export G" uc_col2 "=" $3 "" > env_filepath
 
     # Write to $XDG_CONFIG_HOME/gtk-3.0/bookmarks
-    print "file://" fullpath($3) > gtk_filepath
+    print "file://" fullpath($3) " " $1 > gtk_filepath
   }
 }
 ' "$src"
