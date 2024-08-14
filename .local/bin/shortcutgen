@@ -5,9 +5,10 @@
 
 # If you do not want to create a specific file, replace it's variable with /dev/null
 awk -v lf_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts" \
-    -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
-    -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
-'
+  -v gtk_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks" \
+  -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
+  -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
+  '
 BEGIN {
   FS=","
   OFS=","
@@ -16,6 +17,12 @@ BEGIN {
 # Function to remove whitespaces from a string
 function remove_whitespace(str) {
   gsub(/[[:space:]]/, "", str)
+  return str
+}
+
+# Function to expand ~ into full path (ex: /home/...)
+function fullpath(str) {
+  gsub(/~\//, ENVIRON["HOME"] "/", str)
   return str
 }
 
@@ -50,6 +57,9 @@ function remove_whitespace(str) {
 
     # Write to $XDG_CACHE_HOME/env-shortcuts
     print "export G" uc_col2 "=" $3 "" > env_filepath
+
+    # Write to $XDG_CONFIG_HOME/gtk-3.0/bookmarks
+    print "file://" fullpath($3) > gtk_filepath
   }
 }
 ' "$src"
