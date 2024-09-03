@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Lynx Web Browser
+Comment=Text-based web browser
+Exec=/usr/bin/foot -e w3m -sixel %u
+Categories=Network;WebBrowser;
+MimeType=text/html;
+Icon=utilities-terminal

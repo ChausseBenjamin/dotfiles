@@ -3,9 +3,9 @@
 
 # enable certain tools only if on macOS
 case "$OSTYPE" in
-  darwin*)
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    ;;
+darwin*)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  ;;
 esac
 
 unsetopt PROMPT_SP 2>/dev/null
@@ -21,6 +21,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export W3M_DIR="$XDG_CONFIG_HOME/w3m"
 
 export DISTRIB_ID=arch
 export DISTRIB_RELEASE="$(uname -r)"
@@ -33,7 +34,7 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export QT_QPA_PLATFORMTHEME="gtk2"
-export MOZ_USE_XINPUT2=1 # Mozilla smooth scrolling/touchpad
+export MOZ_USE_XINPUT2=1                  # Mozilla smooth scrolling/touchpad
 export AWT_TOOLKIT="MToolkit wmname LG3D" # Fix for Java applications in dwm
 export _JAVA_AWT_WM_NONREPARENTING=1      # (this too)
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
@@ -74,10 +75,10 @@ aliasgen >/dev/null 2>&1
 
 # Ensure XDG_RUNTIME_DIR is set
 if test -z "$XDG_RUNTIME_DIR"; then
-	export XDG_RUNTIME_DIR="$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)"
+  export XDG_RUNTIME_DIR="$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)"
 fi
 
-startw(){
+startw() {
   dbus-launch --exit-with-session dwl
 }
 

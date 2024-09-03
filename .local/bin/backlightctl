@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Get the correct sub-directory for your backlight device
 root_path="/sys/class/backlight/"
@@ -12,26 +12,26 @@ default_step=10
 default_set=50
 
 to_percent() {
-	printf "%d" "$((100 * $1 / $max))"
+  printf "%d" "$((100 * $1 / $max))"
 }
 
 to_value() {
-	printf "%d" "$((max * $1 / 100))"
+  printf "%d" "$((max * $1 / 100))"
 }
 
 get_status() {
-	cat "$device/brightness"
+  cat "$device/brightness"
 }
 
 get_percent() {
-	to_percent "$(get_status)"
+  to_percent "$(get_status)"
 }
 
 # Add $1 to current brightness. Adjust if out of bounds (0-$max)
 # $1 is converted to a value between 0-$max within this function
 get_total() {
-	value="$(to_value "$1")"
-	printf "%d" "$(($(get_status) + $value))"
+  value="$(to_value "$1")"
+  printf "%d" "$(($(get_status) + $value))"
 }
 
 helpmsg="Usage: backlightctl -[FLAG] [PERCENTAGE]
@@ -46,38 +46,38 @@ helpmsg="Usage: backlightctl -[FLAG] [PERCENTAGE]
 case "$1" in
 
 -i | --increase)
-	[ -z "$2" ] && step="$default_step" || step="$2"
-	get_total "$step" >"$device/brightness"
-	;;
+  [ -z "$2" ] && step="$default_step" || step="$2"
+  get_total "$step" >"$device/brightness"
+  ;;
 
 -d | --decrease)
-	[ -z "$2" ] && step="$default_step" || step="$2"
-	get_total "-$step" >"$device/brightness"
-	;;
+  [ -z "$2" ] && step="$default_step" || step="$2"
+  get_total "-$step" >"$device/brightness"
+  ;;
 
 -s | --set)
-	[ -z "$2" ] && set="$default_set" || set="$2"
-	to_value "$set" >"$device/brightness"
-	;;
+  [ -z "$2" ] && set="$default_set" || set="$2"
+  to_value "$set" >"$device/brightness"
+  ;;
 
 -g | --get)
-	printf "󰃠 %s\n" "$(get_status)%"
-	;;
+  printf "󰃠 %s\n" "$(get_status)%"
+  ;;
 
 -h | --help)
-	printf "%s" "$helpmsg"
-	;;
+  printf "%s" "$helpmsg"
+  ;;
 *)
-	printf "\033[31mInvalid option: $1\033[0m\n%s" "$helpmsg" && exit 1
-	;;
+  printf "\033[31mInvalid option: $1\033[0m\n%s" "$helpmsg" && exit 1
+  ;;
 esac
 
 # Send notification
 case "$@" in
 *-q* | *--quiet*)
-	exit 0
-	;;
+  exit 0
+  ;;
 *)
-	notify-send.sh -t 1000 --replace-file /tmp/bl-notif -a "󰃠 Brightness:" "$(get_percent)%"
-	;;
+  notify-send.sh -t 1000 --replace-file /tmp/bl-notif -a "󰃠 Brightness:" "$(get_percent)%"
+  ;;
 esac

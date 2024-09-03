@@ -33,3 +33,4 @@ tmls,    tmux list-sessions
 xx,      chmod +x
 adog,    git log --all --decorate --oneline --graph
 yadog,   yadm log --all --decorate --oneline --graph
+z,       zathura --fork
