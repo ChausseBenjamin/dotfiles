@@ -3,15 +3,17 @@
 # Quit if a valid configuration source doesn't exist
 [ -f "$XDG_CONFIG_HOME/shortcutrc" ] && src="$XDG_CONFIG_HOME/shortcutrc" || exit 1
 
-# If you do not want to create a specific file, replace it's variable with /dev/null
+# If you do not want to create a specific file, replace its variable with /dev/null
 awk -v lf_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts" \
   -v gtk_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks" \
   -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
   -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
+  -v plain_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/plain-shortcuts" \
   '
 BEGIN {
   FS=","
   OFS=","
+  max_length = 0
 }
 
 # Function to remove whitespaces from a string
@@ -42,24 +44,48 @@ function fullpath(str) {
 
   # Check if line is empty or contains only whitespace
   if (NF) {
+    # Update max_length if current lhs is longer
+    if (length($1) > max_length) {
+      max_length = length($1)
+    }
+
+    # Store the current line for later processing
+    lines[NR] = $0
+  }
+}
+END {
+  for (i = 1; i <= NR; i++) {
+    split(lines[i], fields, FS)
+
+    # Skip processing if necessary fields are empty
+    if (fields[2] == "" || fields[3] == "") {
+      continue
+    }
 
     # Convert column 2 to lowercase
-    lc_col2 = tolower($2)
+    lc_col2 = tolower(fields[2])
 
     # Convert column 2 to uppercase
-    uc_col2 = toupper($2)
+    uc_col2 = toupper(fields[2])
 
     # Write to $XDG_CONFIG_HOME/lf/shortcuts
-    print "map g" lc_col2 " cd " $3 > lf_filepath
+    print "map g" lc_col2 " cd " fields[3] > lf_filepath
 
     # Write to $XDG_CACHE_HOME/zsh-shortcuts
-    print "g" lc_col2 "() {cd " $3 "}" > zsh_filepath
+    print "g" lc_col2 "() {cd " fields[3] "}" > zsh_filepath
 
     # Write to $XDG_CACHE_HOME/env-shortcuts
-    print "export G" uc_col2 "=" $3 "" > env_filepath
+    print "export G" uc_col2 "=" fields[3] "" > env_filepath
 
     # Write to $XDG_CONFIG_HOME/gtk-3.0/bookmarks
-    print "file://" fullpath($3) " " $1 > gtk_filepath
+    print "file://" fullpath(fields[3]) " " fields[1] > gtk_filepath
+
+    # Write plain Title + `,` + only if fields[1] is not empty
+    if (fields[1] != "") {
+      printf "%-*s : %s\n", max_length, fields[1], fullpath(fields[3]) > plain_filepath
+    } else if (fields[3] != "") {
+      printf "%s\n", fullpath(fields[3]) > plain_filepath
+    }
   }
 }
 ' "$src"

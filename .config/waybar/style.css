@@ -1,6 +1,6 @@
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-size: 11px;
+  font-size: 20;
   padding: 0px;
   font-family: sans-serif;
   /* color: #1b1d1b; */
@@ -9,6 +9,16 @@
 window#waybar {
   /* background-color: rgba(43, 48, 59, 0); */
   background-color: rgba(27, 29, 27, 0.78); /* #1b1d1b */
+}
+
+#layout {
+  padding-right: 5px;
+  margin-right: 5px;
+}
+
+#window {
+  padding-left: 5px;
+  margin-left: 5px;
 }
 
 #tags {
@@ -32,7 +42,7 @@ window#waybar {
   color: rgba(68, 122, 108, 1);            /* #447a6c */
 }
 
-#tags button.focused, #window {
+#tags button.focused, #window, #layout {
   background-color: rgba(125,75,35,0.8);   /* #7d4b23 */
   color: rgba(27, 29, 27, 1);              /* #1b1d1b */
 }

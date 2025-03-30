@@ -76,6 +76,10 @@ RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 
 zstyle ':vcs_info:git:*' formats '%b'
 
+
+export LF_KITTY_TEMPDIR="$(mktemp -d -t lf-kitty-XXXXXX)"
+export LF_KITTY_IMAGE_ID=$(date +%s)
+# export LF_KITTY_IMAGE_ID=1234
 f() {
     tmp="$(mktemp -uq)"
     trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM EXIT' HUP INT QUIT TERM EXIT
@@ -84,6 +88,10 @@ f() {
         dir="$(cat "$tmp")"
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
+}
+
+disks() {
+  lsblk -o NAME,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
 }
 
 # Commonly used shortcuts

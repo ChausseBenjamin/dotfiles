@@ -1,20 +1,34 @@
 #!/bin/sh
 
-layout=$(cat "$HOME/.cache/layout")
+cachefile="$HOME/.cache/layout"
 
-case "$layout" in
-ca)
-	setxkbmap -model pc104 -layout us -variant ,,
-	echo us >"$HOME/.cache/layout"
-	;;
-us)
-	setxkbmap -model pc104 -layout ca -variant ,,
-	echo ca >"$HOME/.cache/layout"
-	;;
-*)
-	setxkbmap -model pc104 -layout us -variant ,,
-	echo us >"$HOME/.cache/layout"
-	;;
-esac
+# Handle manual override first
+if [ -n "$1" ]; then
+    echo "$1" >"$cachefile"
+else
+    # Ensure the cache file exists, or initialize it
+    [ -f "$cachefile" ] || echo "us" >"$cachefile"
+    layout=$(cat "$cachefile")
 
-kill -38 "$(pidof dwmblocks)"
+    case "$layout" in
+    ca)
+        echo us >"$cachefile"
+        ;;
+    us)
+        echo ca >"$cachefile"
+        ;;
+    *)
+        echo us >"$cachefile"
+        ;;
+    esac
+fi
+
+# Apply keyboard layout
+riverctl keyboard-layout -model pc104 "$(cat "$cachefile")"
+
+# Restart the correct block if waybar is running
+waybar_pid=$(pidof waybar)
+if [ -n "$waybar_pid" ]; then
+    kill -38 "$waybar_pid"
+fi
+

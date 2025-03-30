@@ -17,7 +17,9 @@
 :e,      $EDITOR
 :q,      exit
 cdd,     cd ..
+disks,   lsblk -o ID-LINK,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
 e,       $EDITOR
+db,      maestral
 w,       $BROWSER
 g,       git
 ff,      fastfetch --raw $HOME/.cache/gentoo.six --logo-width 32 --logo-height 24 --logo-padding 2

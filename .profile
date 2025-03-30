@@ -45,6 +45,7 @@ export BAT_THEME="ansi"
 export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 
 # Path
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$(find "$HOME/.local/bin" -type d | paste -sd ":" -)"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
@@ -53,6 +54,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
+export GITHUB_TOKEN="$(pass gh/token)"
+export WIREMAN_CONFIG_DIR=$XDG_CONFIG_HOME/wireman
 
 # Set foot as the default terminal when not connected via SSH
 # or xterm when connected via SSH
@@ -78,11 +81,10 @@ if test -z "$XDG_RUNTIME_DIR"; then
   export XDG_RUNTIME_DIR="$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)"
 fi
 
-startw() {
-  dbus-launch --exit-with-session dwl
-}
-
 # Start Desktop Environment if on the main TTY
-[ "$(tty)" = "/dev/tty1" ] && ! pidof dwl >/dev/null 2>&1 && {
-  startw
+[ "$(tty)" = "/dev/tty1" ] && ! pidof river >/dev/null 2>&1 && {
+  dbus-launch --exit-with-session river -no-xwayland
+}
+[ "$(tty)" = "/dev/tty2" ] && ! pidof river >/dev/null 2>&1 && {
+  dbus-launch --exit-with-session river
 }

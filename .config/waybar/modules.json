@@ -1,17 +1,26 @@
 {
+  "river/layout": {
+    "format": " <tt>{}</tt> ",
+    "min-length": 4,
+    "align": "right"
+  },
+  "river/window": {
+    "format": "{}",
+  },
+  "river/tags": {
+    "num-tags": 9,
+    "set-tags": [
+      1, 2, 4, 8, 16, 32, 64, 128, 256
+    ],
+    "tag-labels": [
+      "1", "2", "3", "4", "5", "6", "7", "8", "9"
+    ],
+  },
   "dwl/tags": {
     "num-tags": 9,
     "disable-click": true,
     "tag-labels": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
+      "1", "2", "3", "4", "5", "6", "7", "8", "9"
     ],
   },
   "dwl/window": {
@@ -32,6 +41,13 @@
     "exec": "$HOME/.local/bin/dwmbar/dwmb-dotfiles",
     "interval": 3600,
     "signal": 7,
+  },
+  "custom/layout": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "/home/master/.local/bin/dwmbar/dwmb-layout",
+    "interval": 3600,
+    "signal": 4,
   },
   "custom/mail": {
     "format": "<tt>{}</tt>",

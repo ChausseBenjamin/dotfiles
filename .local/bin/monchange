@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Script to run whenever monitor configuration changes
+pidof waybar || setsid waybar
+pidof rivertile || rivertile &
+makewall &

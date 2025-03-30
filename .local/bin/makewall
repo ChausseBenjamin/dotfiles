@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-wallDir="${XDG_CONFIG_HOME:-$HOME}/wallpapers"
+wallDir="${XDG_CONFIG_HOME:-$HOME/.config}/wallpapers"
 
 # Acquire the list of connected displays and their models
 displays="$(wlr-randr --json | jq -r '.[] | select(.enabled) | "\(.name) \(.model)"')"

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+repo="$(echo "$1" | sed 's/\.git//;s/.*\///;')"
+
+git clone "$1" "$repo/repo"
+
+cd "$repo/repo"
+
+# Get the main/master branch upstream from the cloned repo
+master="$(git branch --show-curent)"
+
+cd .. && mv repo "$master"

@@ -1,6 +1,4 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 name = Benjamin Chausse
 email = benjamin@chausse.xyz
 signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
@@ -12,8 +10,27 @@ signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
 	rebase = false
 [commit]
 	gpgsign = true
+[tag]
+	gpgsign = true
 [sendemail]
 	smtpserver = mail.chausse.xyz
 	smtpuser = benjamin
 	smtpserverport = 587
 	smtpencryption = tls
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[safe]
+	directory = /home/master/.local/src/river
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+[merge]
+	conflictStyle = zdiff3

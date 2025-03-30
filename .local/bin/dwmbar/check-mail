@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -z "$($HOME/.local/bin/dwmbar/dwmb-mail)" ] && exit 1
+
+exit 0

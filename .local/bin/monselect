@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Acquire the list of connected displays
+displays="$(wlr-randr --json | jq -r '.[] | select(.enabled) | .name' | tofi)"

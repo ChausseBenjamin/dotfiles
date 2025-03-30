@@ -1,34 +1,39 @@
 #!/bin/sh
 
-# Toggle dropdown terminal windows.
-# The first argument is the title of the window.
-# The rest of it is the program/command to be run
-# in the dropdown window.
+# Toggle dropdown terminal windows in River.
+# The first argument is the name of the dropdown window.
+# The rest is the command to be run inside the terminal.
 
 name="$1"
 class="dropdown"
 title="dropdown_$name"
-active="$(xdotool search --name "$title" | wc -l)"
 shift
 
-case "$TERMINAL" in
-*st)
-	classflag="-c"
-	titleflag="-t"
-	cmdflag="-e"
-	;;
-*alacritty)
-	classflag="--class"
-	titleflag="--title"
-	cmdflag="--command"
-	;;
- *foot)
-	classflag="-a"
-	titleflag="--title"
-	cmdflag="-e"
-esac
+# Get the window ID of an existing dropdown terminal
+existing=$(riverctl list-views | awk -v class="$class" '$3 == class {print $1}')
 
-case "$active" in
-0) $TERMINAL "$classflag" "dropdown" "$titleflag" "$title" "$cmdflag" "$@" & ;;
-*) kill -9 "$(xdotool search --name "$class" getwindowpid)" ;;
-esac
+if [ -n "$existing" ]; then
+    # If found, close it
+    riverctl close-view "$existing"
+else
+    # Otherwise, launch a new one
+    case "$TERMINAL" in
+    *st)
+        classflag="-c"
+        titleflag="-t"
+        cmdflag="-e"
+        ;;
+    *alacritty)
+        classflag="--class"
+        titleflag="--title"
+        cmdflag="--command"
+        ;;
+    *foot)
+        classflag="-a"
+        titleflag="--title"
+        cmdflag="-e"
+        ;;
+    esac
+
+    $TERMINAL "$classflag" "$class" "$titleflag" "$title" "$cmdflag" "$@" &
+fi

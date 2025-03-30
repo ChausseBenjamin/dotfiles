@@ -1,0 +1,9 @@
+#!/bin/sh
+
+repo="$1"
+[ -z "$repo" ] && repo="$(basename "$(pwd)")"
+
+git remote set-url origin "ssh://chausse.xyz/$repo"
+git remote set-url --add --push origin "ssh://chausse.xyz/$repo"
+git remote set-url --add --push origin git@github.com:ChausseBenjamin/$repo
+

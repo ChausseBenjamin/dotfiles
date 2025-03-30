@@ -1,0 +1,42 @@
+#!/bin/sh
+
+capturedir="${XDG_PICTURES_DIR:-$HOME/Pictures}/captures"
+
+infomsg="Usage: capture [OPTION]
+  -h,--help:       Print this help message
+  -s,--selection:  Capture a portion of the screen
+  -f,--fullscreen: Grab the entire screen
+"
+
+capturetype=""
+capturename="/dev/null"
+msg="Capture location: "
+
+icon="󰄀"
+
+case "$1" in
+  -w|--window)
+    capturetype="Window"
+    msg="Not implemented yet"
+    ;;
+
+  -s|--selection)
+    capturetype="Region"
+    sel="$(slurp -w0 -b"447a6c69")"
+    capturename="$capturedir/capture-$(date "+%Y-%M-%d_%H-%m-%S").png"
+    grim -t png -g "$sel" $capturename
+    msg="$msg$capturename"
+    ;;
+
+  -f|--fulscreen)
+    capturetype="Fulscreen"
+    capturename="$capturedir/capture-$(date "+%Y-%M-%d_%H-%m-%S").png"
+    msg="$msg$capturename"
+    grim -t png "$capturename"
+    ;;
+
+  *) echo "Invalid argument provided" && printf "$infomsg" && exit 1 ;;
+esac
+
+wl-copy --type image/png < $capturename
+notify-send "$msg" -a "$icon  $capturetype Capture" -i "$capturename"

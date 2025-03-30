@@ -1,0 +1,23 @@
+#!/bin/sh
+
+
+# raw (basic processing before converting to specific formats)
+#   - remove comments
+#   - remove empty lines
+#   - remove spacing (keep commas between columns)
+#   - remove trailing whitespace
+
+# Strip comments, remove empty lines, condense spacing, remove trailing whitespace
+raw="$(sed 's/#.*//g;s/,[[:space:]]*/,/g;/^$/d;s/[[:space:]]*$//g' <"${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc")"
+
+# lf (sourced by lfrc)
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/map g\2 cd \3/' >"${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts"
+
+# Shell aliases (read by zshrc)
+echo "$raw" | sed 's/\(.*\),\(.*\),\(.*\)/alias g\2="cd \3"/' >"${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts"
+
+# Environment variables (read by .profile)
+echo "$raw" | sed 's/^\(.*\),\(.*\),/export G\U\2=,/;s/,\(.*\)/\1/' >"${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts"
+
+
+

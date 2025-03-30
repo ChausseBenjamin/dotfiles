@@ -1,4 +1,5 @@
 {
+  "reload_style_on_change": false,
   "position": "top",
    "layer": "top",
    "height": 12,
@@ -7,8 +8,9 @@
    "_Modules_": "Choose the order of the modules",
 
    "modules-left": [
-     "dwl/tags",
-     "dwl/window",
+     "river/tags",
+     "river/layout",
+     "river/window"
    ],
 
    "modules-center": [
@@ -18,9 +20,10 @@
      "custom/dotfiles",
      "custom/mail",
      "custom/eselect",
+     "custom/layout",
      "custom/date",
      "custom/time",
-     "custom/battery",
+     "custom/battery"
    ],
 
    "include": "~/.config/waybar/modules.json"

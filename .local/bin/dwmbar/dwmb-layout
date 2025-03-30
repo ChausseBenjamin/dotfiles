@@ -1,3 +1,5 @@
 #!/bin/sh
 
-echo "  $(cat "$HOME/.cache/layout")"
+text="  $(cat "$HOME/.cache/layout")"
+
+printf '{ "text": "%s", "class": "block" }\n' "$text"

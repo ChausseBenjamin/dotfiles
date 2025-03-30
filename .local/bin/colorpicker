@@ -6,6 +6,6 @@
 
 sed "s/fill=.*>/fill=\"$col\">/g" $HOME/.local/share/circle.svg > /tmp/circle.svg
 
-echo "$col" | xsel -b
+echo "$col" | wl-copy
 
 notify-send -i "/tmp/circle.svg" -a "Colorpicker" "$col was successfully copied to your clipboard."

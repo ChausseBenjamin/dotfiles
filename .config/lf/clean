@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$XDG_CONFIG_HOME/lf/kitty.sh delete_img $LF_KITTY_IMAGE_ID 0

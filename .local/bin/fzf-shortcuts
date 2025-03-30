@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Example shortcutfile contents:
+# Compilation   : /home/master/.local/src
+# Config        : /home/master/.config
+# CV            : /home/master/Dropbox/A/work/Application/CV/current
+# Downloads     : /home/master/Downloads
+# Dropbox       : /home/master/Dropbox
+# Hotkeys       : /home/master/.config/sxhkd
+
+shortcutfile="${XDG_CACHE_HOME:-$HOME/.cache}/plain-shortcuts"
+
+# Read the file and pass it to fzf
+selected=$(cat "$shortcutfile" | fzf)
+
+# Extract the path part (after the colon)
+selected_path=$(echo "$selected" | cut -d ':' -f 2-)
+
+# Trim leading and trailing whitespace
+selected_path=$(echo "$selected_path" | sed 's/^ *//;s/ *$//')
+
+# Print the selected path
+echo "$selected_path"

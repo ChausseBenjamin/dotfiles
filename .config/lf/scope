@@ -8,7 +8,7 @@ PREVIEW_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
 PREVIEW_WIDTH=600 # px
 
 chafafunc() {
-  chafa -f sixel -O 0 --polite on -c full --color-space din99d -w 9 -t 0.8 --size "$1"x
+  chafa -f sixel -O 0 --polite on -c full -w 9 -t 0.8 --view-size "$1"x"$2" --animate false --fg-only
 }
 
 # Prevent recursive thumbnails (if the file ends in .six)
@@ -19,16 +19,22 @@ text/html)
   lynx -width="$4" -display_charset=utf-8 -dump "$1"
   ;;
 text/troff)
-  man ./ "$1" | col -b
+  w=`expr "$2" - 2`
+  MANWIDTH="$w" man ./ "$1"
   ;;
-text/* | */xml | application/json | application/x-ndjson)
+text/* | */xml)
+  [ "${1##*.}" = "md" ] && glow -s dark -w "$2" "$1" && exit 0
   bat --terminal-width "$(($4 - 2))" -f "$1"
   ;;
+application/json | application/x-ndjson)
+  jq -C < "$1" ;;
 audio/* | application/octet-stream)
   mediainfo "$1" || exit 1
   ;;
 font/* | application/vnd.ms-opentype)
-  PREVIEW_TEXT="ABCDEFGHIJKLMNOPQRSTUBWXYZ\n""\
+  FONT_NAME=$(fc-query --format "%{family}\n" "$1" | head -n 1)
+
+  PREVIEW_TEXT="${FONT_NAME}\nABCDEFGHIJKLMNOPQRSTUBWXYZ\n""\
 abcdefghijklmnopqrstuvwxyz\n""\
 1234567890\n""\
 !@#$\%(){}[]-+=_\`~"
@@ -38,26 +44,27 @@ abcdefghijklmnopqrstuvwxyz\n""\
     -font "$1" \
     -fill '#000000' \
     -annotate +0+0 "$PREVIEW_TEXT" \
-    -flatten jpeg:- | chafafunc $2
+    -flatten jpeg:- | chafafunc $2 $3
   ;;
+
 image/vnd.djvu)
   djvused "$1" -e 'select 1; save-page-with /dev/stdout' |
-      convert djvu:- jpeg:- | chafafunc $2
+      convert djvu:- jpeg:- | chafafunc $2 $3
   ;;
 image/webp)
-  dwebp "$1" -tiff -o - | chafafunc $2
+  dwebp "$1" -tiff -o - | chafafunc $2 $3
   ;;
 image/heic)
-  convert "$1" jpeg:- | chafafunc $2
+  convert "$1" jpeg:- | chafafunc $2 $3
   ;;
 image/*)
-  cat "$1" | chafafunc $2
+  cat "$1" | chafafunc $2 $3
   ;;
 */pdf)
-  pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - | chafafunc $2
+  pdftocairo -singlefile -scale-to-x $PREVIEW_WIDTH -scale-to-y -1 -jpeg "$1" - | chafafunc $2 $3
   ;;
 video/*)
-  ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - | chafafunc $2
+  ffmpegthumbnailer -i "$1" -s 0 -c jpeg -f -o - | chafafunc $2 $3
   ;;
 application/*zip)
   atool --list -- "$1"

@@ -5,7 +5,7 @@
 [ ! -f "$1" ] && exit
 [ -z "$(file "$1" | grep -o 'image data')" ] && exit
 
-displays=$(xrandr | grep " connected" | sed 's/^\([a-Z,0-9,-]*\).*/\1/')
+displays=$(wlr-randr --json | jq -r '.[] | select(.active) | .name')
 
 # Same as above but use dmenu only if there are multiple displays
 if [ "$(echo "$displays" | wc -l)" -gt 1 ]; then
