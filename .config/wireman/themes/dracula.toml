@@ -1,0 +1,42 @@
+[colors]
+black = "#282a36"
+white = "#f8f8f2"
+gray = "#585c74"
+pink = "#ff79c6"
+purple = "#bd93f9"
+orange = "#ffb86c"
+orange-dark = "#e9b781"
+cyan = "#8be9fd"
+cyan-dark = "#3d808f"
+
+[base.focused]
+foreground = "white"
+background = "black"
+
+[base.unfocused]
+foreground = "gray"
+background = "black"
+
+[highlight.focused]
+foreground = "orange"
+background = "black"
+
+[highlight.unfocused]
+foreground = "orange-dark"
+background = "black"
+
+[title.focused]
+foreground = "cyan"
+background = "black"
+
+[title.unfocused]
+foreground = "cyan-dark"
+background = "black"
+
+[border.focused]
+foreground = "white"
+background = "black"
+
+[border.unfocused]
+foreground = "gray"
+background = "black"

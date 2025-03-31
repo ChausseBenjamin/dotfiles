@@ -1,0 +1,19 @@
+device_name = "AT Translated Set 2 keyboard"
+
+# capslock+escape combo
+[[dual_role]]
+input = "KEY_CAPSLOCK"
+hold = ["KEY_LEFTMETA"]
+tap = ["KEY_ESC"]
+
+# Left shift + "(" combo
+[[dual_role]]
+input = "KEY_LEFTSHIFT"
+hold = ["KEY_LEFTSHIFT"]
+tap = ["KEY_KPLEFTPAREN"]
+
+# Right shift + ")" combo
+[[dual_role]]
+input = "KEY_RIGHTSHIFT"
+hold = ["KEY_RIGHTSHIFT"]
+tap = ["KEY_KPRIGHTPAREN"]

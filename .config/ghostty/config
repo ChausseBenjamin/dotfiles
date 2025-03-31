@@ -1,0 +1,80 @@
+# Window
+# window-decoration = client
+window-theme = dark
+resize-overlay = never
+confirm-close-surface = false
+
+# macOS
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = true
+macos-icon = official
+
+# linux weirdness
+window-decoration = none
+window-padding-x = 0
+window-padding-y = 0
+
+# Kitty Images
+image-storage-limit = 3200000000
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Keybinds
+keybind = alt+shift+k=increase_font_size:1
+keybind = alt+shift+j=decrease_font_size:1
+keybind = super+shift+c=copy_to_clipboard
+keybind = super+shift+v=paste_from_clipboard
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = true
+
+# Background and Transparency
+background = #111a1f
+background-opacity = 0.8
+unfocused-split-opacity = 06
+background-blur = true
+background-blur-radius = 15
+
+# Fonts and Cursor
+font-family = "Vulf Mono"
+font-size = 15
+
+cursor-style = block
+cursor-color = #66aabb
+cursor-opacity = 0.8
+
+# custom-shader-animation = true
+# custom-shader = ~/.config/ghostty/shaders/starfield.glsl
+
+# Colorscheme
+
+# black
+palette = 0=#111a1f
+palette = 8=#868b8d
+# red
+palette = 1=#8d7856
+palette = 9=#810002
+# green
+palette = 2=#798362
+palette = 10=#037500
+# yellow
+palette = 3=#9b9257
+palette = 11=#ebcb88
+# blue
+palette = 4=#63768a
+palette = 12=#779988
+# magenta
+palette = 5=#b7416e
+palette = 13=#738c9c
+# cyan
+palette = 6=#6998b3
+palette = 14=#66aabb
+# white
+palette = 7=#c5c8c6
+palette = 15=#c0c7ca
+
+# vim:ft=ghostty

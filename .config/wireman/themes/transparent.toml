@@ -1,0 +1,32 @@
+[colors]
+black = "#101116"
+white = "#f1f5f9"
+orange = "#ebcb88"
+orange-dark = "#b7416d"
+gray = "#738c9c"
+cyan = "#66aabb"
+cyan-dark = "#798362"
+
+[base.focused]
+foreground = "white"
+
+[base.unfocused]
+foreground = "gray"
+
+[highlight.focused]
+foreground = "orange"
+
+[highlight.unfocused]
+foreground = "orange-dark"
+
+[title.focused]
+foreground = "cyan"
+
+[title.unfocused]
+foreground = "cyan-dark"
+
+[border.focused]
+foreground = "white"
+
+[border.unfocused]
+foreground = "gray"

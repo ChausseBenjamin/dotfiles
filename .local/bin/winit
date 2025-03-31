@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# winit: Wayland Init (using dwl)
-
-dwl &
-swaybg -i ~/.config/wallpaper/default.jpg &

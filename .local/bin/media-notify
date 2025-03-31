@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Create a temporary directory
-current="$(mktemp -d)"
-raw="$(playerctl metadata)"

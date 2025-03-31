@@ -1,0 +1,25 @@
+includes = [
+  "$HOME/Workspace/rafta/master",
+  "$HOME/Workspace/rafta/master/external"
+]
+files = [
+  "resources/schema.proto",
+]
+
+[history]
+directory = ""
+autosave = true
+disabled = false
+
+[server]
+default_address = "http://localhost:50051"
+default_auth_header = ""
+
+[logging]
+level = "Debug"
+directory = "$HOME/.cache"
+
+[ui]
+skin = "$HOME/.config/wireman/themes/transparent.toml"
+
+[tls]

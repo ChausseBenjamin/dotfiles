@@ -1,0 +1,45 @@
+output "eDP-1" alias $mainmon
+output "LG Electronics LG ULTRAWIDE 0x0002DCA5" alias $widemon
+
+
+profile dualmon {
+  output $mainmon {
+    enable
+      mode 2256x1504@59.999
+      position 0,0
+      transform normal
+      scale 1
+    }
+  output $widemon {
+    enable
+    mode 2560x1080@59.978
+    position 2256,424
+    transform 180
+    scale 1
+  }
+  exec monchange
+}
+
+
+profile singlemon {
+  output $mainmon {
+    enable
+    mode 2256x1504@59.999
+    position 0,0
+    transform normal
+    scale 1
+  }
+  exec monchange
+}
+
+profile singlewide {
+  output $mainmon disable
+  output $widemon {
+    enable
+    mode 2256x1504@59.9789
+    position 0,0
+    transform 180
+    scale 1
+  }
+  exec monchange
+}
