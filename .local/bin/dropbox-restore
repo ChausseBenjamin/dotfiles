@@ -19,13 +19,13 @@ else
 	exit 1
 fi
 
-excluded_files=$(dropbox-cli exclude list | awk '{print $1}' | sed 's/\/$//')
+excluded_files=$(maestral excluded list)
 
 if [ -z "$excluded_files" ]; then
 	notify-send -a " Dropbox" "No files are excluded in this directory."
 	exit 1
 fi
 
-echo "$excluded_files" | dmenu -w "$(xdotool getactivewindow)" -p " Select a file to restore:" | while read -r file; do
-	dropbox-cli exclude remove "$file"
+echo "$excluded_files" | tofi -p " Select a file to restore:" | while read -r file; do
+	maestral excluded remove "$file"
 done

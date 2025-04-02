@@ -1,4 +1,4 @@
-#!/usr/bin/lua
+#!/usr/bin/lua5.4
 
 --[[
 
@@ -508,23 +508,26 @@ local mappings = {
 	},
 }
 
--- -- These mappings are repeated, so they are separated from the mappings table
+-- These mappings are repeated, so they are separated from the mappings table
 local function tag_mappings()
 	for i = 1, 9 do
-		-- local tag_num = 1 << (i - 1)
-		local tag_num = math.pow(2, i - 1)
+		local tag_num = 1 << (i - 1)
+
 		-- Super+[1-9] to focus tag [0-8]
 		os.execute(string.format("riverctl map normal Super %s set-focused-tags %s", i, tag_num))
+
 		-- Super+Shift+[1-9] to tag focused view with tag [0-8]
 		os.execute(string.format("riverctl map normal Super+Shift %s set-view-tags %s", i, tag_num))
+
 		-- Super+Control+[1-9] to toggle focus of tag [0-8]
-		os.execute(string.format("riverctl map normal Super+Control %s toggle-focused-tags %s", i, tag_num))
+		os.execute(string.format("riverctl map normal Alt %s toggle-focused-tags %s", i, tag_num))
+
 		-- Super+Alt+[1-9] to toggle tag [0-8] of focused view
 		os.execute(string.format("riverctl map normal Super+Alt %s toggle-view-tags %s", i, tag_num))
 	end
+
 	-- river has a total of 32 tags
-	-- local all_tags = (1 << 32) - 1
-	local all_tags = math.pow(2, 32) - 1
+	local all_tags = (1 << 32) - 1
 	os.execute(string.format("riverctl map normal Super 0 set-focused-tags %s", all_tags))
 	os.execute(string.format("riverctl map normal Super+Shift 0 set-view-tags %s", all_tags))
 end

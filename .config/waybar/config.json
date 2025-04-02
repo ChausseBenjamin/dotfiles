@@ -19,7 +19,6 @@
    "modules-right": [
      "custom/dotfiles",
      "custom/mail",
-     "custom/eselect",
      "custom/layout",
      "custom/date",
      "custom/time",

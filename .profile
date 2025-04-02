@@ -14,7 +14,7 @@ unsetopt PROMPT_SP 2>/dev/null
 export EDITOR=nvim
 export TERMINAL=foot
 export TERMINAL_PROG=foot
-export BROWSER=firefox-bin
+export BROWSER=firefox
 
 # Misc
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -83,8 +83,14 @@ fi
 
 # Start Desktop Environment if on the main TTY
 [ "$(tty)" = "/dev/tty1" ] && ! pidof river >/dev/null 2>&1 && {
-  dbus-launch --exit-with-session river -no-xwayland
+  dbus-launch --exit-with-session river -no-xwayland &
+  /usr/bin/pipewire &
+  /usr/bin/wireplumber &
+  /usr/bin/pipewire-pulse &
 }
 [ "$(tty)" = "/dev/tty2" ] && ! pidof river >/dev/null 2>&1 && {
-  dbus-launch --exit-with-session river
+  dbus-launch --exit-with-session river &
+  /usr/bin/pipewire &
+  /usr/bin/wireplumber &
+  /usr/bin/pipewire-pulse &
 }
