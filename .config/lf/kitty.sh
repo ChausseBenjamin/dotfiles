@@ -32,24 +32,40 @@ delete_img() {
 #   $3 placement id
 #   $4 x, $5 y, $6 w, $7 h
 show() {
-    local img_width img_height new_width new_height aspect_ratio preview_ratio
+    local img_width img_height new_width new_height
     img_width=$(identify -format "%w" "$1")
     img_height=$(identify -format "%h" "$1")
     
-    # Calculate aspect ratios
-    aspect_ratio=$(echo "scale=4; $img_width / $img_height" | bc -l)
-    preview_ratio=$(echo "scale=4; $6 / $7" | bc -l)
+    # Debug output to file
+    echo "DEBUG: Image=${img_width}x${img_height}, Preview=${6}x${7}" >> /tmp/lf_debug.log
     
-    # Scale to fit while preserving aspect ratio
-    if (( $(echo "$aspect_ratio > $preview_ratio" | bc -l) )); then
-        # Image is wider - fit to width
+    # Calculate scale factors for both dimensions
+    local scale_w scale_h
+    scale_w=$(awk "BEGIN {print $6 / $img_width}")
+    scale_h=$(awk "BEGIN {print $7 / $img_height}")
+    
+    echo "DEBUG: Scale factors - width: $scale_w, height: $scale_h" >> /tmp/lf_debug.log
+    
+    # Use the SMALLER scale factor to ensure it fits in both dimensions
+    if (( $(awk "BEGIN {print ($scale_w < $scale_h)}") )); then
+        # Width scale is smaller - width constrained
         new_width=$6
-        new_height=$(echo "$6 / $aspect_ratio" | bc -l | cut -d. -f1)
+        new_height=$(awk "BEGIN {printf \"%.0f\", $img_height * $scale_w}")
+        echo "DEBUG: Using width scale (smaller) -> ${new_width}x${new_height}" >> /tmp/lf_debug.log
     else
-        # Image is taller - fit to height
+        # Height scale is smaller - height constrained
         new_height=$7
-        new_width=$(echo "$7 * $aspect_ratio" | bc -l | cut -d. -f1)
+        new_width=$(awk "BEGIN {printf \"%.0f\", $img_width * $scale_h}")
+        echo "DEBUG: Using height scale (smaller) -> ${new_width}x${new_height}" >> /tmp/lf_debug.log
     fi
+    
+    # Verify aspect ratio
+    local final_aspect original_aspect
+    original_aspect=$(awk "BEGIN {printf \"%.6f\", $img_width / $img_height}")
+    final_aspect=$(awk "BEGIN {printf \"%.6f\", $new_width / $new_height}")
+    echo "DEBUG: Original aspect: $original_aspect, Final aspect: $final_aspect" >> /tmp/lf_debug.log
+    echo "DEBUG: Final -> ${new_width}x${new_height}" >> /tmp/lf_debug.log
+    echo "---" >> /tmp/lf_debug.log
     
     transmit_file_png "$1" "$2"
     display_img "$2" "$3" "$4" "$5" "$new_width" "$new_height"

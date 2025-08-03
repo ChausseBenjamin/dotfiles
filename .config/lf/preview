@@ -30,6 +30,18 @@ application/json | application/x-ndjson)
 audio/* | application/octet-stream)
   mediainfo "$1" || exit 1
   ;;
+image/vnd.djvu)
+	djvused "$1" -e 'select 1; save-page-with /dev/stdout' | magick djvu:- "$THUMBNAIL_FPATH"
+	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
+	;;
+image/webp)
+	dwebp "$1" -tiff -o "$THUMBNAIL_FPATH"
+	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
+	;;
+image/heic)
+	magick convert "$1" "$THUMBNAIL_FPATH"
+	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
+	;;
 image/png)
 	$XDG_CONFIG_HOME/lf/kitty.sh show "$1" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
 	;;
@@ -41,10 +53,26 @@ image/*)
 	magick convert "$1" "$THUMBNAIL_FPATH"
 	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
 	;;
-application/pdf)
-	pdftocairo -singlefile -scale-to-x 600 -scale-to-y -1 -png "$1" "${THUMBNAIL_FPATH%.*}"
+*/pdf)
+	pdftocairo -singlefile -r 150 -png "$1" "${THUMBNAIL_FPATH%.*}"
 	mv "${THUMBNAIL_FPATH%.*}-1.png" "$THUMBNAIL_FPATH" 2>/dev/null || mv "${THUMBNAIL_FPATH%.*}.png" "$THUMBNAIL_FPATH"
 	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
+	;;
+video/*)
+	ffmpegthumbnailer -i "$1" -s 0 -c png -f -o "$THUMBNAIL_FPATH"
+	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
+	;;
+application/*zip)
+	atool --list -- "$1"
+	;;
+*spreadsheetml.sheet)
+	xlsx2csv -s 1 "$1" | bat --terminal-width "$(($4 - 2))" -l 'csv'
+	;;
+*opendocument*)
+	odt2txt "$1"
+	;;
+application/pgp-encrypted)
+	gpg -d -- "$1"
 	;;
 font/* | application/vnd.ms-opentype)
   FONT_NAME=$(fc-query --format "%{family}\n" "$1" | head -n 1)
