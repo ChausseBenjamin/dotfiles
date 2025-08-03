@@ -22,7 +22,7 @@ text/troff)
   MANWIDTH="$w" man ./ "$1"
   ;;
 text/* | */xml)
-  [ "${1##*.}" = "md" ] && glow -s dark -w "$2" "$1" && exit 0
+  [ "${1##*.}" = "md" ] && glow -w "$2" "$1" && exit 127
   bat --terminal-width "$(($4 - 2))" -f "$1"
   ;;
 application/json | application/x-ndjson)
@@ -42,7 +42,8 @@ image/*)
 	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
 	;;
 application/pdf)
-	gs -o "$THUMBNAIL_FPATH" -sDEVICE=pngalpha -dLastPage=1 "$1" >/dev/null
+	pdftocairo -singlefile -scale-to-x 600 -scale-to-y -1 -png "$1" "${THUMBNAIL_FPATH%.*}"
+	mv "${THUMBNAIL_FPATH%.*}-1.png" "$THUMBNAIL_FPATH" 2>/dev/null || mv "${THUMBNAIL_FPATH%.*}.png" "$THUMBNAIL_FPATH"
 	$XDG_CONFIG_HOME/lf/kitty.sh show "$THUMBNAIL_FPATH" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
 	;;
 font/* | application/vnd.ms-opentype)

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Read stdin fully
+data=$(cat)
+
+# Encode to base64, strip newlines
+b64=$(printf %s "$data" | base64 | tr -d '\n')
+
+# Emit OSC 52 sequence
+printf '\033]52;c;%s\a' "$b64"

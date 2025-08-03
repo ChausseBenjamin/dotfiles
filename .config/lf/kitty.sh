@@ -15,7 +15,7 @@ transmit_file_png() {
 display_img() {
     printf "\e[s" >/dev/tty # save cursor position
     tput cup $4 $3 >/dev/tty # move cursor
-    printf "\e_Ga=p,i=$1,p=$2,q=1\e\\" >/dev/tty
+    printf "\e_Ga=p,i=$1,p=$2,c=$5,r=$6,q=1\e\\" >/dev/tty
     printf "\e[u" >/dev/tty # restore cursor position
 }
 
@@ -32,11 +32,25 @@ delete_img() {
 #   $3 placement id
 #   $4 x, $5 y, $6 w, $7 h
 show() {
-    local img_width img_height new_width new_height
+    local img_width img_height new_width new_height aspect_ratio preview_ratio
     img_width=$(identify -format "%w" "$1")
     img_height=$(identify -format "%h" "$1")
-    new_width=$6
-    new_height=$7
+    
+    # Calculate aspect ratios
+    aspect_ratio=$(echo "scale=4; $img_width / $img_height" | bc -l)
+    preview_ratio=$(echo "scale=4; $6 / $7" | bc -l)
+    
+    # Scale to fit while preserving aspect ratio
+    if (( $(echo "$aspect_ratio > $preview_ratio" | bc -l) )); then
+        # Image is wider - fit to width
+        new_width=$6
+        new_height=$(echo "$6 / $aspect_ratio" | bc -l | cut -d. -f1)
+    else
+        # Image is taller - fit to height
+        new_height=$7
+        new_width=$(echo "$7 * $aspect_ratio" | bc -l | cut -d. -f1)
+    fi
+    
     transmit_file_png "$1" "$2"
     display_img "$2" "$3" "$4" "$5" "$new_width" "$new_height"
 }
