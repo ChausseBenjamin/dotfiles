@@ -16,49 +16,14 @@ source "$SCRIPT_DIR/cache_system.sh"
 #   $3 height of the display area in cell coordinates
 THUMBNAIL_FPATH="$LF_KITTY_TEMPDIR/thumbnail.png"
 
-# Resolve symlinks for consistent cache key generation
-REAL_FILE="$(readlink -f "$1")"
-
-# Early protection: Skip files in cache directory
-if [[ "${REAL_FILE#$CACHE_DIR}" != "$REAL_FILE" ]]; then
-    # This is a cache file - use direct display without caching
-    case "$REAL_FILE" in
-        *.png|*.jpg|*.jpeg)
-            $XDG_CONFIG_HOME/lf/kitty.sh show "$REAL_FILE" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
-            exit 127
-            ;;
-    esac
-fi
-
 # Get MIME type for caching decisions
-MIME_TYPE="$(file --dereference --brief --mime-type -- "$REAL_FILE")"
+MIME_TYPE="$(file --dereference --brief --mime-type -- "$1")"
 
-# Check if we already have a cached version (without generating)
+# Try to get cached version first for supported formats
 CACHED_FILE=""
 case "$MIME_TYPE" in
   image/jpeg | image/jpg | image/webp | image/heic | image/gif | image/* | */pdf | image/vnd.djvu | video/* | font/* | application/vnd.ms-opentype)
-    # Inline cache check to avoid broken functions
-    # Determine resolution based on content type
-    if [[ "$MIME_TYPE" =~ (pdf|djvu|font|opentype) ]]; then
-        target_width=$TEXT_CACHE_WIDTH
-        target_height=$TEXT_CACHE_HEIGHT
-    else
-        target_width=$IMAGE_CACHE_WIDTH
-        target_height=$IMAGE_CACHE_HEIGHT
-    fi
-    
-    # Generate cache key inline
-    file_stat=$(stat -c "%Y-%s-%n" "$REAL_FILE" 2>/dev/null || echo "missing")
-    cache_input="${file_stat}-${target_width}x${target_height}"
-    cache_key=$(echo "$cache_input" | sha256sum | cut -d' ' -f1)
-    
-    # Check for existing cache file
-    cache_file="$CACHE_DIR/images/${cache_key}.png"
-    if [[ -r "$cache_file" ]]; then
-        CACHED_FILE="$cache_file"
-        # Update access time for LRU cleanup
-        touch "$cache_file" "$CACHE_DIR/metadata/${cache_key}.meta" 2>/dev/null || true
-    fi
+    CACHED_FILE=$(get_cached_preview "$1" "$MIME_TYPE" 2>/dev/null || echo "")
     ;;
 esac
 
@@ -68,24 +33,12 @@ if [[ -n "$CACHED_FILE" && -f "$CACHED_FILE" ]]; then
   exit 127
 fi
 
-# Start preemptive caching when we encounter an uncached file
-case "$MIME_TYPE" in
-  image/jpeg | image/jpg | image/webp | image/heic | image/gif | image/* | */pdf | image/vnd.djvu | video/* | font/* | application/vnd.ms-opentype)
-    CURRENT_DIR="$(dirname "$REAL_FILE")"
-    precache_directory "$CURRENT_DIR" "$REAL_FILE" &
-    ;;
-esac
-
-# Now generate cache for current file and continue with normal preview logic
-case "$MIME_TYPE" in
-  image/jpeg | image/jpg | image/webp | image/heic | image/gif | image/* | */pdf | image/vnd.djvu | video/* | font/* | application/vnd.ms-opentype)
-    CACHED_FILE=$(get_cached_preview "$REAL_FILE" "$MIME_TYPE" 2>/dev/null || echo "")
-    if [[ -n "$CACHED_FILE" && -f "$CACHED_FILE" ]]; then
-      $XDG_CONFIG_HOME/lf/kitty.sh show "$CACHED_FILE" $LF_KITTY_IMAGE_ID 1 $4 $5 $2 $3
-      exit 127
-    fi
-    ;;
-esac
+# Start preemptive caching ONLY when we encounter an uncached file
+CURRENT_DIR="$(dirname "$(readlink -f "$1")")"
+echo "DEBUG: Starting precache for directory: $CURRENT_DIR" >> /tmp/precache.log
+echo "DEBUG: Found files: $(find "$CURRENT_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.heic" -o -iname "*.gif" -o -iname "*.pdf" \) 2>/dev/null | wc -l)" >> /tmp/precache.log
+precache_directory "$CURRENT_DIR" &
+echo "DEBUG: Precache background job started with PID: $!" >> /tmp/precache.log
 
 # case "$(basename -- "$1" | tr '[:upper:]' '[:lower:]')" in
 case "$MIME_TYPE" in

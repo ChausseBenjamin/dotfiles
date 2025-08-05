@@ -1,0 +1,57 @@
+# Yazi keymap configuration migrated from lf
+# Based on ~/.config/lf/lfrc
+
+[mgr]
+prepend_keymap = [
+    # File operations (matching lf bindings)
+    { on = "d", run = "yank --cut", desc = "Cut files (like lf)" },
+    { on = "D", run = "remove", desc = "Delete files" },
+    { on = "<C-n>", run = "create --dir", desc = "Create directory" },
+    { on = ".", run = "hidden toggle", desc = "Toggle hidden files" },
+    # Smart navigation/opening plugin
+    { on = "<Enter>", run = "plugin smart-enter", desc = "Enter directory or open file" },
+    { on = "l", run = "plugin smart-enter", desc = "Enter directory or open file" },
+    { on = "x", run = "shell '$0' --block", desc = "Execute file" },
+    { on = "X", run = "shell '$0' --orphan", desc = "Execute file in background" },
+    { on = "o", run = "open", desc = "Open with default" },
+    { on = "O", run = "open --interactive", desc = "Open with chooser" },
+
+    # Rename operations (matching lf bindings)
+    { on = "A", run = "rename --cursor=end", desc = "Rename at end" },
+    { on = "c", run = "rename --empty=all", desc = "New rename (clear all)" },
+    { on = "I", run = "rename --cursor=start", desc = "Rename at beginning" },
+    { on = "i", run = "rename --cursor=before_ext", desc = "Rename before extension" },
+    { on = "a", run = "rename --cursor=end", desc = "Rename after extension" },
+    # { on = "B", run = "shell '~/.config/yazi/scripts/lf-bulkrename' --block", desc = "Bulk rename (lf style)" },
+    { on = "B", run = "plugin bulk-rename", desc = "Bulk rename (lf style)" },
+
+    # Navigation (matching lf bindings)
+    { on = "<C-e>", run = "arrow 1", desc = "Move down" },
+    { on = "<C-y>", run = "arrow -1", desc = "Move up" },
+
+    # External programs (matching lf bindings)
+    # { on = "V", run = "shell 'nvim' --interactive", desc = "Open nvim" },
+    { on = "N", run = "create", desc = "Create file" },
+    { on = "W", run = "shell '$TERMINAL' --orphan", desc = "Open terminal" },
+
+    # Custom lf-specific bindings (may need adjustment)
+    { on = "E", run = "shell 'maestral excluded add \"$0\" && notify-send -a \" Dropbox\" \"Excluded $0 from computer\"' --block", desc = "Exclude from Dropbox" },
+    { on = "R", run = "shell 'dropbox-restore \"$0\"' --block", desc = "Restore from Dropbox" },
+    { on = "S", run = "shell 'maestral sharelink \"$0\" | wl-copy && notify-send -a \" Dropbox\" \"Link copied to clipboard.\"' --block", desc = "Copy Dropbox share link" },
+    { on = "b", run = "shell 'setbg \"$0\"' --block", desc = "Set as background" },
+
+    # Sort operations (matching lf bindings)
+    { on = ["s", "a"], run = ["sort mtime", "linemode mtime"], desc = "Sort by access time" },
+    { on = ["s", "c"], run = ["sort btime", "linemode btime"], desc = "Sort by creation time" },
+    { on = ["s", "e"], run = ["sort extension", "linemode none"], desc = "Sort by extension" },
+    { on = ["s", "n"], run = ["sort natural", "linemode none"], desc = "Sort naturally" },
+    { on = ["s", "s"], run = ["sort size", "linemode size"], desc = "Sort by size" },
+    { on = ["s", "t"], run = ["sort mtime", "linemode mtime"], desc = "Sort by modification time" },
+
+    # Dynamic shortcuts navigation (g key + dynamic sequence from ~/.cache/shortcuts.lua)
+    { on = "g", run = "plugin dynamic-keys", desc = "Go to shortcut (dynamic from shortcuts.lua)" },
+
+    # Dynamic file operations with shortcuts
+    { on = "Y", run = "plugin dynamic-keys -- copy", desc = "Copy selected files to shortcut directory" },
+    { on = "M", run = "plugin dynamic-keys -- move", desc = "Move selected files to shortcut directory" },
+]

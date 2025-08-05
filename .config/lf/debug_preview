@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Debug version of preview script to see what's happening
+# This will help us understand why images are still blurry
+
+FILE_PATH="$1"
+PREVIEW_WIDTH="${2:-80}"
+PREVIEW_HEIGHT="${3:-24}"
+
+echo "=== DEBUG INFO ===" >&2
+echo "File: $FILE_PATH" >&2
+echo "Preview area: ${PREVIEW_WIDTH}x${PREVIEW_HEIGHT}" >&2
+
+if [[ -f "$FILE_PATH" ]]; then
+    # Check if it's an image
+    mime_type=$(file --dereference --brief --mime-type -- "$FILE_PATH" 2>/dev/null)
+    echo "MIME type: $mime_type" >&2
+    
+    if [[ "$mime_type" == image/* ]]; then
+        # Get image dimensions
+        read -r img_width img_height <<< "$(magick identify -format "%w %h" "$FILE_PATH" 2>/dev/null || echo "0 0")"
+        echo "Image dimensions: ${img_width}x${img_height}" >&2
+        
+        # Calculate what we would do
+        resize_threshold=1.5
+        width_ratio=$(awk "BEGIN {printf \"%.2f\", $img_width / $PREVIEW_WIDTH}")
+        height_ratio=$(awk "BEGIN {printf \"%.2f\", $img_height / $PREVIEW_HEIGHT}")
+        
+        echo "Ratios - Width: $width_ratio, Height: $height_ratio" >&2
+        
+        if (( $(awk "BEGIN {print ($width_ratio > $resize_threshold || $height_ratio > $resize_threshold)}") )); then
+            echo "Decision: RESIZE (ratios exceed threshold $resize_threshold)" >&2
+        else
+            echo "Decision: NATIVE DISPLAY (ratios within threshold)" >&2
+        fi
+        
+        # Show what the actual kitty.sh command would be
+        echo "Kitty command would be:" >&2
+        echo "  kitty.sh show '$FILE_PATH' ... $PREVIEW_WIDTH $PREVIEW_HEIGHT" >&2
+    fi
+fi
+
+echo "=================" >&2
+
+# Fall back to text preview
+head -n 10 "$FILE_PATH" 2>/dev/null || echo "Cannot preview file"

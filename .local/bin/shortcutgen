@@ -8,6 +8,7 @@ awk -v lf_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts" \
   -v gtk_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks" \
   -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
   -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
+  -v nvim_dropsites_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/shortcuts.lua" \
   -v plain_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/plain-shortcuts" \
   '
 BEGIN {
@@ -54,6 +55,9 @@ function fullpath(str) {
   }
 }
 END {
+  # Prep for nvim-dropsites:
+  print "return {" > nvim_dropsites_filepath
+
   for (i = 1; i <= NR; i++) {
     split(lines[i], fields, FS)
 
@@ -80,6 +84,14 @@ END {
     # Write to $XDG_CONFIG_HOME/gtk-3.0/bookmarks
     print "file://" fullpath(fields[3]) " " fields[1] > gtk_filepath
 
+    # Write to $XDG_CACHE_HOME/nvim-dropsites
+    split(lines[i], fields, FS)
+    if (fields[1] != "" && fields[3] != "") {
+      printf "{ name = \"%s\", dir = \"%s\" },\n", fields[1], fullpath(fields[3]) >> nvim_dropsites_filepath
+    } else if (fields[3] != "") {
+      printf "{ name = \"\", dir = \"%s\" },\n", fullpath(fields[3]) >> nvim_dropsites_filepath
+    }
+
     # Write plain Title + `,` + only if fields[1] is not empty
     if (fields[1] != "") {
       printf "%-*s : %s\n", max_length, fields[1], fullpath(fields[3]) > plain_filepath
@@ -87,5 +99,8 @@ END {
       printf "%s\n", fullpath(fields[3]) > plain_filepath
     }
   }
+
+  # Closure for nvim-dropsites:
+  print "}" >> nvim_dropsites_filepath
 }
 ' "$src"

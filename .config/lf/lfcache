@@ -1,0 +1,139 @@
+#!/bin/bash
+
+# LF Cache Management Utility
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+source "$SCRIPT_DIR/cache_system.sh"
+
+show_help() {
+    cat << EOF
+LF Preview Cache Management
+
+Usage: $0 <command>
+
+Commands:
+    stats     Show cache statistics
+    clear     Clear entire cache
+    clean     Remove old cache entries (>30 days)
+    cleanup   Force LRU cleanup (reduce to 512MB)
+    size      Show current cache size in MB
+    
+Examples:
+    $0 stats    # Show cache info
+    $0 clear    # Clear all cached previews
+    $0 cleanup  # Force cleanup when cache is too large
+EOF
+}
+
+show_stats() {
+    if [[ ! -d "$CACHE_DIR" ]]; then
+        echo "Cache directory does not exist: $CACHE_DIR"
+        return
+    fi
+    
+    local image_count meta_count cache_size_mb
+    image_count=$(find "$CACHE_DIR/images" -name "*.png" 2>/dev/null | wc -l)
+    meta_count=$(find "$CACHE_DIR/metadata" -name "*.meta" 2>/dev/null | wc -l)
+    cache_size_mb=$(du -sm "$CACHE_DIR" 2>/dev/null | cut -f1 || echo 0)
+    
+    echo "LF Preview Cache Statistics:"
+    echo "  Location: $CACHE_DIR"
+    echo "  Cached images: $image_count"
+    echo "  Metadata files: $meta_count"
+    echo "  Total size: ${cache_size_mb}MB / ${MAX_CACHE_SIZE_MB}MB max"
+    
+    # Show size status
+    if [[ $cache_size_mb -gt $MAX_CACHE_SIZE_MB ]]; then
+        echo "  Status: ⚠️  Cache exceeds maximum size - cleanup will trigger"
+    elif [[ $cache_size_mb -gt $TARGET_CACHE_SIZE_MB ]]; then
+        echo "  Status: ℹ️  Cache is moderate size (${TARGET_CACHE_SIZE_MB}MB+ will trigger cleanup)"
+    else
+        echo "  Status: ✅ Cache size is optimal"
+    fi
+    
+    if [[ $image_count -gt 0 ]]; then
+        echo
+        echo "Recent cache entries:"
+        find "$CACHE_DIR/images" -name "*.png" -printf "%T+ %p\n" 2>/dev/null | sort -r | head -5 | while read -r timestamp file; do
+            local size_kb
+            size_kb=$(du -k "$file" 2>/dev/null | cut -f1 || echo 0)
+            echo "  $(basename "$file" .png): ${size_kb}KB (${timestamp%.*})"
+        done
+    fi
+}
+
+clear_cache() {
+    if [[ -d "$CACHE_DIR" ]]; then
+        echo "Clearing cache directory: $CACHE_DIR"
+        rm -rf "$CACHE_DIR"
+        mkdir -p "$CACHE_DIR"/{images,metadata,locks}
+        echo "Cache cleared."
+    else
+        echo "Cache directory does not exist."
+    fi
+}
+
+clean_old_cache() {
+    if [[ ! -d "$CACHE_DIR" ]]; then
+        echo "Cache directory does not exist."
+        return
+    fi
+    
+    echo "Cleaning old cache entries (>30 days)..."
+    
+    local removed_images removed_meta
+    removed_images=$(find "$CACHE_DIR/images" -name "*.png" -mtime +30 -delete -print 2>/dev/null | wc -l)
+    removed_meta=$(find "$CACHE_DIR/metadata" -name "*.meta" -mtime +30 -delete -print 2>/dev/null | wc -l)
+    
+    echo "Removed $removed_images cached images and $removed_meta metadata files."
+}
+
+show_cache_size() {
+    local size_mb
+    size_mb=$(get_cache_size_mb)
+    echo "Current cache size: ${size_mb}MB"
+    echo "Maximum cache size: ${MAX_CACHE_SIZE_MB}MB"
+    echo "Target size after cleanup: ${TARGET_CACHE_SIZE_MB}MB"
+    
+    if [[ $size_mb -gt $MAX_CACHE_SIZE_MB ]]; then
+        echo "⚠️  Cache exceeds maximum size - cleanup recommended"
+    elif [[ $size_mb -gt $TARGET_CACHE_SIZE_MB ]]; then
+        echo "ℹ️  Cache is moderate size"
+    else
+        echo "✅ Cache size is optimal"
+    fi
+}
+
+force_cleanup() {
+    echo "Forcing LRU cache cleanup..."
+    cleanup_cache_lru
+}
+
+case "${1:-}" in
+    stats)
+        show_stats
+        ;;
+    clear)
+        clear_cache
+        ;;
+    clean)
+        clean_old_cache
+        ;;
+    cleanup)
+        force_cleanup
+        ;;
+    size)
+        show_cache_size
+        ;;
+    help|--help|-h)
+        show_help
+        ;;
+    *)
+        echo "Unknown command: ${1:-}"
+        echo
+        show_help
+        exit 1
+        ;;
+esac

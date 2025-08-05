@@ -1,0 +1,60 @@
+[mgr]
+
+ratio = [1,2,2]
+
+[opener]
+
+image = [
+    { run = 'imv "$@"', orphan = true, desc = "View with imv" },
+]
+video = [
+    { run = 'mpv "$@"', orphan = true, desc = "Play with mpv" },
+]
+text = [
+    { run = '$EDITOR "$@"', block = true, desc = "Edit with $EDITOR" },
+]
+archive = [
+    { run = 'file-roller "$@"', orphan = true, desc = "Extract with file-roller" },
+]
+fallback = [
+    { run = 'xdg-open "$@"', orphan = true, desc = "Open with default" },
+]
+
+[open]
+
+rules = [
+    # Images
+    { mime = "image/*", use = "image" },
+
+    # Videos
+    { mime = "video/*", use = "video" },
+
+    # Text files
+    { mime = "text/*", use = "text" },
+    { name = "*.lua", use = "text" },
+    { name = "*.md", use = "text" },
+    { name = "*.txt", use = "text" },
+    { name = "*.conf", use = "text" },
+    { name = "*.ini", use = "text" },
+    { name = "*.toml", use = "text" },
+    { name = "*.yaml", use = "text" },
+    { name = "*.yml", use = "text" },
+    { name = "*.json", use = "text" },
+
+    # Archives
+    { mime = "application/zip", use = "archive" },
+    { mime = "application/x-tar", use = "archive" },
+    { mime = "application/x-7z-compressed", use = "archive" },
+
+    # Fallback for everything else
+    { name = "*", use = "fallback" },
+]
+
+[preview]
+
+max_width = 1920
+image_quality = 85
+image_delay = 0
+
+[tasks]
+image_bound = [0,0]
