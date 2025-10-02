@@ -3,13 +3,14 @@
 # Quit if a valid configuration source doesn't exist
 [ -f "$XDG_CONFIG_HOME/shortcutrc" ] && src="$XDG_CONFIG_HOME/shortcutrc" || exit 1
 
-# If you do not want to create a specific file, replace its variable with /dev/null
-awk -v lf_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/lf/shortcuts" \
-  -v gtk_filepath="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks" \
-  -v zsh_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-shortcuts" \
-  -v env_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/env-shortcuts" \
-  -v nvim_dropsites_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/shortcuts.lua" \
-  -v plain_filepath="${XDG_CACHE_HOME:-$HOME/.cache}/plain-shortcuts" \
+# Environment variables with /dev/null defaults
+awk -v lf_filepath="${SHORTCUTGEN_LF_FILE:-/dev/null}" \
+  -v gtk_filepath="${SHORTCUTGEN_GTK_FILE:-/dev/null}" \
+  -v zsh_filepath="${SHORTCUTGEN_ZSH_FILE:-/dev/null}" \
+  -v env_filepath="${SHORTCUTGEN_ENV_FILE:-/dev/null}" \
+  -v misc_lua_filepath="${SHORTCUTGEN_LUA_FILE:-/dev/null}" \
+  -v plain_filepath="${SHORTCUTGEN_TXT_FILE:-/dev/null}" \
+  -v json_filepath="${SHORTCUTGEN_JSON_FILE:-/dev/null}" \
   '
 BEGIN {
   FS=","
@@ -56,7 +57,12 @@ function fullpath(str) {
 }
 END {
   # Prep for nvim-dropsites:
-  print "return {" > nvim_dropsites_filepath
+  print "return {" > misc_lua_filepath
+
+  # Start JSON file
+  print "[" > json_filepath
+
+  first_json_entry = 1
 
   for (i = 1; i <= NR; i++) {
     split(lines[i], fields, FS)
@@ -87,10 +93,18 @@ END {
     # Write to $XDG_CACHE_HOME/nvim-dropsites
     split(lines[i], fields, FS)
     if (fields[1] != "" && fields[3] != "") {
-      printf "{ name = \"%s\", dir = \"%s\" },\n", fields[1], fullpath(fields[3]) >> nvim_dropsites_filepath
+      printf "{ name = \"%s\", dir = \"%s\", keys = \"%s\" },\n", fields[1], fullpath(fields[3]), lc_col2 >> misc_lua_filepath
     } else if (fields[3] != "") {
-      printf "{ name = \"\", dir = \"%s\" },\n", fullpath(fields[3]) >> nvim_dropsites_filepath
+      printf "{ name = \"\", dir = \"%s\", keys = \"%s\" },\n", fullpath(fields[3]), lc_col2 >> misc_lua_filepath
     }
+
+    # Write to JSON file
+    if (first_json_entry) {
+      first_json_entry = 0
+    } else {
+      printf ",\n" >> json_filepath
+    }
+    printf"  {\"name\":\"%s\",\"path\":\"%s\",\"key\":\"%s\"}",fields[1],fullpath(fields[3]),lc_col2>>json_filepath
 
     # Write plain Title + `,` + only if fields[1] is not empty
     if (fields[1] != "") {
@@ -101,6 +115,9 @@ END {
   }
 
   # Closure for nvim-dropsites:
-  print "}" >> nvim_dropsites_filepath
+  print "}" >> misc_lua_filepath
+
+  # Closure JSON file
+  print "\n]" >> json_filepath
 }
 ' "$src"

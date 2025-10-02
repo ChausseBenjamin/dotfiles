@@ -1,2 +1,8 @@
 [flavor]
 dark = "no-clown-fiesta"
+
+[icon]
+prepend_dirs = [
+  { name = "Dropbox", text = " " },
+  { name = "Workspace", text = " " },
+]
