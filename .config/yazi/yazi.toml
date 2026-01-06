@@ -16,6 +16,9 @@ text = [
 archive = [
     { run = 'file-roller "$@"', orphan = true, desc = "Extract with file-roller" },
 ]
+epub = [
+    { run = 'zathura "$@"', orphan = true, desc = "Open with zathura" },
+]
 fallback = [
     { run = 'xdg-open "$@"', orphan = true, desc = "Open with default" },
 ]
@@ -45,6 +48,9 @@ rules = [
     { mime = "application/zip", use = "archive" },
     { mime = "application/x-tar", use = "archive" },
     { mime = "application/x-7z-compressed", use = "archive" },
+
+    # Epub files
+    { name = "*.epub", use = "epub" },
 
     # Fallback for everything else
     { name = "*", use = "fallback" },

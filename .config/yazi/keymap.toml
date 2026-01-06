@@ -1,6 +1,3 @@
-# Yazi keymap configuration migrated from lf
-# Based on ~/.config/lf/lfrc
-
 [mgr]
 prepend_keymap = [
     # File operations (matching lf bindings)
@@ -24,10 +21,6 @@ prepend_keymap = [
     { on = "a", run = "rename --cursor=end", desc = "Rename after extension" },
     # { on = "B", run = "shell '~/.config/yazi/scripts/lf-bulkrename' --block", desc = "Bulk rename (lf style)" },
     { on = "B", run = "plugin bulk-rename", desc = "Bulk rename (lf style)" },
-
-    # Navigation (matching lf bindings)
-    { on = "<C-e>", run = "arrow 1", desc = "Move down" },
-    { on = "<C-y>", run = "arrow -1", desc = "Move up" },
 
     # External programs (matching lf bindings)
     # { on = "V", run = "shell 'nvim' --interactive", desc = "Open nvim" },

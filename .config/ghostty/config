@@ -4,6 +4,8 @@ window-theme = dark
 resize-overlay = never
 confirm-close-surface = false
 
+shell-integration-features = ssh-env,ssh-terminfo,cursor
+
 # macOS
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
@@ -14,6 +16,10 @@ macos-icon = official
 window-decoration = none
 window-padding-x = 0
 window-padding-y = 0
+
+# Performance enhancements
+quit-after-last-window-closed = true
+quit-after-last-window-closed-delay = 5m
 
 # Kitty Images
 image-storage-limit = 3200000000
@@ -34,21 +40,18 @@ copy-on-select = true
 
 # Background and Transparency
 background = #111a1f
-background-opacity = 0.8
+background-opacity = 0.75
 unfocused-split-opacity = 06
 background-blur = true
 background-blur-radius = 15
 
 # Fonts and Cursor
 font-family = "Vulf Mono"
-font-size = 15
+font-size = 17
 
 cursor-style = block
-cursor-color = #66aabb
+cursor-color = #90a0b5
 cursor-opacity = 0.8
-
-# custom-shader-animation = true
-# custom-shader = ~/.config/ghostty/shaders/starfield.glsl
 
 # Colorscheme
 
