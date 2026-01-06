@@ -1,29 +1,26 @@
 {
-  "reload_style_on_change": false,
-  "position": "top",
-   "layer": "top",
-   "height": 12,
-   "spacing": 0,
+    "reload_style_on_change": false,
+    "position": "top",
+    "layer": "top",
+    "height": 12,
+    "spacing": 0,
 
-   "_Modules_": "Choose the order of the modules",
+    "modules-left": [
+        "dwl/tags",
+        "dwl/window"
+    ],
 
-   "modules-left": [
-     "river/tags",
-     "river/layout",
-     "river/window"
-   ],
+    "modules-center": [],
 
-   "modules-center": [
-   ],
+    "modules-right": [
+        "custom/dotfiles",
+        "custom/mail",
+        "custom/layout",
+        "custom/date",
+        "custom/time",
+        "custom/network",
+        "custom/battery"
+    ],
 
-   "modules-right": [
-     "custom/dotfiles",
-     "custom/mail",
-     "custom/layout",
-     "custom/date",
-     "custom/time",
-     "custom/battery"
-   ],
-
-   "include": "~/.config/waybar/modules.json"
+    "include": "~/.config/waybar/modules.json"
 }

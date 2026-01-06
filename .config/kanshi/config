@@ -1,6 +1,28 @@
 output "eDP-1" alias $mainmon
-output "LG Electronics LG ULTRAWIDE 0x0002DCA5" alias $widemon
+output "DP-9"  alias $widemon
+output "DP-10" alias $bigmon
 
+profile triplemon {
+	output $mainmon {
+      mode 2256x1504@59.999
+      position 0,1016
+			transform normal
+			scale 1
+	}
+	output $widemon {
+		  mode 2560x1080@59.978
+			position 2256,1440
+			transform 180
+			scale 1
+	}
+	output $bigmon {
+	    mode 3840x2160@59.997
+			position 2256,0
+			transform normal
+			scale 1.5
+	}
+  exec monchange
+}
 
 profile dualmon {
   output $mainmon {
@@ -19,7 +41,6 @@ profile dualmon {
   }
   exec monchange
 }
-
 
 profile singlemon {
   output $mainmon {

@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Usage:
+# This script prints network status with appropriate icons
+# Checks ethernet first, then WiFi via wpa_supplicant
+#
+# Icons:
+# 󰈀  Ethernet connected
+# 󰤮  WiFi/wpa_supplicant disabled  
+# 󰤯  No WiFi connection
+# 󰤟  WiFi strength low (0-25%)
+# 󰤢  WiFi strength mid (26-50%) 
+# 󰤥  WiFi strength high (51-75%)
+# 󰤨  WiFi strength max (76-100%)
+
+# Check if ethernet is connected
+for eth in /sys/class/net/e*; do
+    [ -d "$eth" ] && [ "$(cat "$eth/operstate" 2>/dev/null)" = "up" ] && {
+        printf '{ "text": "󰈀 ", "class": "block" }\n'
+        exit 0
+    }
+done
+
+# Check wpa_supplicant status
+wpa_status=$(wpa_cli -i wlan0 status 2>/dev/null)
+[ $? -ne 0 ] && {
+    printf '{ "text": "󰤮 ", "class": "block" }\n'
+    exit 0
+}
+
+# Check if connected to WiFi
+echo "$wpa_status" | grep -q "wpa_state=COMPLETED" || {
+    printf '{ "text": "󰤯 ", "class": "block" }\n'
+    exit 0
+}
+
+# Get signal strength
+signal=$(wpa_cli -i wlan0 signal_poll 2>/dev/null | grep "^RSSI=" | cut -d= -f2)
+[ -z "$signal" ] && signal=-100
+
+# Convert RSSI to approximate percentage (rough estimation)
+# RSSI ranges typically from -30 (excellent) to -90 (poor)
+if [ "$signal" -ge -50 ]; then
+    icon="󰤨"  # max strength
+elif [ "$signal" -ge -60 ]; then
+    icon="󰤥"  # high strength  
+elif [ "$signal" -ge -70 ]; then
+    icon="󰤢"  # mid strength
+else
+    icon="󰤟"  # low strength
+fi
+
+printf '{ "text": "%s ", "class": "block" }\n' "$icon"

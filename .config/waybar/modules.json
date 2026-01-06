@@ -72,6 +72,13 @@
     "interval": 3600,
     "signal": 1,
   },
+  "custom/network": {
+    "format": "<tt>{}</tt>",
+    "return-type": "json",
+    "exec": "$HOME/.local/bin/dwmbar/dwmb-network",
+    "interval": 3600,
+    "signal": 2,
+  },
   "custom/date": {
     "format": "<tt>{}</tt>",
     "return-type": "json",
