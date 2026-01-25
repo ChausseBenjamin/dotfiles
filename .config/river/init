@@ -38,9 +38,15 @@ local startup_commands = {
 	},
 	-- Startup programs
 	{ "gentoo-pipewire-launcher", "restart" },
-	{ "pidof", "waybar", "||", "waybar" },
-	{ "pidof", "kanshi", "||", "kanshi" },
+	{ "pidof",                    "waybar", "||", "waybar" },
+	{ "pidof",                    "kanshi", "||", "kanshi" },
 }
+
+-- local keyboard = {
+-- 	layouts = { "codemac" },
+-- 	model   = "basic",
+-- 	options = "grp:ctrl_space_toggle",
+-- }
 
 local keyboard = {
 	layouts = { "us", "ca" },
@@ -179,9 +185,9 @@ for action, patterns in pairs(window_rules) do
 			os.execute(string.format(
 				"riverctl rule-add -%s %s %s %s",
 				pattern_type, -- e.g., "app-id" or "title"
-				pattern, -- e.g., "dropdown" or "vesktop"
-				action, -- e.g., "float" or "tags"
-				args -- e.g., "" or "9"
+				pattern,  -- e.g., "dropdown" or "vesktop"
+				action,   -- e.g., "float" or "tags"
+				args      -- e.g., "" or "9"
 			))
 		end
 	end
@@ -213,7 +219,7 @@ local mappings = {
 			{ -- Terminal emulators
 				mod = "Super",
 				key = "Return",
-				command = { "spawn", "ghostty" },
+				command = { "spawn", [['ghostty']] },
 				-- command = { "spawn", "foot" },
 			},
 			{ -- Application launcher
@@ -372,8 +378,8 @@ local mappings = {
 				command = "toggle-fullscreen",
 			},
 			{ -- Toggle keyboard layout
-				mod = "Alt",
-				key = "Return",
+				mod = { "Super", "Shift" },
+				key = "Space",
 				command = { "spawn", "layouttoggle" },
 			},
 			{ -- Dropdown Terminal
@@ -389,7 +395,7 @@ local mappings = {
 			{ -- Dropdown Network Manager
 				mod = "None",
 				key = "XF86AudioMedia",
-				command = { "spawn", [['dropdowntoggle network nmtui']] },
+				command = { "spawn", [['colorpicker']] },
 			},
 			{ -- Dropdown Bluetooth Manager
 				mod = "Shift",

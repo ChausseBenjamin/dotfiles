@@ -1,9 +1,9 @@
 local get_files = ya.sync(function()
 	local files = {}
 	local selected = cx.active.selected
-	
+
 	ya.dbg("Selected count: " .. #selected)
-	
+
 	-- If files are selected, use only those; otherwise use all files in current directory
 	if #selected > 0 then
 		ya.dbg("Using selected files")
@@ -28,7 +28,7 @@ local get_files = ya.sync(function()
 			ya.dbg("No current.files found")
 		end
 	end
-	
+
 	ya.dbg("Total files for rename: " .. #files)
 	return files
 end)
@@ -39,9 +39,9 @@ end)
 
 local function entry()
 	ya.dbg("=== BULK RENAME PLUGIN START ===")
-	
+
 	local files = get_files()
-	
+
 	if #files == 0 then
 		ya.dbg("No files to rename - showing notification")
 		ya.notify({
@@ -52,17 +52,17 @@ local function entry()
 		})
 		return
 	end
-	
+
 	-- Create temporary files
 	local tmpfile_old = os.tmpname()
 	local tmpfile_new = os.tmpname()
-	
+
 	ya.dbg("Temp files: " .. tmpfile_old .. " | " .. tmpfile_new)
-	
+
 	-- Write file list to both temp files
 	local file_list = table.concat(files, "\n") .. "\n"
 	ya.dbg("File list content:\n" .. file_list)
-	
+
 	local f = io.open(tmpfile_old, "w")
 	if f then
 		f:write(file_list)
@@ -78,7 +78,7 @@ local function entry()
 		})
 		return
 	end
-	
+
 	f = io.open(tmpfile_new, "w")
 	if f then
 		f:write(file_list)
@@ -94,45 +94,45 @@ local function entry()
 		})
 		return
 	end
-	
+
 	-- Get editor and open the temp file
 	local editor = os.getenv("EDITOR") or "nano"
 	ya.dbg("Using editor: " .. editor)
 	ya.dbg("About to execute editor command...")
-	
+
 	-- Hide Yazi and give control to the terminal
-	local permit = ya.hide()
-	
+	local permit = ui.hide()
+
 	-- Run the editor synchronously and wait for it to complete
 	-- Use stdin/stdout/stderr inheritance to ensure proper TTY interaction
 	local status, err = Command(editor)
-		:arg(tmpfile_new)
-		:stdin(Command.INHERIT)
-		:stdout(Command.INHERIT)
-		:stderr(Command.INHERIT)
-		:status()
-	
+			:arg(tmpfile_new)
+			:stdin(Command.INHERIT)
+			:stdout(Command.INHERIT)
+			:stderr(Command.INHERIT)
+			:status()
+
 	-- Restore Yazi interface
 	permit:drop()
-	
+
 	if err then
 		ya.err("Failed to run editor: " .. tostring(err))
 		return
 	end
-	
+
 	ya.dbg("Editor exit status: success=" .. tostring(status.success) .. ", code=" .. tostring(status.code))
-	
+
 	if not status.success then
 		ya.err("Editor exited with non-zero status: " .. tostring(status.code or "unknown"))
 		return
 	end
-	
+
 	ya.dbg("Editor completed successfully")
-	
+
 	-- Read both files to compare
 	local old_names = {}
 	local new_names = {}
-	
+
 	f = io.open(tmpfile_old, "r")
 	if f then
 		for line in f:lines() do
@@ -143,7 +143,7 @@ local function entry()
 		f:close()
 		ya.dbg("Read " .. #old_names .. " old names")
 	end
-	
+
 	f = io.open(tmpfile_new, "r")
 	if f then
 		for line in f:lines() do
@@ -154,7 +154,7 @@ local function entry()
 		f:close()
 		ya.dbg("Read " .. #new_names .. " new names")
 	end
-	
+
 	-- Safety check: line count must match
 	if #old_names ~= #new_names then
 		ya.dbg("Line count mismatch: " .. #old_names .. " vs " .. #new_names)
@@ -168,24 +168,24 @@ local function entry()
 		os.remove(tmpfile_new)
 		return
 	end
-	
+
 	-- Perform renames
 	local renamed_count = 0
 	local current_dir = get_current_dir()
 	ya.dbg("Current directory: " .. current_dir)
-	
+
 	for i = 1, #old_names do
 		local old_name = old_names[i]
 		local new_name = new_names[i]
-		
+
 		ya.dbg("Processing: " .. old_name .. " -> " .. new_name)
-		
+
 		if old_name ~= new_name and new_name ~= "" then
 			local old_path = current_dir .. "/" .. old_name
 			local new_path = current_dir .. "/" .. new_name
-			
+
 			ya.dbg("Paths: " .. old_path .. " -> " .. new_path)
-			
+
 			-- Check if target exists
 			local new_cha, _ = fs.cha(Url(new_path))
 			if not new_cha then
@@ -213,16 +213,16 @@ local function entry()
 			end
 		end
 	end
-	
+
 	-- Cleanup
 	os.remove(tmpfile_old)
 	os.remove(tmpfile_new)
 	ya.dbg("Cleaned up temp files")
-	
+
 	-- Refresh Yazi
 	ya.emit("refresh", {})
 	ya.dbg("Emitted refresh")
-	
+
 	if renamed_count > 0 then
 		ya.dbg("Success: renamed " .. renamed_count .. " files")
 		ya.notify({
@@ -240,10 +240,11 @@ local function entry()
 			level = "info"
 		})
 	end
-	
+
 	ya.dbg("=== BULK RENAME PLUGIN END ===")
 end
 
 return {
 	entry = entry
 }
+

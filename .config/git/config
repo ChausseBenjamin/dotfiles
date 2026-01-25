@@ -9,7 +9,7 @@ signingkey = ABC4A5A7430D6309ACBD219044F94DD6456590C3
 [pull]
 	rebase = false
 [commit]
-	gpgsign = true
+	gpgsign = false
 [tag]
 	gpgsign = true
 [sendemail]

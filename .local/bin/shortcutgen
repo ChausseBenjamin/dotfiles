@@ -1,9 +1,15 @@
 #!/bin/sh
 
-# Quit if a valid configuration source doesn't exist
-[ -f "$XDG_CONFIG_HOME/shortcutrc" ] && src="$XDG_CONFIG_HOME/shortcutrc" || exit 1
+# Set source file
+# Source environment variables
+. "${GCF:-$HOME/.config}/shortcutgen/sources"
 
-# Environment variables with /dev/null defaults
+# Set source file to shortcuts data
+src="${GCF:-$HOME/.config}/shortcutgen/shortcuts"
+
+# Quit if a valid configuration source doesn't exist
+[ -f "$src" ] || exit 1
+
 awk -v lf_filepath="${SHORTCUTGEN_LF_FILE:-/dev/null}" \
   -v gtk_filepath="${SHORTCUTGEN_GTK_FILE:-/dev/null}" \
   -v zsh_filepath="${SHORTCUTGEN_ZSH_FILE:-/dev/null}" \

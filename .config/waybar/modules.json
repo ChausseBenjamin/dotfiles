@@ -5,7 +5,7 @@
     "align": "right"
   },
   "river/window": {
-    "format": "{}",
+    "format": "{}"
   },
   "river/tags": {
     "num-tags": 9,
@@ -14,40 +14,41 @@
     ],
     "tag-labels": [
       "1", "2", "3", "4", "5", "6", "7", "8", "9"
-    ],
+    ]
   },
   "dwl/tags": {
     "num-tags": 9,
     "disable-click": true,
     "tag-labels": [
       "1", "2", "3", "4", "5", "6", "7", "8", "9"
-    ],
+    ]
   },
   "dwl/window": {
     "format": " <tt>{layout}</tt> {title} ",
     "tooltip": false,
-    "max-length": 255,
+    "max-length": 255
   },
   "custom/time": {
     "format": "<tt>{}</tt>",
     "return-type": "json",
     "exec": "$HOME/.local/bin/dwmbar/dwmb-time",
     "interval": 3600,
-    "signal": 8,
+    "signal": 8
   },
   "custom/dotfiles": {
     "format": "<tt>{}</tt>",
     "return-type": "json",
     "exec": "$HOME/.local/bin/dwmbar/dwmb-dotfiles",
     "interval": 3600,
-    "signal": 7,
+    "signal": 7
   },
   "custom/layout": {
     "format": "<tt>{}</tt>",
     "return-type": "json",
     "exec": "/home/master/.local/bin/dwmbar/dwmb-layout",
     "interval": 3600,
-    "signal": 4,
+		"on-click": "layouttoggle",
+    "signal": 4
   },
   "custom/mail": {
     "format": "<tt>{}</tt>",
@@ -55,7 +56,7 @@
     "exec": "$HOME/.local/bin/dwmbar/dwmb-mail",
     "exec-if": "$HOME/.local/bin/dwmbar/check-mail",
     "interval": 3600,
-    "signal": 12,
+    "signal": 12
   },
   "custom/eselect": {
     "format": "<tt>{}</tt>",
@@ -63,7 +64,7 @@
     "exec": "$HOME/.local/bin/dwmbar/dwmb-eselect",
     "exec-if": "$HOME/.local/bin/dwmbar/check-eselect",
     "interval": 3600,
-    "signal": 11,
+    "signal": 11
   },
   "custom/battery": {
     "format": "<tt>{}</tt>",
@@ -71,6 +72,7 @@
     "exec": "$HOME/.local/bin/dwmbar/dwmb-battery",
     "interval": 3600,
     "signal": 1,
+    "on-click": "$HOME/.local/bin/power-menu"
   },
   "custom/network": {
     "format": "<tt>{}</tt>",
@@ -78,12 +80,13 @@
     "exec": "$HOME/.local/bin/dwmbar/dwmb-network",
     "interval": 3600,
     "signal": 2,
+    "on-click": "wpa_cli -i wlan0 status 2>/dev/null | grep '^ssid=' | cut -d= -f2 | xargs -I {} notify-send -a 'WiFi Network' '{}'"
   },
   "custom/date": {
     "format": "<tt>{}</tt>",
     "return-type": "json",
     "exec": "$HOME/.local/bin/dwmbar/dwmb-date",
     "interval": 3600,
-    "signal": 6,
-  },
+    "signal": 6
+  }
 }

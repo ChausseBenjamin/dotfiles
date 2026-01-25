@@ -6,10 +6,10 @@
 #
 # Icons:
 # 󰈀  Ethernet connected
-# 󰤮  WiFi/wpa_supplicant disabled  
+# 󰤮  WiFi/wpa_supplicant disabled
 # 󰤯  No WiFi connection
 # 󰤟  WiFi strength low (0-25%)
-# 󰤢  WiFi strength mid (26-50%) 
+# 󰤢  WiFi strength mid (26-50%)
 # 󰤥  WiFi strength high (51-75%)
 # 󰤨  WiFi strength max (76-100%)
 
@@ -34,6 +34,10 @@ echo "$wpa_status" | grep -q "wpa_state=COMPLETED" || {
     exit 0
 }
 
+# Get network name (SSID)
+ssid=$(echo "$wpa_status" | grep "^ssid=" | cut -d= -f2)
+[ -z "$ssid" ] && ssid="Unknown"
+
 # Get signal strength
 signal=$(wpa_cli -i wlan0 signal_poll 2>/dev/null | grep "^RSSI=" | cut -d= -f2)
 [ -z "$signal" ] && signal=-100
@@ -43,11 +47,11 @@ signal=$(wpa_cli -i wlan0 signal_poll 2>/dev/null | grep "^RSSI=" | cut -d= -f2)
 if [ "$signal" -ge -50 ]; then
     icon="󰤨"  # max strength
 elif [ "$signal" -ge -60 ]; then
-    icon="󰤥"  # high strength  
+    icon="󰤥"  # high strength
 elif [ "$signal" -ge -70 ]; then
     icon="󰤢"  # mid strength
 else
     icon="󰤟"  # low strength
 fi
 
-printf '{ "text": "%s ", "class": "block" }\n' "$icon"
+printf '{ "text": "%s %s", "class": "block" }\n' "$icon" "$ssid"

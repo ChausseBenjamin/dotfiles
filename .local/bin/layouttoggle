@@ -1,10 +1,10 @@
 #!/bin/sh
 #
 # Keyboard layout toggle script for mangowc
-# 
+#
 # USAGE:
 #   layouttoggle        - Cycle: ca -> us -> coolmak -> ca
-#   layouttoggle us     - Force set to US layout  
+#   layouttoggle us     - Force set to US layout
 #   layouttoggle ca     - Force set to Canadian layout (with é)
 #   layouttoggle coolmak - Force set to Coolmak layout
 #
@@ -17,41 +17,35 @@ if [ -n "$1" ]; then
         ca|us|coolmak)
             mmsg -d setoption,xkb_rules_layout,"$1"
             echo "$1" > "$cachefile"
-            echo "Layout set to: $1"
             ;;
         *)
             echo "Invalid layout: $1"
-            echo "Valid options: ca, us, coolmak"
             exit 1
             ;;
     esac
 else
     # Get current layout from mangowc
     current_layout=$(mmsg -g | grep "kb_layout" | head -1 | awk '{print $3}')
-    
+
     # Cycle through layouts: ca -> us -> coolmak -> ca
     case "$current_layout" in
         ca)
             mmsg -d setoption,xkb_rules_layout,us
             echo "us" > "$cachefile"
-            echo "Switched to: us"
             ;;
         us)
             mmsg -d setoption,xkb_rules_layout,coolmak
             echo "coolmak" > "$cachefile"
-            echo "Switched to: coolmak"
             ;;
         coolmak|eng)
             # mangowc might show coolmak as "eng"
             mmsg -d setoption,xkb_rules_layout,ca
             echo "ca" > "$cachefile"
-            echo "Switched to: ca"
             ;;
         *)
             # Default to ca if unknown
             mmsg -d setoption,xkb_rules_layout,ca
             echo "ca" > "$cachefile"
-            echo "Reset to: ca"
             ;;
     esac
 fi

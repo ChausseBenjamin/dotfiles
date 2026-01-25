@@ -17,8 +17,8 @@
         "custom/mail",
         "custom/layout",
         "custom/date",
-        "custom/time",
         "custom/network",
+        "custom/time",
         "custom/battery"
     ],
 
