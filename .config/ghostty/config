@@ -77,4 +77,6 @@ palette = 14=#66aabb
 palette = 7=#c5c8c6
 palette = 15=#c0c7ca
 
+working-directory = ~
+
 # vim:ft=ghostty
