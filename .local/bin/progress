@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+progress_val() {
+    printf "\x1b]9;4;%s;%s\x07" "$1" "$2"
+}
+
+progress_clear() {
+    printf "\x1b]9;4;0\x07"
+}
+
+cleanup() {
+    progress_clear
+    exit 0
+}
+trap cleanup SIGINT
+
+step() {
+    local from=$1 to=$2
+    for i in $(seq "$from" "$to"); do
+        progress_val 1 "$i"
+        sleep 0.05
+    done
+}
+
+test1() {
+    echo "=== Test 1: 0-100% in 5 seconds ==="
+    step 0 100
+    progress_clear
+    sleep 1
+}
+
+test2() {
+    echo "=== Test 2: Smooth with 2s pause at every 25% ==="
+    step 0 25
+    sleep 2
+    step 25 50
+    sleep 2
+    step 50 75
+    sleep 2
+    step 75 100
+    sleep 2
+    progress_clear
+    sleep 1
+}
+
+test3() {
+    echo "=== Test 3: Error for 3s at 50% then finish ==="
+    step 0 50
+    progress_val 2 50
+    sleep 3
+    step 51 100
+    progress_clear
+    sleep 1
+}
+
+test4() {
+    echo "=== Test 4: Sudden jumps forward ==="
+    progress_val 1 0
+    sleep 1
+    progress_val 1 20
+    sleep 1
+    progress_val 1 40
+    sleep 1
+    progress_val 1 60
+    sleep 1
+    progress_val 1 80
+    sleep 1
+    progress_val 1 100
+    sleep 0.5
+    progress_clear
+}
+
+if [[ "${1:-}" =~ ^[0-9]+$ ]]; then
+    "test$1"
+else
+    test1
+    test2
+    test3
+    test4
+fi

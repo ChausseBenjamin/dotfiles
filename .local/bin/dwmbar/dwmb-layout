@@ -1,5 +1,6 @@
 #!/bin/sh
 
-text="  $(cat "$HOME/.cache/layout")"
+layout=$(mmsg get keyboardlayout 2>/dev/null | sed -n 's/.*"layout":"[^(]*(\([^)]*\)).*/\1/p')
+[ -z "$layout" ] && layout=$(cat "$HOME/.cache/layout" 2>/dev/null || echo "?")
 
-printf '{ "text": "%s", "class": "block" }\n' "$text"
+printf '{ "text": "  %s", "class": "block" }\n' "$layout"

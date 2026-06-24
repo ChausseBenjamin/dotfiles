@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Check if the file exists
-if [ ! -f "$1" ]; then
-	echo "File not found!"
-	exit 2
-fi
-
-convert "$1" -resize 600x sixel:- | cat

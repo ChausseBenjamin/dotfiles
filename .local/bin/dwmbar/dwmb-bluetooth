@@ -1,0 +1,33 @@
+#!/bin/sh
+
+off_icon="󰂲 "
+on_icon=" "
+
+[ -n "$(sudo rc-status | rg bluetoothd)" ] && \
+	icon="$on_icon" || \
+	icon="$off_icon"
+
+
+[ -n "$1" ] && {
+  prompt=" Bluetooth: "
+
+	bt_start=" Start"
+	bt_stop=" Stop"
+	bt_restart=" Restart"
+	bt_airpods="󰋋 Airpods"
+	bt_menu="󰕮 Menu"
+	options="$bt_start\n$bt_stop\n$bt_restart\n$bt_airpods\n$bt_menu"
+
+	choice=$(echo -e "$options"| tofi --width="16%" --height="10%" --prompt-text "$prompt")
+	case "$choice" in
+	  "$bt_start")   sudo rc-service bluetoothd start ;;
+	  "$bt_stop")    sudo rc-service bluetoothd stop ;;
+	  "$bt_restart") sudo rc-service bluetoothd restart ;;
+	  "$bt_airpods") librepods --no-tray ;;
+	  "$bt_menu") $TERMINAL --title="bluetooth" --command="bluetui" ;;
+		*) exit 0
+	esac
+	kill -48 $(pidof waybar)
+}
+
+printf '{ "text": "%s", "class": "block" }\n' "$icon"

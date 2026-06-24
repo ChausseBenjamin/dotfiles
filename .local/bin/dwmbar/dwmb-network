@@ -13,6 +13,32 @@
 # 󰤥  WiFi strength high (51-75%)
 # 󰤨  WiFi strength max (76-100%)
 
+[ -n "$1" ] && {
+	prompt="  Network:"
+
+  restart="󰐥 Restart Wpa Supplicant"
+  start=" Start Wpa Supplicant"
+  stop=" Stop Wpa Supplicant"
+	edit_cfg=" Edit configurationt"
+	options="$start\n$stop\n$restart\n$edit_cfg"
+
+	choice=$(echo -e "$options"| tofi --width="20%" --height="10%" --prompt-text "$prompt")
+	case "$choice" in
+		"$start") sudo rc-service wpa_supplicant start && exit 0 ;;
+		"$stop") sudo rc-service wpa_supplicant stop ;;
+		"$restart")
+				sudo rc-service wpa_supplicant stop && sleep 1 && \
+				sudo rc-service wpa_supplicant start && exit 0 ;;
+		"$edit_cfg")
+			$TERMINAL --title="wpa_supplicant" \
+				        --command="$EDITOR /etc/wpa_supplicant/wpa_supplicant.conf" && \
+				sudo rc-service wpa_supplicant stop && sleep 1 && \
+				sudo rc-service wpa_supplicant start && exit 0 ;;
+		*) exit 1;
+	esac
+
+}
+
 # Check if ethernet is connected
 for eth in /sys/class/net/e*; do
     [ -d "$eth" ] && [ "$(cat "$eth/operstate" 2>/dev/null)" = "up" ] && {
@@ -36,6 +62,8 @@ echo "$wpa_status" | grep -q "wpa_state=COMPLETED" || {
 
 # Get network name (SSID)
 ssid=$(echo "$wpa_status" | grep "^ssid=" | cut -d= -f2)
+# Decode escape sequences (e.g., \xc3\xa9 -> é)
+ssid=$(printf '%b' "$ssid")
 [ -z "$ssid" ] && ssid="Unknown"
 
 # Get signal strength

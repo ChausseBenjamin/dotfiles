@@ -1,26 +1,24 @@
 #!/bin/bash
 
-#	Usage:
-
-#		The first argument is the percentage by which you should
-#		change the volume
-
-#		The second argument should be `+` or `-`
-#		to choose wether to increment or decrement audio.
-#		If no second argument is given, the audio will be SET
-#		to a set percentage fixed by the first argument.
 case "$1" in
-mute) wpctl set-mute $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') toggle ;;
+mute) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
 *)
 	pcnt="$1"
 	sign="$2"
 	if [ -z "$sign" ]; then
-		wpctl set-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') "$pcnt"
+		pactl set-sink-volume @DEFAULT_SINK@ "$pcnt%"
 	else
-		wpctl set-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') "$pcnt%$sign"
+		curr=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | head -1)
+		case "$sign" in
+			+) new=$((curr + pcnt)); [ "$new" -gt 100 ] && new=100 ;;
+			-) new=$((curr - pcnt)); [ "$new" -lt 0 ] && new=0 ;;
+		esac
+		pactl set-sink-volume @DEFAULT_SINK@ "${new}%"
 	fi
-	# wpctl set-volume @DEFAULT_AUDIO_SINK@ "$pcnt%$sign"
 	;;
 esac
 
-notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a $(wpctl get-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/'))
+vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | head -1)
+muted=$(pactl get-sink-mute @DEFAULT_SINK@)
+notify_data="${vol}%"; [ "$muted" = "Mute: yes" ] && notify_data+=" (muted)"
+# notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a "$notify_data"

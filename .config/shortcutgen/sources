@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export SHORTCUTGEN_GTK_FILE="$HOME/.config/gtk-3.0/bookmarks"
+export SHORTCUTGEN_ZSH_FILE="$HOME/.cache/zsh-shortcuts"
+export SHORTCUTGEN_ENV_FILE="$HOME/.cache/env-shortcuts"
+export SHORTCUTGEN_LUA_FILE="$HOME/.cache/shortcuts.lua"
+export SHORTCUTGEN_TXT_FILE="$HOME/.cache/plain-shortcuts"
+export SHORTCUTGEN_JSON_FILE="$HOME/.cache/shortcuts.json"

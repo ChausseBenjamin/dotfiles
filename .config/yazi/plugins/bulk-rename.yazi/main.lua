@@ -247,4 +247,3 @@ end
 return {
 	entry = entry
 }
-

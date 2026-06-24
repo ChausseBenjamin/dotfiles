@@ -1,7 +1,6 @@
 #!/bin/sh
 
-[ -z "$1" ] && col=$(hyprpicker -an ) ||
-  col="$1"
+[ -z "$1" ] && col=$(hyprpicker -nf hex ) || col="$1"
 
 
 sed "s/fill=.*>/fill=\"$col\">/g" $HOME/.local/share/circle.svg > /tmp/circle.svg
