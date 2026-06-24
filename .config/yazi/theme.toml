@@ -1,8 +1,10 @@
 [flavor]
-dark = "no-clown-fiesta"
+dark = "base16"
+light = "base16"
+# dark = "no-clown-fiesta"
 
 [icon]
 prepend_dirs = [
-  { name = "Dropbox", text = " " },
-  { name = "Workspace", text = " " },
+  { name = "Dropbox", text = "" },
+  { name = "Workspace", text = "" },
 ]

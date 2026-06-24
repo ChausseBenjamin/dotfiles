@@ -36,5 +36,6 @@ map J zoom in
 map K zoom out
 map i recolor
 map p print
+
 set synctex true
-set synctex-editor-command "nvr --remote-silent %f -c %l"
+set synctex-editor-command "texlab inverse-search -i %{input} -l %{line}"

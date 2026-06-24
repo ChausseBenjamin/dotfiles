@@ -78,6 +78,6 @@ case "$@" in
   exit 0
   ;;
 *)
-  notify-send.sh -t 1000 --replace-file /tmp/bl-notif -a "󰃠 Brightness:" "$(get_percent)%"
+  notify-send.sh -t 1000 --replace-file /tmp/bl-notif -a "󰃠   Brightness:" "$(get_percent)%"
   ;;
 esac

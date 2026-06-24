@@ -1,0 +1,92 @@
+#!/bin/sh
+
+# Possible statuses:
+# - Connected
+# - Disconnected
+# - Indexing
+# - Paused
+# - Syncing
+
+# Example output:
+# Account      benjamin@chausse.xyz (Pro)
+# Usage        28.5% of 2.2 TB used
+# Status       Syncing ↓ 344/499
+# Sync errors  0
+
+statusline=$(maestral status | rg 'Status')
+status=""
+
+sync_frac() {
+	echo "$statusline" | sed "s/.*\s\([0-9]\+\/[0-9]\+\).*/\1/"
+}
+
+update() {
+	kill -n 46 $(pidof waybar);
+}
+
+
+[ -n "$1" ] && {
+  prompt="  Dropbox: "
+
+	db_auth=" Authenticate"
+	db_stop=" Stop"
+	db_start=" Start"
+	db_pause=" Pause/Resume"
+	options="$db_auth\n$db_start\n$db_stop\n$db_pause"
+
+	choice=$(echo -e "$options"| tofi --width="16%" --height="10%" --prompt-text "$prompt")
+	case "$choice" in
+	  "$db_auth") $TERMINAL --title="Dropbox" --command="maestral auth link" && \
+			update && \
+			exit 0 ;;
+	  "$db_stop") rc-service --user maestral stop && sleep 5 && update && exit 0 ;;
+	  "$db_start") rc-service --user maestral start && sleep 5 && update && exit 0 ;;
+		"$db_pause") paused=$(echo "$statusline" | rg "Paused")
+			[ -n "$paused" ] && maestral resume && sleep 5 && update && exit 0;
+			maestral pause && sleep 5 && update && exit 0;
+			;;
+		*) update && exit 1 ;;
+	esac
+}
+
+case $statusline in
+	*Connected*)
+		msg=" "
+		;;
+	*Disconnected*)
+		msg="(   )"
+		;;
+	*Up\ to\ date*)
+		msg=" "
+		;;
+	*Indexing*)
+		# msg="(   )"
+		active="1"
+		msg="(   )"
+		;;
+	*Paused*)
+		msg="(  󰒲 )"
+		# msg="!!"
+		;;
+	*Syncing*)
+		active="1"
+		msg="(  $(sync_frac)  )"
+		;;
+	*)
+		active="1"
+		# msg="(   )"
+		msg="(   )"
+		;;
+esac
+
+printf '{ "text": "%s", "class": "block" }\n' "$msg"
+
+# Force the script to re-trigger itself every 10 seconds when
+# actively doing something (sync/index/etc...)
+# waybar_signal=12 --> pidof (34+12)=46
+[ -n "$active" ] && {
+	sleep 10;
+	update;
+}
+
+exit 0

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+help="Usage: $(basename $0) title command
+  title   : Name for the terminal title (single word)
+  command : Command for the tmux session to execute
+"
+
+case "$1" in
+	--size|-s) size="$2" && shift 2 ;;
+esac
+
+title="$1" && shift
+session="float-$title"
+size="normal"
+
+attach() {
+  ${TERMINAL:-ghostty} --class="com.floating.$size" --title="$title" --command="tmux attach-session -t $session"
+}
+
+case $(tmux display-message -p -t "$session" '#{session_attached}') in
+  # Session exists but isn't currently attached
+  0) attach && exit 0 ;;
+  # Session exists AND is currently attached
+  1) tmux detach-client -s "$session" && exit 0 ;;
+  # Session doesn't exist and must be created
+  *) tmux new-session -d -s "$session" "$@" && \
+     tmux set-option -t "$session" status off && \
+     tmux set-option -t "$session" detach-on-destroy on && \
+     attach && exit 0 ;;
+esac
+
+printf "$help"

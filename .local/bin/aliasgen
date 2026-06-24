@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # Removing unecessary comments and documentation
-raw="$(sed 's/^\s*//;s/#.*$//;s/,\s*/,/g;/^$/d' <"${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc")"
+raw="$(sed '1,15d;s/^\s*//;s/,\s*/, /g;/^$/d' <"${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc")"
+# raw="$(sed 's/^\s*//;s/,\s*/, /g;/^$/d' <"${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc")"
 
 # #---zsh---# #
-echo "$raw" | sed 's/\(.*\),\(.*\)/\1(){\2 $@}/' >"${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases"
+echo "$raw" | sed 's/\([^[:space:]]*\),\(.*\)/\1(){\2 $@}/' \
+	>"${XDG_CACHE_HOME:-$HOME/.cache}/zsh-aliases"

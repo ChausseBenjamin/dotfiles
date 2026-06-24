@@ -14,25 +14,26 @@
 # For this to work, "$@" is appended to the end of every function here.
 # Take this into consideration when creating new ones.
 
-:e,      $EDITOR
-:q,      exit
-cdd,     cd ..
-disks,   lsblk -o ID-LINK,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
-e,       $EDITOR
-db,      maestral
-w,       $BROWSER
-g,       git
-ff,      fastfetch
-bi,      brew install
-gg,      go generate ./...
-gr,      groot=$(git rev-parse --show-toplevel 2>/dev/null); [ -z "$groot" ] || cd "$groot" || return
-mmi,     make clean && make && sudo make install
-mkcd,    mkdir -p -- "$1" && cd -P --
-R,       R -q
-tmcd,    tmux attach-session -t
-tmdd,    tmux  kill-session -t
-tmls,    tmux list-sessions
-xx,      chmod +x
-adog,    git log --all --decorate --oneline --graph
-yadog,   yadm log --all --decorate --oneline --graph
-z,       zathura --fork
+:e,        $EDITOR
+:q,        exit
+cdd,       cd ..
+disks,     lsblk -o ID-LINK,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
+e,         $EDITOR
+db,        maestral
+w,         $BROWSER
+g,         git
+ff,        fastfetch
+bi,        brew install
+ggen,      go generate ./...
+gr,        groot=$(git rev-parse --show-toplevel 2>/dev/null); [ -z "$groot" ] || cd "$groot" || return
+mmi,       make clean && make && sudo make install
+mkcd,      mkdir -p -- "$1" && cd -P --
+R,         R -q
+tmcd,      tmux attach-session -t
+tmdd,      tmux  kill-session -t
+linecount, find . -iname "*.$1" | xargs cat | wc -l && set --
+tmls,      tmux list-sessions
+xx,        chmod +x
+adog,      git log --all --decorate --oneline --graph
+yadog,     yadm log --all --decorate --oneline --graph
+z,         zathura --fork

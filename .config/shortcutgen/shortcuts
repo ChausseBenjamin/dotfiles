@@ -1,9 +1,9 @@
-#   _____ _                _             _
-#  / ____| |              | |           | \
-# | (___ | |__   ___  _ __| |_ ___ _   _| |_ _ __ ___
-#  \___ \| '_ \ / _ \| '__| __/ __| | | | __| '__/ __\
-#  ____) | | | | (_) | |  | || (__| |_| | |_| | | (__
-# |_____/|_| |_|\___/|_|   \__\___|\__,_|\__|_|  \___\
+#  ____  _                _             _
+# / ___|| |__   ___  _ __| |_ ___ _   _| |_ ___
+# \___ \| '_ \ / _ \| '__| __/ __| | | | __/ __|
+#  ___) | | | | (_) | |  | || (__| |_| | |_\__ \
+# |____/|_| |_|\___/|_|   \__\___|\__,_|\__|___/
+#
 #
 # #---Universal Shortcut Configuration File---# #
 # This file aims to provide a simple way to configure
@@ -35,8 +35,10 @@ Images,        img, ~/Dropbox/A/Personnal/Photos/unsorted
 Neovim,        vi,  ~/.config/nvim
 Obsidian,      oi,  ~/Documents/obsidian/main
 OrgMode,       om,  ~/Dropbox/org
-Rafta,         rf,  ~/Workspace/rafta
-School,        sf,  ~/Dropbox/A/scholar/sherbrooke/26-01-S5
+Rafta,         rf,  ~/Workspace/rafta/master
+RaftaNvim,     rn,  ~/Workspace/plugins/rafta.nvim
+Rustymux,      rm,  ~/Workspace/rustymux
+School,        sf,  ~/Dropbox/A/scholar/sherbrooke/26-05-reprises
 Screenshots,   ss,  ~/Pictures/captures
 Scripts,       sc,  ~/.local/bin
 Wallpapers,    wp,  ~/Pictures/wallpapers

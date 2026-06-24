@@ -1,0 +1,54 @@
+#!/bin/bash
+
+args=()
+skip_next=false
+size_set=false
+
+for arg in "$@"; do
+    if $skip_next; then
+        skip_next=false
+        continue
+    fi
+    case "$arg" in
+        --output=*|-o=*)
+            ;;
+        --type=*|-t=*)
+            ;;
+        --size=*|-s=*)
+            size_set=true
+            args+=("$arg")
+            ;;
+        --output|-o|--type|-t)
+            skip_next=true
+            ;;
+        --size|-s)
+            size_set=true
+            args+=("$arg")
+            ;;
+        -h|--help|-V|--version)
+            exec qrencode "$@"
+            ;;
+        *)
+            args+=("$arg")
+            ;;
+    esac
+done
+
+$size_set || args=(-s 15 "${args[@]}")
+
+qrencode -o - -t PNG "${args[@]}" | {
+    data=$(base64 -w 0 | tr -d '\n')
+    [ -z "$data" ] && exit 1
+    pos=0
+    len=${#data}
+    while [ $pos -lt $len ]; do
+        chunk=${data:$pos:4096}
+        if [ $((pos + 4096)) -ge $len ]; then
+            printf '\e_Ga=T,f=100,m=0;%s\e\\' "$chunk"
+        else
+            printf '\e_Ga=T,f=100,m=1;%s\e\\' "$chunk"
+        fi
+        pos=$((pos + 4096))
+    done
+}
+echo ""
