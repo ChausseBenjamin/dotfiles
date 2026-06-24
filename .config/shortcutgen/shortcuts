@@ -38,10 +38,11 @@ OrgMode,       om,  ~/Dropbox/org
 Rafta,         rf,  ~/Workspace/rafta/master
 RaftaNvim,     rn,  ~/Workspace/plugins/rafta.nvim
 Rustymux,      rm,  ~/Workspace/rustymux
-School,        sf,  ~/Dropbox/A/scholar/sherbrooke/26-05-S6
+School,        sf,  ~/Dropbox/A/scholar/sherbrooke/26-05-reprises
 Screenshots,   ss,  ~/Pictures/captures
 Scripts,       sc,  ~/.local/bin
 Wallpapers,    wp,  ~/Pictures/wallpapers
 Website,       ww,  ~/Workspace/chausse.xyz
+Privateer,     pt,  ~/Workspace/privateer
 WindowManager, wm,  ~/.local/src/dwl
 Workspace,     ws,  ~/Workspace

@@ -1,6 +1,6 @@
 includes = [
-  "$HOME/Workspace/rafta/master",
-  "$HOME/Workspace/rafta/master/external"
+  "$HOME/Workspace/rafta/",
+  "$HOME/Workspace/rafta/external"
 ]
 files = [
   "resources/schema.proto",
