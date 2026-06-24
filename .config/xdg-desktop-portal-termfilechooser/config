@@ -2,6 +2,6 @@
 cmd=yazi-wrapper.sh
 default_dir=$HOME
 env=TERMCMD='ghostty --title=file-manager -e'
-env=VARIABLE2=VALUE2
+env=YAZI_CONFIRM_WRITE=1
 open_mode=suggested
 save_mode = last
