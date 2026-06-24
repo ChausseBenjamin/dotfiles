@@ -13,10 +13,10 @@ base="${file%.*}"
 cd "$dir" || exit
 
 textype() {
-  command="pdflatex"
-  (sed 5q "$file" | grep -i -q 'xelatex') && command="xelatex"
+  command="pdflatex -interaction=nonstopmode"
+  (sed 5q "$file" | rg -i -q 'xelatex') && command="xelatex -interaction=nonstopmode"
   $command --output-directory="$dir" "$base" &&
-    grep -i addbibresource "$file" >/dev/null &&
+    rg -i addbibresource "$file" >/dev/null &&
     biber --input-directory "$dir" "$base" &&
     $command --output-directory="$dir" "$base" &&
     $command --output-directory="$dir" "$base"
@@ -37,5 +37,5 @@ case "$file" in
 *\.go) go run "$file" ;;
 *\.sent) setsid sent "$file" 2>/dev/null & ;;
 *.Xresources) xrdb -load "$file" ;;
-*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
+*) sed 1q "$file" | rg "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac

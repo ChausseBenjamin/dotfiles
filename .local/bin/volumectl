@@ -10,12 +10,17 @@
 #		If no second argument is given, the audio will be SET
 #		to a set percentage fixed by the first argument.
 case "$1" in
-mute) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+mute) wpctl set-mute $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') toggle ;;
 *)
 	pcnt="$1"
 	sign="$2"
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$pcnt%$sign"
+	if [ -z "$sign" ]; then
+		wpctl set-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') "$pcnt"
+	else
+		wpctl set-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/') "$pcnt%$sign"
+	fi
+	# wpctl set-volume @DEFAULT_AUDIO_SINK@ "$pcnt%$sign"
 	;;
 esac
 
-notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a $(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+notify-send.sh -t 1000 --replace-file /tmp/vol-notif -a $(wpctl get-volume $(wpctl status 2>/dev/null | sed -n '/Sinks:/,/Sources:/p' | grep "\*" | sed 's/.*\*\s*\([0-9]*\)\..*/\1/'))

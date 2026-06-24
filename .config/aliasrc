@@ -22,7 +22,7 @@ e,       $EDITOR
 db,      maestral
 w,       $BROWSER
 g,       git
-ff,      fastfetch --raw $HOME/.cache/gentoo.six --logo-width 32 --logo-height 24 --logo-padding 2
+ff,      fastfetch
 bi,      brew install
 gg,      go generate ./...
 gr,      groot=$(git rev-parse --show-toplevel 2>/dev/null); [ -z "$groot" ] || cd "$groot" || return

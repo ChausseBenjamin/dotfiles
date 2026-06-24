@@ -76,14 +76,12 @@ RPROMPT="\$vcs_info_msg_0_ %B%F{magenta}(%B%F{cyan}%1/%B%F{magenta})"
 
 zstyle ':vcs_info:git:*' formats '%b'
 
+export SIXKCD_RENDERER="kitty"
 
-export LF_KITTY_TEMPDIR="$(mktemp -d -t lf-kitty-XXXXXX)"
-export LF_KITTY_IMAGE_ID=$(date +%s)
-# export LF_KITTY_IMAGE_ID=1234
 f() {
     tmp="$(mktemp -uq)"
     trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM EXIT' HUP INT QUIT TERM EXIT
-    lf -single -last-dir-path="$tmp" "$@"
+    yazi --cwd-file="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
@@ -101,3 +99,5 @@ disks() {
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# . "$HOME/.local/share/../bin/env"

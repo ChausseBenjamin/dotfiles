@@ -12,8 +12,8 @@ unsetopt PROMPT_SP 2>/dev/null
 
 # Applications
 export EDITOR=nvim
-export TERMINAL=foot
-export TERMINAL_PROG=foot
+export TERMINAL=ghostty
+export TERMINAL_PROG=ghostty
 export BROWSER=firefox
 
 # Misc
@@ -54,12 +54,14 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
+export PATH=/home/master/.opencode/bin:$PATH
 export GITHUB_TOKEN="$(pass gh/token)"
 export WIREMAN_CONFIG_DIR=$XDG_CONFIG_HOME/wireman
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 # Set foot as the default terminal when not connected via SSH
 # or xterm when connected via SSH
-[ -z "$SSH_CONNECTION" ] && export TERM=foot || export TERM=xterm
+[ -z "$SSH_CONNECTION" ] && export TERM=ghostty || export TERM=xterm
 
 # less/man colors
 export LESS="R"
@@ -72,6 +74,7 @@ export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 
 # Generate shortcuts and aliases
+source $XDG_CONFIG_HOME/shortcutgen/sources
 shortcutgen >/dev/null 2>&1
 aliasgen >/dev/null 2>&1
 [ -f "$XDG_CACHE_HOME/env-shortcuts" ] && source "$XDG_CACHE_HOME/env-shortcuts"
@@ -82,15 +85,14 @@ if test -z "$XDG_RUNTIME_DIR"; then
 fi
 
 # Start Desktop Environment if on the main TTY
-[ "$(tty)" = "/dev/tty1" ] && ! pidof river >/dev/null 2>&1 && {
-  dbus-launch --exit-with-session river -no-xwayland &
-  /usr/bin/pipewire &
-  /usr/bin/wireplumber &
-  /usr/bin/pipewire-pulse &
+[ "$(tty)" = "/dev/tty1" ] && ! pidof mango >/dev/null 2>&1 && {
+  # river &
+  dbus-launch --exit-with-session mango &
+	# mango
+  # /usr/bin/pipewire &
+  # /usr/bin/wireplumber &
+  # /usr/bin/pipewire-pulse &
 }
-[ "$(tty)" = "/dev/tty2" ] && ! pidof river >/dev/null 2>&1 && {
-  dbus-launch --exit-with-session river &
-  /usr/bin/pipewire &
-  /usr/bin/wireplumber &
-  /usr/bin/pipewire-pulse &
-}
+. "/home/master/.local/share/cargo/env"
+export GPG_TTY=$(tty)
+gpg-connect-agent /bye 2>/dev/null || gpg-agent --daemon

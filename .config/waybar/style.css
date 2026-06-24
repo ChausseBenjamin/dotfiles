@@ -1,24 +1,33 @@
+/* Color scheme variables */
+@define-color bg rgba(27, 29, 27, 0.78);     /* #1b1d1b */
+@define-color fg rgba(27, 29, 27, 1);         /* #1b1d1b */
+@define-color accent rgba(68, 122, 108, 1);   /* #447a6c */
+@define-color focused rgba(125, 75, 35, 0.8);  /* #7d4b23 */
+
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
   font-size: 20;
   padding: 0px;
   font-family: sans-serif;
-  /* color: #1b1d1b; */
 }
 
 window#waybar {
-  /* background-color: rgba(43, 48, 59, 0); */
-  background-color: rgba(27, 29, 27, 0.78); /* #1b1d1b */
+  background: @bg;
 }
 
-#layout {
+.modules-right {
   padding-right: 5px;
-  margin-right: 5px;
 }
 
-#window {
-  padding-left: 5px;
-  margin-left: 5px;
+button {
+  margin: -4px 0px;
+  border: none;
+  border-radius: 0;
+}
+
+button:hover {
+  background: @accent;
+  border-radius: 0;
+  transition: none;
 }
 
 #tags {
@@ -26,41 +35,59 @@ window#waybar {
 }
 
 #tags button:not(.occupied):not(.focused) {
-	font-size: 0;
-	min-width: 0;
-	min-height: 0;
-	margin: -17px;
-	padding: 0;
-	border: 0;
-	opacity: 0;
-	box-shadow: none;
-	background-color: transparent;
-}
-
-#tags button.occupied, .block {
-  /* background-color: rgba(27, 29, 27, 0.8); /1* #1b1d1b *1/ */
-  color: rgba(68, 122, 108, 1);            /* #447a6c */
-}
-
-#tags button.focused, #window, #layout {
-  background-color: rgba(125,75,35,0.8);   /* #7d4b23 */
-  color: rgba(27, 29, 27, 1);              /* #1b1d1b */
-}
-
-.block {
-  padding-right: 5px;
-}
-
-#workspaces button {
+  font-size: 0;
+  min-width: 0;
+  min-height: 0;
+  margin: -17px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  box-shadow: none;
   background-color: transparent;
-  color: #f2f1f0;
 }
 
-button {
-  /* Use box-shadow instead of border so the text isn't offset */
-  /* box-shadow: inset 0 -3px transparent; */
-  /* Avoid rounded borders under each button name */
-  margin: -4px 0px;
-  border: none;
-  border-radius: 0;
+#tags button.occupied {
+  color: @accent;
+}
+
+#tags button.focused {
+  background-color: @focused;
+  color: @fg;
+}
+
+#window {
+  padding-left: 5px;
+  margin-left: 5px;
+  background-color: @focused;
+  color: @fg;
+}
+
+#layout {
+  padding-right: 5px;
+  margin-right: 5px;
+  background-color: @focused;
+  color: @fg;
+}
+
+#custom-dotfiles,
+#custom-mail,
+#custom-layout,
+#custom-date,
+#custom-time,
+#custom-network,
+#custom-battery {
+  padding-right: 12px;
+  padding-left: 5px;
+  color: @accent;
+}
+
+#custom-dotfiles:hover,
+#custom-mail:hover,
+#custom-layout:hover,
+#custom-date:hover,
+#custom-time:hover,
+#custom-network:hover,
+#custom-battery:hover {
+  background: @focused;
+  color: @fg;
 }
