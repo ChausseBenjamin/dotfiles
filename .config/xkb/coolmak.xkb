@@ -1,0 +1,68 @@
+xkb_keymap {
+    xkb_keycodes  { include "evdev+aliases(qwerty)" };
+    xkb_types     { include "complete" };
+    xkb_compat    { include "complete" };
+    xkb_geometry  { include "pc(pc105)" };
+
+    xkb_symbols {
+        include "pc+inet(evdev)"
+
+        name[Group1] = "Coolmak";
+
+        // Row 1 (number row)
+        key <TLDE> { [ grave, asciitilde ] };
+        key <AE01> { [ 1, exclam ] };
+        key <AE02> { [ 2, at ] };
+        key <AE03> { [ 3, numbersign ] };
+        key <AE04> { [ 4, dollar ] };
+        key <AE05> { [ 5, percent ] };
+        key <AE06> { [ 6, asciicircum ] };
+        key <AE07> { [ equal, plus ] };
+        key <AE08> { [ 7, ampersand ] };
+        key <AE09> { [ 8, asterisk ] };
+        key <AE10> { [ 9, parenleft ] };
+        key <AE11> { [ 0, parenright ] };
+        key <AE12> { [ minus, underscore ] };
+
+        // Row 2 (top row)
+        key <AD01> { [ q, Q ] };
+        key <AD02> { [ w, W ] };
+        key <AD03> { [ f, F ] };
+        key <AD04> { [ p, P ] };
+        key <AD05> { [ b, B ] };
+        key <AD06> { [ bracketleft, braceleft ] };
+        key <AD07> { [ h, H ] };
+        key <AD08> { [ l, L ] };
+        key <AD09> { [ u, U ] };
+        key <AD10> { [ y, Y ] };
+        key <AD11> { [ semicolon, colon ] };
+        key <AD12> { [ apostrophe, quotedbl ] };
+        key <BKSL> { [ backslash, bar ] };
+
+        // Row 3 (home row)
+        key <AC01> { [ a, A ] };
+        key <AC02> { [ r, R ] };
+        key <AC03> { [ s, S ] };
+        key <AC04> { [ t, T ] };
+        key <AC05> { [ g, G ] };
+        key <AC06> { [ bracketright, braceright ] };
+        key <AC07> { [ m, M ] };
+        key <AC08> { [ n, N ] };
+        key <AC09> { [ e, E ] };
+        key <AC10> { [ i, I ] };
+        key <AC11> { [ o, O ] };
+
+        // Row 4 (bottom row)
+        key <AB01> { [ x, X ] };
+        key <AB02> { [ c, C ] };
+        key <AB03> { [ d, D ] };
+        key <AB04> { [ v, V ] };
+        key <AB05> { [ z, Z ] };
+        key <AB06> { [ slash, question ] };
+        key <AB07> { [ j, J ] };
+        key <AB08> { [ k, K ] };
+        key <AB09> { [ period, less ] };
+        key <AB10> { [ comma, greater ] };
+    };
+};
+// vim:ft=xkb
